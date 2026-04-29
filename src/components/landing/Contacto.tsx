@@ -2,20 +2,29 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useServerFn } from "@tanstack/react-start";
 import { Mail, MapPin, ShieldCheck, Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-import { auditSchema, type AuditInput, submitAudit } from "@/server/audit.functions";
 import { fadeUp, stagger, viewportOnce } from "./motion";
 
+const auditSchema = z.object({
+  nombre: z.string().trim().min(2, "Minimo 2 caracteres").max(80),
+  email: z.string().trim().email("Email no valido").max(160),
+  empresa: z.string().trim().min(1, "Indica tu empresa").max(120),
+  telefono: z.string().trim().min(6, "Telefono no valido").max(30),
+  web: z.string().trim().max(160).optional().or(z.literal("")),
+  mensaje: z.string().trim().max(1200).optional().or(z.literal("")),
+});
+
+type AuditInput = z.infer<typeof auditSchema>;
+
 export function Contacto() {
-  const submit = useServerFn(submitAudit);
   const [enviando, setEnviando] = useState(false);
 
   const {
@@ -38,8 +47,27 @@ export function Contacto() {
   const onSubmit = async (values: AuditInput) => {
     try {
       setEnviando(true);
-      const res = await submit({ data: values });
-      toast.success("Solicitud enviada", { description: res.mensaje });
+
+      // TODO: Reemplazar por tu endpoint real cuando lo tengas.
+      const endpoint = import.meta.env.VITE_AUDIT_ENDPOINT || "https://tu-endpoint.com/auditoria";
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // TODO: Agregar headers de autenticacion si aplica.
+          // Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error enviando el formulario");
+      }
+
+      toast.success("Solicitud enviada", {
+        description: "Tu solicitud fue enviada correctamente.",
+      });
       reset();
     } catch (err) {
       console.error(err);
