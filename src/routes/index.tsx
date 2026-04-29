@@ -2,12 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Header } from "@/components/landing/Header";
 import { Hero } from "@/components/landing/Hero";
+import { Brands } from "@/components/landing/Brands";
 import { Beneficios } from "@/components/landing/Beneficios";
 import { Servicios } from "@/components/landing/Servicios";
 import { Proceso } from "@/components/landing/Proceso";
 import { Canales } from "@/components/landing/Canales";
 import { Faq } from "@/components/landing/Faq";
 import { Auditoria } from "@/components/landing/Auditoria";
+import { Planes } from "@/components/landing/Planes";
 import { Contacto } from "@/components/landing/Contacto";
 import { Footer } from "@/components/landing/Footer";
 import { Toaster } from "@/components/ui/sonner";
@@ -77,8 +79,10 @@ function Index() {
       <Header />
       <main>
         <Hero />
+        <Brands />
         <Beneficios />
         <Servicios />
+        <Planes />
         <Proceso />
         <Canales />
         <Faq />

@@ -18,11 +18,18 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import imgChatbots from "@/assets/chatbots.png";
+import imgVoicebots from "@/assets/voicebots.png";
+import imgAutomatizacion from "@/assets/automatizacion y seguimiento.png";
+import imgCRM from "@/assets/CRM.png";
+import imgWorkflow from "@/assets/workflow inteligente.png";
+
 export type Servicio = {
   icon: LucideIcon;
   titulo: string;
   descripcion: string;
   destacado?: boolean;
+  image?: string;
 };
 
 export const servicios: Servicio[] = [
@@ -32,30 +39,35 @@ export const servicios: Servicio[] = [
     descripcion:
       "Agentes especializados con NLP que entienden intenciones, manejan objeciones y ejecutan estrategias de venta complejas en cada rama de tu negocio.",
     destacado: true,
+    image: imgChatbots,
   },
   {
     icon: Workflow,
     titulo: "Automatización de Procesos",
     descripcion:
       "Eliminamos tareas repetitivas y errores humanos liberando a tu equipo para que se enfoque en cerrar ventas de alto valor.",
+    image: imgAutomatizacion,
   },
   {
     icon: Filter,
     titulo: "Cualificación de Leads",
     descripcion:
       "Filtramos y puntuamos cada prospecto en tiempo real para que solo hables con los que están listos para comprar.",
+    image: imgVoicebots,
   },
   {
     icon: Database,
     titulo: "Integración con CRM",
     descripcion:
       "Sincronización bidireccional con tu CRM mediante API. Datos limpios, actualizados y accionables 24/7.",
+    image: imgCRM,
   },
   {
     icon: CalendarClock,
     titulo: "Agendamiento Automático",
     descripcion:
       "Citas en tu calendario sin fricción. El agente negocia el horario, confirma y envía recordatorios.",
+    image: imgCRM,
   },
   {
     icon: GitBranch,
@@ -63,6 +75,7 @@ export const servicios: Servicio[] = [
     descripcion:
       "Flujos de trabajo que disparan acciones automáticas: cualificar leads, agendar, actualizar CRM y nutrir prospectos.",
     destacado: true,
+    image: imgWorkflow,
   },
 ];
 

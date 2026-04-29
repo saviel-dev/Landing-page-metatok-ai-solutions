@@ -41,10 +41,15 @@ export function Servicios() {
             <article
               key={s.titulo}
               className={[
-                "card-hover rounded-2xl border border-border bg-card p-6 md:p-7",
+                "card-hover rounded-2xl border border-border bg-card p-6 md:p-7 flex flex-col",
                 s.destacado ? "lg:row-span-1" : "",
               ].join(" ")}
             >
+              {s.image && (
+                <div className="mb-6 -mt-2 -mx-2 overflow-hidden rounded-xl border border-border/40 bg-background/40">
+                  <img src={s.image} alt={s.titulo} className="w-full h-40 object-cover opacity-90 transition-opacity duration-300 hover:opacity-100" />
+                </div>
+              )}
               <div className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-[var(--color-surface)]">
                 <s.icon className="h-5 w-5 text-primary" aria-hidden />
               </div>

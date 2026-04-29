@@ -59,67 +59,121 @@
 }
 
 /*
- * Paleta Metatok (única, sin variante light — la web siempre es dark).
- * Equivalencias hex aproximadas:
- *  background        #0F172A  -> oklch(0.205 0.043 257)
- *  surface (card-2)  #111827  -> oklch(0.222 0.041 256)
- *  card / surface    #1E293B  -> oklch(0.282 0.039 257)
- *  primary           #22C55E  -> oklch(0.722 0.192 149)
- *  accent            #38BDF8  -> oklch(0.762 0.131 224)
- *  foreground        #F8FAFC  -> oklch(0.984 0.003 248)
- *  muted-fg          #CBD5E1  -> oklch(0.852 0.018 252)
- *  border            #334155  -> oklch(0.376 0.034 257)
+ * Paleta Metatok DARK — Azul/Morado (predeterminada).
+ *  primary   #6366F1  → indigo vibrante  oklch(0.585 0.233 272)
+ *  accent    #A855F7  → violeta/morado   oklch(0.627 0.265 303)
+ *  bg        #0A0E1A  → azul marino profundo
  */
 :root,
-.dark {
+:root.dark {
   --radius: 0.75rem;
 
-  --background: oklch(0.205 0.043 257);
-  --foreground: oklch(0.984 0.003 248);
+  --background: oklch(0.14 0.035 267);
+  --foreground: oklch(0.97 0.004 248);
 
-  --surface: oklch(0.222 0.041 256);
-  --surface-2: oklch(0.282 0.039 257);
+  --surface: oklch(0.17 0.032 268);
+  --surface-2: oklch(0.22 0.03 268);
 
-  --card: oklch(0.282 0.039 257);
-  --card-foreground: oklch(0.984 0.003 248);
+  --card: oklch(0.22 0.03 268);
+  --card-foreground: oklch(0.97 0.004 248);
 
-  --popover: oklch(0.282 0.039 257);
-  --popover-foreground: oklch(0.984 0.003 248);
+  --popover: oklch(0.22 0.03 268);
+  --popover-foreground: oklch(0.97 0.004 248);
 
-  --primary: oklch(0.722 0.192 149);
-  --primary-foreground: oklch(0.16 0.04 257);
+  /* Azul índigo vibrante como primario */
+  --primary: oklch(0.60 0.233 272);
+  --primary-foreground: oklch(0.99 0 0);
 
-  --secondary: oklch(0.282 0.039 257);
-  --secondary-foreground: oklch(0.984 0.003 248);
+  --secondary: oklch(0.22 0.03 268);
+  --secondary-foreground: oklch(0.97 0.004 248);
 
-  --muted: oklch(0.282 0.039 257);
-  --muted-foreground: oklch(0.768 0.026 252);
+  --muted: oklch(0.22 0.03 268);
+  --muted-foreground: oklch(0.72 0.025 260);
 
-  --accent: oklch(0.762 0.131 224);
-  --accent-foreground: oklch(0.16 0.04 257);
+  /* Violeta/morado como acento */
+  --accent: oklch(0.65 0.265 303);
+  --accent-foreground: oklch(0.99 0 0);
 
   --destructive: oklch(0.62 0.22 27);
-  --destructive-foreground: oklch(0.984 0.003 248);
+  --destructive-foreground: oklch(0.97 0.004 248);
 
-  --border: oklch(0.376 0.034 257);
-  --input: oklch(0.376 0.034 257);
-  --ring: oklch(0.722 0.192 149);
+  --border: oklch(0.32 0.04 268);
+  --input: oklch(0.32 0.04 268);
+  --ring: oklch(0.60 0.233 272);
 
-  --chart-1: oklch(0.722 0.192 149);
-  --chart-2: oklch(0.762 0.131 224);
-  --chart-3: oklch(0.6 0.118 184);
-  --chart-4: oklch(0.828 0.189 84);
-  --chart-5: oklch(0.769 0.188 70);
+  --chart-1: oklch(0.60 0.233 272);
+  --chart-2: oklch(0.65 0.265 303);
+  --chart-3: oklch(0.62 0.18 230);
+  --chart-4: oklch(0.72 0.15 200);
+  --chart-5: oklch(0.75 0.12 280);
 
-  --sidebar: oklch(0.222 0.041 256);
-  --sidebar-foreground: oklch(0.984 0.003 248);
-  --sidebar-primary: oklch(0.722 0.192 149);
-  --sidebar-primary-foreground: oklch(0.16 0.04 257);
-  --sidebar-accent: oklch(0.282 0.039 257);
-  --sidebar-accent-foreground: oklch(0.984 0.003 248);
-  --sidebar-border: oklch(0.376 0.034 257);
-  --sidebar-ring: oklch(0.722 0.192 149);
+  --sidebar: oklch(0.17 0.032 268);
+  --sidebar-foreground: oklch(0.97 0.004 248);
+  --sidebar-primary: oklch(0.60 0.233 272);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.22 0.03 268);
+  --sidebar-accent-foreground: oklch(0.97 0.004 248);
+  --sidebar-border: oklch(0.32 0.04 268);
+  --sidebar-ring: oklch(0.60 0.233 272);
 }
+
+/*
+ * Paleta Metatok LIGHT — Azul/Morado.
+ * Fondos blancos/grises fríos, primario azul índigo, acento violeta.
+ */
+:root.light {
+  --radius: 0.75rem;
+
+  --background: oklch(0.975 0.006 265);
+  --foreground: oklch(0.15 0.04 268);
+
+  --surface: oklch(0.93 0.01 265);
+  --surface-2: oklch(0.90 0.012 266);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.04 268);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.04 268);
+
+  /* Azul índigo como primario — algo más oscuro para contraste sobre fondo claro */
+  --primary: oklch(0.52 0.233 272);
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.90 0.012 266);
+  --secondary-foreground: oklch(0.15 0.04 268);
+
+  --muted: oklch(0.90 0.012 266);
+  --muted-foreground: oklch(0.44 0.03 265);
+
+  /* Violeta/morado como acento */
+  --accent: oklch(0.55 0.265 303);
+  --accent-foreground: oklch(0.99 0 0);
+
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.82 0.02 265);
+  --input: oklch(0.82 0.02 265);
+  --ring: oklch(0.52 0.233 272);
+
+  --chart-1: oklch(0.52 0.233 272);
+  --chart-2: oklch(0.55 0.265 303);
+  --chart-3: oklch(0.55 0.18 230);
+  --chart-4: oklch(0.65 0.15 200);
+  --chart-5: oklch(0.68 0.12 280);
+
+  --sidebar: oklch(0.93 0.01 265);
+  --sidebar-foreground: oklch(0.15 0.04 268);
+  --sidebar-primary: oklch(0.52 0.233 272);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.90 0.012 266);
+  --sidebar-accent-foreground: oklch(0.15 0.04 268);
+  --sidebar-border: oklch(0.82 0.02 265);
+  --sidebar-ring: oklch(0.52 0.233 272);
+}
+
+
 
 @layer base {
   * {
@@ -186,37 +240,12 @@
   }
 }
 
-/* ─── Animated Floating Blobs ─────────────────────────────────────────────── */
-@keyframes blob-float-1 {
-  0%   { transform: translate(0px, 0px)   scale(1); }
-  20%  { transform: translate(40px, -30px) scale(1.06); }
-  40%  { transform: translate(-25px, 20px) scale(0.95); }
-  60%  { transform: translate(30px, 40px)  scale(1.04); }
-  80%  { transform: translate(-15px, -20px) scale(0.97); }
-  100% { transform: translate(0px, 0px)   scale(1); }
-}
-
-@keyframes blob-float-2 {
-  0%   { transform: translate(0px, 0px)    scale(1); }
-  25%  { transform: translate(-50px, 30px)  scale(1.08); }
-  50%  { transform: translate(30px, -40px)  scale(0.93); }
-  75%  { transform: translate(50px, 20px)   scale(1.05); }
-  100% { transform: translate(0px, 0px)    scale(1); }
-}
-
-@keyframes blob-float-3 {
-  0%   { transform: translate(0px, 0px)    scale(1); }
-  30%  { transform: translate(60px, -20px)  scale(1.07); }
-  55%  { transform: translate(-30px, 50px)  scale(0.94); }
-  80%  { transform: translate(-50px, -10px) scale(1.03); }
-  100% { transform: translate(0px, 0px)    scale(1); }
-}
-
-@keyframes blob-float-4 {
-  0%   { transform: translate(0px, 0px)    scale(1); }
-  35%  { transform: translate(-40px, -50px) scale(1.05); }
-  65%  { transform: translate(50px, 30px)   scale(0.96); }
-  100% { transform: translate(0px, 0px)    scale(1); }
+/* ─── Organic Floating Blobs (estilo julianherrera-dev) ───────────────────── */
+@keyframes blob {
+  0%   { transform: translate(0px,   0px)   scale(1); }
+  33%  { transform: translate(30px,  -50px) scale(1.1); }
+  66%  { transform: translate(-20px,  20px) scale(0.9); }
+  100% { transform: translate(0px,   0px)   scale(1); }
 }
 
 .blob {
@@ -225,13 +254,36 @@
   filter: blur(80px);
   will-change: transform;
   pointer-events: none;
+  animation: blob 7s ease-in-out infinite;
+  /* Modo claro: multiply para que los blobs se vean sobre fondo blanco */
+  mix-blend-mode: multiply;
 }
-.blob-1 { animation: blob-float-1 18s ease-in-out infinite; }
-.blob-2 { animation: blob-float-2 24s ease-in-out infinite; }
-.blob-3 { animation: blob-float-3 20s ease-in-out infinite; }
-.blob-4 { animation: blob-float-4 28s ease-in-out infinite; }
+
+/* En modo oscuro los blobs brillan con screen */
+:root.dark .blob {
+  mix-blend-mode: screen;
+}
+
+/* Variantes de velocidad para aspecto más orgánico */
+.blob-1 { animation-duration: 7s;  animation-delay: 0s;   }
+.blob-2 { animation-duration: 10s; animation-delay: 2s;   }
+.blob-3 { animation-duration: 13s; animation-delay: 4s;   }
+.blob-4 { animation-duration: 9s;  animation-delay: 1s;   }
 
 /* Respeta prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .blob { animation: none; }
+}
+
+/* --- Infinite Marquee ----------------------------------------------- */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation-play-state: paused; }
 }

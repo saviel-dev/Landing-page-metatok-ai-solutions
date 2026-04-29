@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import logo from "@/assets/logo.png";
-import logoMini from "@/assets/logo mini.png";
 import logoMiniExtended from "@/assets/logo mini extended.png";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/hooks/useTheme";
 
 // Navegación principal — anclas a las secciones de la landing
 const nav = [
@@ -17,6 +17,7 @@ const nav = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -74,7 +75,15 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            {/* Toggle de tema */}
+            <button
+              onClick={toggle}
+              aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+              className="inline-flex items-center justify-center h-9 w-9 rounded-md border border-border text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
+            >
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             <Button
               asChild
               className="bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold"
@@ -83,15 +92,24 @@ export function Header() {
             </Button>
           </div>
 
-          {/* Botón hamburguesa móvil */}
-          <button
-            className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-md border border-border text-foreground transition-colors hover:bg-card"
-            onClick={() => setOpen((o) => !o)}
-            aria-label={open ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={open}
-          >
-            <Menu className="h-5 w-5" />
-          </button>
+          {/* Botón hamburguesa + toggle móvil */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggle}
+              aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+              className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-border text-foreground transition-colors hover:bg-card"
+            >
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+            <button
+              className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-border text-foreground transition-colors hover:bg-card"
+              onClick={() => setOpen((o) => !o)}
+              aria-label={open ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={open}
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </header>
 

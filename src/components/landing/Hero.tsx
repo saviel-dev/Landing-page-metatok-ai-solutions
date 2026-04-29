@@ -37,12 +37,16 @@ export function Hero() {
         style={{ backgroundImage: `url(${wallpaperHero})` }}
       />
 
-      {/* Acentos decorativos: Animated Floating Blobs */}
+      {/* Acentos decorativos: Organic Blob Background */}
       <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="blob blob-1 w-96 h-96 bg-primary/10 top-[-10%] left-[-10%]" />
-        <div className="blob blob-2 w-[30rem] h-[30rem] bg-accent/10 top-[10%] right-[-10%]" />
-        <div className="blob blob-3 w-[40rem] h-[40rem] bg-primary/5 bottom-[-20%] left-[20%]" />
-        <div className="blob blob-4 w-[25rem] h-[25rem] bg-accent/10 bottom-[10%] left-[60%]" />
+        {/* Blob azul índigo — superior izquierda */}
+        <div className="blob blob-1 w-[28rem] h-[28rem] md:w-[42rem] md:h-[42rem] bg-indigo-400 opacity-30 top-[-15%] left-[-10%]" />
+        {/* Blob violeta — superior derecha (más prominente) */}
+        <div className="blob blob-2 w-[32rem] h-[32rem] md:w-[52rem] md:h-[52rem] bg-violet-400 opacity-25 top-[-5%] right-[-15%]" />
+        {/* Blob azul — inferior izquierda */}
+        <div className="blob blob-3 w-[26rem] h-[26rem] md:w-[40rem] md:h-[40rem] bg-blue-500 opacity-20 bottom-[-20%] left-[10%]" />
+        {/* Blob morado — inferior derecha */}
+        <div className="blob blob-4 w-[20rem] h-[20rem] md:w-[36rem] md:h-[36rem] bg-purple-500 opacity-20 bottom-[0%] right-[5%]" />
       </div>
 
       <div className="container-mt grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
