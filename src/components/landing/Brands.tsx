@@ -52,6 +52,7 @@ export function Brands() {
                 className="h-8 md:h-9 w-auto max-w-[48px] object-contain"
                 loading="lazy"
                 draggable={false}
+                suppressHydrationWarning
               />
               <span className="text-base md:text-lg font-semibold text-foreground whitespace-nowrap">
                 {brand.name}
