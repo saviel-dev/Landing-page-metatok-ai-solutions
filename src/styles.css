@@ -143,6 +143,11 @@
     background-color: color-mix(in oklab, var(--color-primary) 35%, transparent);
     color: var(--color-foreground);
   }
+
+  button, 
+  [role="button"] {
+    cursor: pointer;
+  }
 }
 
 @layer utilities {
@@ -177,4 +182,54 @@
       padding-inline: 2rem;
     }
   }
+}
+
+/* ─── Animated Floating Blobs ─────────────────────────────────────────────── */
+@keyframes blob-float-1 {
+  0%   { transform: translate(0px, 0px)   scale(1); }
+  20%  { transform: translate(40px, -30px) scale(1.06); }
+  40%  { transform: translate(-25px, 20px) scale(0.95); }
+  60%  { transform: translate(30px, 40px)  scale(1.04); }
+  80%  { transform: translate(-15px, -20px) scale(0.97); }
+  100% { transform: translate(0px, 0px)   scale(1); }
+}
+
+@keyframes blob-float-2 {
+  0%   { transform: translate(0px, 0px)    scale(1); }
+  25%  { transform: translate(-50px, 30px)  scale(1.08); }
+  50%  { transform: translate(30px, -40px)  scale(0.93); }
+  75%  { transform: translate(50px, 20px)   scale(1.05); }
+  100% { transform: translate(0px, 0px)    scale(1); }
+}
+
+@keyframes blob-float-3 {
+  0%   { transform: translate(0px, 0px)    scale(1); }
+  30%  { transform: translate(60px, -20px)  scale(1.07); }
+  55%  { transform: translate(-30px, 50px)  scale(0.94); }
+  80%  { transform: translate(-50px, -10px) scale(1.03); }
+  100% { transform: translate(0px, 0px)    scale(1); }
+}
+
+@keyframes blob-float-4 {
+  0%   { transform: translate(0px, 0px)    scale(1); }
+  35%  { transform: translate(-40px, -50px) scale(1.05); }
+  65%  { transform: translate(50px, 30px)   scale(0.96); }
+  100% { transform: translate(0px, 0px)    scale(1); }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+  pointer-events: none;
+}
+.blob-1 { animation: blob-float-1 18s ease-in-out infinite; }
+.blob-2 { animation: blob-float-2 24s ease-in-out infinite; }
+.blob-3 { animation: blob-float-3 20s ease-in-out infinite; }
+.blob-4 { animation: blob-float-4 28s ease-in-out infinite; }
+
+/* Respeta prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none; }
 }

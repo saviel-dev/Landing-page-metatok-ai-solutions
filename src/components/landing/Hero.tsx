@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, ShieldCheck, Clock, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeUp, stagger, viewportOnce } from "./motion";
+import { useSlideInLeft, useSlideInRight, useTypingEffect, useStaggerChildren, asRef } from "@/hooks/useAnimeJs";
+import wallpaperHero from "@/assets/wallpaper-hero.png";
 
 const trust = [
   { icon: Clock, label: "Operativo 24/7" },
@@ -11,24 +13,42 @@ const trust = [
 ];
 
 export function Hero() {
+  const typingRef1 = useTypingEffect(200);
+  const typingRef2 = useTypingEffect(1300); // 40 chars * 28ms = ~1100ms
+  const typingRef3 = useTypingEffect(1950); // 23 chars * 28ms = ~650ms
+
+  // Slide izquierda en el bloque de texto
+  const textColRef = useSlideInLeft(100);
+  // Slide derecha en el mockup
+  const mockupRef = useSlideInRight(200);
+  // Stagger en los iconos de confianza
+  const trustRef = useStaggerChildren(":scope > li", 400, 100);
+
   return (
     <section
       id="inicio"
       className="relative pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden"
       aria-labelledby="hero-heading"
     >
-      {/* Acentos decorativos sutiles, sin degradados sobre los CTAs */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 opacity-[0.07]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 0%, var(--color-primary) 0, transparent 40%), radial-gradient(circle at 90% 10%, var(--color-accent) 0, transparent 35%)",
-        }}
+      {/* Fondo Wallpaper con baja opacidad */}
+      <div 
+        aria-hidden 
+        className="absolute inset-0 -z-20 opacity-[0.08] bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{ backgroundImage: `url(${wallpaperHero})` }}
       />
 
+      {/* Acentos decorativos: Animated Floating Blobs */}
+      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="blob blob-1 w-96 h-96 bg-primary/10 top-[-10%] left-[-10%]" />
+        <div className="blob blob-2 w-[30rem] h-[30rem] bg-accent/10 top-[10%] right-[-10%]" />
+        <div className="blob blob-3 w-[40rem] h-[40rem] bg-primary/5 bottom-[-20%] left-[20%]" />
+        <div className="blob blob-4 w-[25rem] h-[25rem] bg-accent/10 bottom-[10%] left-[60%]" />
+      </div>
+
       <div className="container-mt grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        {/* Columna texto — slide desde la izquierda */}
         <motion.div
+          ref={asRef(textColRef)}
           className="lg:col-span-7"
           variants={stagger}
           initial="hidden"
@@ -47,8 +67,9 @@ export function Hero() {
             variants={fadeUp}
             className="mt-5 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.05]"
           >
-            Automatiza la captación, calificación y{" "}
-            <span className="text-primary">conversión de tus leads</span> con IA.
+            <span ref={asRef<HTMLSpanElement>(typingRef1)}>Automatiza la captación, calificación y </span>
+            <span ref={asRef<HTMLSpanElement>(typingRef2)} className="text-primary">conversión de tus leads</span>
+            <span ref={asRef<HTMLSpanElement>(typingRef3)}> con IA.</span>
           </motion.h1>
 
           <motion.p
@@ -64,24 +85,29 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="h-12 px-6 text-base bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold"
+              className="h-12 px-6 text-base bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold transition-all duration-300 group hover:-translate-y-0.5"
             >
-              <a href="#auditoria">
-                Solicitar Auditoría Gratuita <ArrowRight className="ml-2 h-4 w-4" />
+              <a href="#auditoria" className="flex items-center">
+                Solicitar Auditoría Gratuita
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="h-12 px-6 text-base border-border text-foreground hover:bg-card"
+              className="h-12 px-6 text-base border-border bg-transparent text-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/40 transition-all duration-300 group shadow-sm hover:shadow-[0_0_25px_-12px_var(--color-accent)] hover:-translate-y-0.5"
             >
-              <a href="#servicios">Ver servicios</a>
+              <a href="#servicios" className="flex items-center">
+                Ver servicios
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
             </Button>
           </motion.div>
 
-          <motion.ul
-            variants={fadeUp}
+          {/* Trust badges — stagger Anime.js */}
+          <ul
+            ref={asRef<HTMLUListElement>(trustRef)}
             className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4"
           >
             {trust.map((t) => (
@@ -93,16 +119,13 @@ export function Hero() {
                 {t.label}
               </li>
             ))}
-          </motion.ul>
+          </ul>
         </motion.div>
 
-        {/* Mockup decorativo flat — cards apiladas */}
-        <motion.div
+        {/* Mockup — slide desde la derecha con Anime.js */}
+        <div
+          ref={asRef<HTMLDivElement>(mockupRef)}
           className="lg:col-span-5"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          {...viewportOnce}
         >
           <div className="relative mx-auto max-w-md">
             <div className="rounded-2xl border border-border bg-card p-5 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)]">
@@ -133,7 +156,7 @@ export function Hero() {
               className="absolute -inset-1 -z-10 rounded-3xl border border-border/60"
             />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

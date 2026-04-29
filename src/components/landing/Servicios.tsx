@@ -1,49 +1,45 @@
 import { motion } from "framer-motion";
 import { servicios } from "./content";
 import { fadeUp, stagger, viewportOnce } from "./motion";
+import { useSlideInLeft, useStaggerChildren, useTypingEffect, asRef } from "@/hooks/useAnimeJs";
 
 export function Servicios() {
+  // Título con typing effect
+  const titleRef = useTypingEffect(200);
+  // Slide izquierda en el encabezado
+  const headerRef = useSlideInLeft(0);
+  // Stagger en las cards
+  const gridRef = useStaggerChildren(":scope > article", 100, 90);
+
   return (
     <section id="servicios" className="py-20 md:py-28" aria-labelledby="servicios-heading">
       <div className="container-mt">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          variants={stagger}
-          className="max-w-2xl"
-        >
-          <motion.span
-            variants={fadeUp}
-            className="text-xs uppercase tracking-widest text-primary font-semibold"
-          >
+        {/* Encabezado — slide desde izquierda */}
+        <div ref={asRef<HTMLDivElement>(headerRef)} className="max-w-2xl">
+          <span className="text-xs uppercase tracking-widest text-primary font-semibold">
             Servicios
-          </motion.span>
-          <motion.h2
+          </span>
+          <h2
             id="servicios-heading"
-            variants={fadeUp}
+            ref={asRef<HTMLHeadingElement>(titleRef)}
             className="mt-3 text-3xl md:text-4xl font-bold text-foreground tracking-tight"
           >
             Una arquitectura completa de IA y automatización
-          </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-muted-foreground">
+          </h2>
+          <p className="mt-4 text-muted-foreground">
             Diseñamos cada pieza para que se integre en el núcleo de tu negocio y
             opere de forma autónoma desde el primer día.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        {/* Bento grid: 2 destacados grandes + 4 estándar */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          variants={stagger}
+        {/* Grid de cards — stagger Anime.js */}
+        <div
+          ref={asRef<HTMLDivElement>(gridRef)}
           className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           {servicios.map((s) => (
-            <motion.article
+            <article
               key={s.titulo}
-              variants={fadeUp}
               className={[
                 "card-hover rounded-2xl border border-border bg-card p-6 md:p-7",
                 s.destacado ? "lg:row-span-1" : "",
@@ -56,9 +52,9 @@ export function Servicios() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {s.descripcion}
               </p>
-            </motion.article>
+            </article>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

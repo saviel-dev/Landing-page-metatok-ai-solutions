@@ -8,10 +8,20 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "Metatok",
   url: "https://metatok.ai",
-  logo: "https://metatok.ai/metatok-logo.png",
+  logo: "https://metatok.ai/logo.png",
   description:
     "Metatok diseña ecosistemas de Inteligencia Artificial Conversacional y automatización para captar, cualificar y convertir leads 24/7.",
-  sameAs: [],
+  sameAs: [
+    "https://facebook.com/metatok",
+    "https://instagram.com/metatok",
+    "https://tiktok.com/@metatok",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "contacto@metatok.ai",
+    contactType: "customer support",
+    availableLanguage: "Spanish",
+  },
 };
 
 function NotFoundComponent() {
@@ -43,21 +53,22 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
         title:
-          "Metatok — Automatización con IA para captar, cualificar y convertir leads 24/7",
+          "Metatok — Agentes de IA y Automatización para Convertir Leads 24/7",
       },
       {
         name: "description",
         content:
-          "Implementamos agentes de IA, automatización de procesos, integración con CRM y agendamiento automático para escalar tu negocio. Solicita tu auditoría gratuita.",
+          "Metatok implementa agentes de IA conversacional, automatización de procesos, integración con CRM y agendamiento automático. Capta, cualifica y convierte más leads sin tareas repetitivas. Solicita tu auditoría gratuita.",
       },
       {
         name: "keywords",
         content:
-          "automatización IA, agentes de IA, cualificación de leads, CRM, agendamiento automático, embudo de ventas, asistentes IA, auditoría gratuita, Metatok",
+          "agentes IA, automatización con inteligencia artificial, cualificación de leads, integración CRM, agendamiento automático, embudo de ventas automatizado, chatbot IA, Metatok, NLP, flow-works, auditoría gratuita IA",
       },
       { name: "author", content: "Metatok" },
       { name: "theme-color", content: "#0F172A" },
       { name: "robots", content: "index, follow" },
+      { name: "language", content: "es" },
 
       // Open Graph
       { property: "og:type", content: "website" },
@@ -66,33 +77,39 @@ export const Route = createRootRoute({
       {
         property: "og:title",
         content:
-          "Metatok — Automatización con IA para captar, cualificar y convertir leads 24/7",
+          "Metatok — Agentes de IA y Automatización para Convertir Leads 24/7",
       },
       {
         property: "og:description",
         content:
-          "Agentes de IA, automatización, CRM y agendamiento automático. Convierte más con menos esfuerzo. Solicita tu auditoría gratuita.",
+          "Capta, cualifica y convierte leads 24/7 con agentes de IA conversacional, automatización de procesos y CRM. Solicita tu auditoría gratuita hoy.",
       },
-      { property: "og:image", content: "/metatok-logo.png" },
+      { property: "og:image", content: "https://metatok.ai/logo.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Metatok — Automatización con IA" },
       { property: "og:url", content: "https://metatok.ai/" },
 
-      // Twitter
+      // Twitter / X
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@metatok" },
       {
         name: "twitter:title",
         content:
-          "Metatok — Automatización con IA para captar, cualificar y convertir leads 24/7",
+          "Metatok — Agentes de IA y Automatización para Convertir Leads 24/7",
       },
       {
         name: "twitter:description",
         content:
-          "Agentes de IA, automatización, CRM y agendamiento automático. Solicita tu auditoría gratuita.",
+          "Capta, cualifica y convierte leads 24/7 con agentes de IA conversacional, automatización de procesos y CRM.",
       },
-      { name: "twitter:image", content: "/metatok-logo.png" },
+      { name: "twitter:image", content: "https://metatok.ai/logo.png" },
+      { name: "twitter:image:alt", content: "Metatok — Automatización con IA" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: "/metatok-logo.png" },
+      { rel: "icon", type: "image/png", href: "/logo.png" },
+      { rel: "apple-touch-icon", href: "/logo.png" },
       { rel: "canonical", href: "https://metatok.ai/" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
@@ -116,10 +133,10 @@ export const Route = createRootRoute({
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className="dark" suppressHydrationWarning>
-      <head>
+      <head suppressHydrationWarning>
         <HeadContent />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <Scripts />
       </body>

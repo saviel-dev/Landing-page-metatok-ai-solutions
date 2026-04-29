@@ -1,32 +1,35 @@
-import { motion } from "framer-motion";
 import { canales } from "./content";
-import { fadeUp, stagger, viewportOnce } from "./motion";
+import { useFadeUp, useStaggerChildren, asRef } from "@/hooks/useAnimeJs";
 
 export function Canales() {
+  // Fade-up en el texto intro
+  const introRef = useFadeUp(0);
+  // Stagger horizontal en los iconos de canales
+  const listRef = useStaggerChildren(":scope > li", 200, 80);
+
   return (
     <section className="py-14 md:py-16" aria-label="Canales de integración">
       <div className="container-mt">
-        <p className="text-center text-sm text-muted-foreground">
+        <p
+          ref={asRef<HTMLParagraphElement>(introRef)}
+          className="text-center text-sm text-muted-foreground"
+        >
           Despliegue omnicanal · Web, mensajería e integraciones API
         </p>
-        <motion.ul
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          variants={stagger}
+        <ul
+          ref={asRef<HTMLUListElement>(listRef)}
           className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-5"
         >
           {canales.map((c) => (
-            <motion.li
+            <li
               key={c.label}
-              variants={fadeUp}
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <c.icon className="h-5 w-5 text-accent" aria-hidden />
               <span className="text-sm font-medium">{c.label}</span>
-            </motion.li>
+            </li>
           ))}
-        </motion.ul>
+        </ul>
       </div>
     </section>
   );
