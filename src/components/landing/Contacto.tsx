@@ -211,7 +211,7 @@ export function Contacto() {
               type="submit"
               size="lg"
               disabled={enviando}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold"
+              className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold"
             >
               {enviando ? (
                 <>
@@ -221,7 +221,7 @@ export function Contacto() {
               ) : (
                 <>
                   Solicitar auditoría
-                  <Send className="ml-2 h-4 w-4" />
+                  <Send className="ml-2 h-4 w-4 shrink-0" />
                 </>
               )}
             </Button>

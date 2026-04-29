@@ -81,26 +81,26 @@ export function Hero() {
             ni leads perdidos.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4">
+          <motion.div variants={fadeUp} className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4">
             <Button
               asChild
               size="lg"
-              className="h-12 px-6 text-base bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold transition-all duration-300 group hover:-translate-y-0.5"
+              className="w-full sm:w-auto h-auto py-3.5 px-4 sm:px-6 text-sm sm:text-base bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold transition-all duration-300 group hover:-translate-y-0.5 whitespace-normal text-center"
             >
-              <a href="#auditoria" className="flex items-center">
+              <a href="#auditoria" className="flex items-center justify-center">
                 Solicitar Auditoría Gratuita
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="h-12 px-6 text-base border-border bg-transparent text-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/40 transition-all duration-300 group shadow-sm hover:shadow-[0_0_25px_-12px_var(--color-accent)] hover:-translate-y-0.5"
+              className="w-full sm:w-auto h-auto py-3.5 px-4 sm:px-6 text-sm sm:text-base border-border bg-transparent text-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/40 transition-all duration-300 group shadow-sm hover:shadow-[0_0_25px_-12px_var(--color-accent)] hover:-translate-y-0.5 whitespace-normal text-center"
             >
-              <a href="#servicios" className="flex items-center">
+              <a href="#servicios" className="flex items-center justify-center">
                 Ver servicios
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </Button>
           </motion.div>

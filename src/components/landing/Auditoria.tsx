@@ -23,7 +23,7 @@ export function Auditoria() {
           whileInView="show"
           viewport={viewportOnce}
           variants={stagger}
-          className="relative overflow-hidden rounded-3xl border border-primary/40 bg-[var(--color-surface)] p-8 md:p-14"
+          className="relative overflow-hidden rounded-3xl border border-primary/40 bg-[var(--color-surface)] p-6 md:p-14"
         >
           {/* Acento sutil */}
           <div
@@ -72,15 +72,15 @@ export function Auditoria() {
                 ))}
               </motion.ul>
 
-              <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4">
+              <motion.div variants={fadeUp} className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4">
                 <Button
                   asChild
                   size="lg"
-                  className="h-12 px-6 text-base bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold"
+                  className="w-full sm:w-auto h-auto py-3.5 px-4 sm:px-6 text-sm sm:text-base bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold whitespace-normal text-center"
                 >
-                  <a href="#contacto">
+                  <a href="#contacto" className="flex items-center justify-center">
                     Solicitar mi auditoría gratuita
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ml-2 h-4 w-4 shrink-0" />
                   </a>
                 </Button>
                 <span className="self-center text-xs text-muted-foreground">
@@ -94,7 +94,7 @@ export function Auditoria() {
               className="lg:col-span-5"
               aria-hidden
             >
-              <div className="rounded-2xl border border-border bg-card p-6">
+              <div className="rounded-2xl border border-border bg-card p-4 sm:p-6">
                 <div className="text-xs text-muted-foreground">
                   Estimación post-auditoría
                 </div>
