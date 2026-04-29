@@ -23,6 +23,7 @@ import imgVoicebots from "@/assets/voicebots.png";
 import imgAutomatizacion from "@/assets/automatizacion y seguimiento.png";
 import imgCRM from "@/assets/CRM.png";
 import imgWorkflow from "@/assets/workflow inteligente.png";
+import imgCalendarios from "@/assets/calendarios.png";
 
 export type Servicio = {
   icon: LucideIcon;
@@ -67,7 +68,7 @@ export const servicios: Servicio[] = [
     titulo: "Agendamiento Automático",
     descripcion:
       "Citas en tu calendario sin fricción. El agente negocia el horario, confirma y envía recordatorios.",
-    image: imgCRM,
+    image: imgCalendarios,
   },
   {
     icon: GitBranch,
