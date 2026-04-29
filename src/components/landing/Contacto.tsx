@@ -164,17 +164,6 @@ export function Contacto() {
                 {...register("web")}
               />
             </Field>
-            <Field label="Sector / canal principal" id="mensaje-corto" error={undefined}>
-              <Input
-                id="mensaje-corto"
-                placeholder="Ej. ecommerce, servicios, B2B…"
-                onChange={(e) => {
-                  // Lo concatenamos al campo mensaje para no añadir más estado
-                  const ev = e.target.value;
-                  if (ev) (document.getElementById("mensaje") as HTMLTextAreaElement | null);
-                }}
-              />
-            </Field>
           </div>
 
           <Field label="¿Qué quieres automatizar? (opcional)" id="mensaje" error={errors.mensaje?.message}>
