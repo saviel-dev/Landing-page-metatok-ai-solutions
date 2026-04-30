@@ -14,12 +14,12 @@ export function Faq() {
   const col2Ref = useSlideInRight(200);
 
   return (
-    <section id="faq" className="py-20 md:py-28" aria-labelledby="faq-heading">
+    <section id="faq" className="py-12 md:py-20" aria-labelledby="faq-heading">
       <div className="container-mt">
         {/* Encabezado centrado con fade-up */}
         <div
           ref={asRef<HTMLDivElement>(headerRef)}
-          className="max-w-3xl mx-auto text-center mb-16"
+          className="max-w-3xl mx-auto text-center mb-10"
         >
           <span className="text-xs uppercase tracking-widest text-primary font-semibold">
             FAQ
@@ -47,7 +47,7 @@ export function Faq() {
             >
               {faqs.slice(0, Math.ceil(faqs.length / 2)).map((f, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="border-0 px-5">
-                  <AccordionTrigger className="text-left text-base font-medium text-foreground hover:no-underline py-5">
+                  <AccordionTrigger className="text-left text-base font-medium text-foreground hover:no-underline hover:text-primary transition-colors py-5">
                     {f.pregunta}
                   </AccordionTrigger>
                   <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5">
@@ -67,7 +67,7 @@ export function Faq() {
             >
               {faqs.slice(Math.ceil(faqs.length / 2)).map((f, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="border-0 px-5">
-                  <AccordionTrigger className="text-left text-base font-medium text-foreground hover:no-underline py-5">
+                  <AccordionTrigger className="text-left text-base font-medium text-foreground hover:no-underline hover:text-primary transition-colors py-5">
                     {f.pregunta}
                   </AccordionTrigger>
                   <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5">

@@ -1,35 +1,63 @@
 import { canales } from "./content";
-import { useFadeUp, useStaggerChildren, asRef } from "@/hooks/useAnimeJs";
+import { useFadeUp, useStaggerChildren, useSlideInLeft, useTypingEffect, asRef } from "@/hooks/useAnimeJs";
 
 export function Canales() {
-  // Fade-up en el texto intro
-  const introRef = useFadeUp(0);
-  // Stagger horizontal en los iconos de canales
-  const listRef = useStaggerChildren(":scope > li", 200, 80);
+  const headerRef = useSlideInLeft(0);
+  const titleRef = useTypingEffect(200);
+  const gridRef = useStaggerChildren(":scope > li", 200, 80);
 
   return (
-    <section className="py-14 md:py-16" aria-label="Canales de integración">
+    <section
+      id="canales"
+      className="py-12 md:py-20 border-y border-border"
+      aria-labelledby="canales-heading"
+    >
       <div className="container-mt">
-        <p
-          ref={asRef<HTMLParagraphElement>(introRef)}
-          className="text-center text-sm text-muted-foreground"
-        >
-          Despliegue omnicanal · Web, mensajería e integraciones API
-        </p>
+        {/* Encabezado */}
+        <div ref={asRef<HTMLDivElement>(headerRef)} className="max-w-2xl text-center mx-auto mb-10">
+          <span className="text-xs uppercase tracking-widest text-primary font-semibold">
+            Integración omnicanal
+          </span>
+          <h2
+            id="canales-heading"
+            ref={asRef<HTMLHeadingElement>(titleRef)}
+            className="mt-3 text-3xl md:text-4xl font-bold text-foreground tracking-tight"
+          >
+            Tu IA donde ya están{" "}
+            <span className="text-primary">tus clientes</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+            Desplegamos en los canales que tus prospectos ya usan. Sin
+            fricciones, sin cambios de plataforma para ellos.
+          </p>
+        </div>
+
+        {/* Cards de canales */}
         <ul
-          ref={asRef<HTMLUListElement>(listRef)}
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-5"
+          ref={asRef<HTMLUListElement>(gridRef)}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4"
         >
           {canales.map((c) => (
             <li
               key={c.label}
-              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+              className="card-hover flex flex-col items-center gap-3 rounded-2xl border border-border bg-card p-6 text-center"
             >
-              <c.icon className="h-5 w-5 text-accent" aria-hidden />
-              <span className="text-sm font-medium">{c.label}</span>
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-[var(--color-surface)]">
+                <c.icon className="h-6 w-6 text-accent" aria-hidden />
+              </div>
+              <span className="text-sm font-semibold text-foreground">{c.label}</span>
+              <span className="text-xs text-muted-foreground">{c.descripcion}</span>
             </li>
           ))}
         </ul>
+
+        {/* Nota de integración */}
+        <p className="mt-8 text-center text-xs text-muted-foreground">
+          ¿Usas otro canal o sistema interno?{" "}
+          <a href="#contacto" className="text-primary hover:underline font-medium">
+            Consúltanos →
+          </a>
+        </p>
       </div>
     </section>
   );

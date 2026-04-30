@@ -31,6 +31,7 @@ export type Servicio = {
   descripcion: string;
   destacado?: boolean;
   image?: string;
+  beneficio?: string; // beneficio concreto visible para el visitante
 };
 
 export const servicios: Servicio[] = [
@@ -38,7 +39,8 @@ export const servicios: Servicio[] = [
     icon: Bot,
     titulo: "Agentes de IA Conversacional",
     descripcion:
-      "Agentes especializados con NLP que entienden intenciones, manejan objeciones y ejecutan estrategias de venta complejas en cada rama de tu negocio.",
+      "Agentes especializados con NLP que entienden intenciones, manejan objeciones y ejecutan estrategias de venta complejas en cada canal de tu negocio.",
+    beneficio: "Responde al 100% de tus leads en segundos, no en horas.",
     destacado: true,
     image: imgChatbots,
   },
@@ -46,35 +48,40 @@ export const servicios: Servicio[] = [
     icon: Workflow,
     titulo: "Automatización de Procesos",
     descripcion:
-      "Eliminamos tareas repetitivas y errores humanos liberando a tu equipo para que se enfoque en cerrar ventas de alto valor.",
+      "Eliminamos tareas repetitivas y errores humanos, liberando a tu equipo para que se enfoque exclusivamente en cerrar ventas de alto valor.",
+    beneficio: "Recupera hasta 20 h/semana de tiempo productivo.",
     image: imgAutomatizacion,
   },
   {
     icon: Filter,
     titulo: "Cualificación de Leads",
     descripcion:
-      "Filtramos y puntuamos cada prospecto en tiempo real para que solo hables con los que están listos para comprar.",
+      "Filtramos y puntuamos cada prospecto en tiempo real para que solo hables con los que tienen intención real de compra.",
+    beneficio: "Aumenta tu tasa de cierre hasta un 3× sin más presupuesto.",
     image: imgVoicebots,
   },
   {
     icon: Database,
     titulo: "Integración con CRM",
     descripcion:
-      "Sincronización bidireccional con tu CRM mediante API. Datos limpios, actualizados y accionables 24/7.",
+      "Sincronización bidireccional con tu CRM mediante API. Datos limpios, actualizados y accionables 24/7, sin duplicados ni pérdidas.",
+    beneficio: "0 horas de carga manual de datos en tu equipo.",
     image: imgCRM,
   },
   {
     icon: CalendarClock,
     titulo: "Agendamiento Automático",
     descripcion:
-      "Citas en tu calendario sin fricción. El agente negocia el horario, confirma y envía recordatorios.",
+      "Citas en tu calendario sin fricción. El agente negocia el horario, confirma la reunión y envía recordatorios personalizados.",
+    beneficio: "Hasta +54% más citas agendadas sin intervención humana.",
     image: imgCalendarios,
   },
   {
     icon: GitBranch,
-    titulo: "Flow-works inteligentes",
+    titulo: "Flow-works Inteligentes",
     descripcion:
-      "Flujos de trabajo que disparan acciones automáticas: cualificar leads, agendar, actualizar CRM y nutrir prospectos.",
+      "Flujos de trabajo que disparan acciones automáticas: cualifican leads, agendan reuniones, actualizan el CRM y nutren prospectos en piloto automático.",
+    beneficio: "Tu embudo de ventas funciona solo, 24 horas al día.",
     destacado: true,
     image: imgWorkflow,
   },
@@ -85,133 +92,185 @@ export const proceso = [
     numero: "01",
     titulo: "Auditoría de Diagnóstico",
     descripcion:
-      "Un experto en IA analiza tus cuellos de botella operativos y detecta fugas de conversión.",
+      "Un experto analiza tu operación actual, detecta fugas de conversión y cuantifica cuánto estás perdiendo sin automatización.",
+    resultado: "Mapa claro de prioridades",
   },
   {
     numero: "02",
-    titulo: "Consultoría Estratégica",
+    titulo: "Estrategia a Medida",
     descripcion:
-      "Definimos el alcance del proyecto y diseñamos la arquitectura de agentes y flujos a tu medida.",
+      "Diseñamos la arquitectura de agentes, flujos e integraciones adaptada exactamente a tu modelo de negocio y tus canales actuales.",
+    resultado: "Propuesta técnica personalizada",
   },
   {
     numero: "03",
-    titulo: "Presupuesto Ad-Hoc",
+    titulo: "Presupuesto Transparente",
     descripcion:
-      "Recibes una propuesta transparente basada en la complejidad real de tu infraestructura.",
+      "Recibes una propuesta de precio basada en la complejidad real. Sin letra pequeña, sin costes ocultos, sin permanencia forzada.",
+    resultado: "Inversión clara y escalable",
   },
   {
     numero: "04",
-    titulo: "Despliegue y Programación",
+    titulo: "Despliegue Llave en Mano",
     descripcion:
-      "Entre 15 y 30 días: programación, entrenamiento de agentes y QA. Llave en mano.",
+      "Entre 15 y 30 días: programación, entrenamiento de agentes y QA completo. Tu equipo no toca código. Solo recibe resultados.",
+    resultado: "Sistema activo en producción",
   },
 ];
 
 export const beneficios = [
   {
-    titulo: "+ Leads cualificados",
+    titulo: "Más leads cualificados",
     descripcion:
-      "Solo hablas con prospectos listos para comprar. Más eficiencia, menos ruido.",
+      "Filtramos prospectos en tiempo real para que solo hables con los que están listos para comprar.",
+    metrica: "+3×",
+    metricaLabel: "Tasa de cierre",
   },
   {
     titulo: "Cero tareas repetitivas",
     descripcion:
-      "La IA gestiona el front-end de atención y libera a tu equipo comercial.",
+      "La IA gestiona captación, seguimiento y agenda. Tu equipo solo interviene cuando hay una venta que cerrar.",
+    metrica: "20h",
+    metricaLabel: "Ahorradas por semana",
   },
   {
-    titulo: "Conversión 24/7",
+    titulo: "Operativo las 24 horas",
     descripcion:
-      "Tu negocio nunca duerme. Capta, cualifica y agenda incluso fuera de horario.",
+      "Tu negocio nunca duerme. Capta, cualifica y agenda incluso fuera de horario comercial y festivos.",
+    metrica: "24/7",
+    metricaLabel: "Sin interrupciones",
   },
   {
     titulo: "Integración omnicanal",
     descripcion:
-      "Web, WhatsApp, Instagram, Telegram o tu CRM interno vía API.",
+      "Web, WhatsApp, Instagram, Telegram o tu CRM interno vía API. Un ecosistema conectado y coherente.",
+    metrica: "5+",
+    metricaLabel: "Canales integrados",
   },
 ];
 
 export const canales = [
-  { icon: Globe, label: "Web" },
-  { icon: MessageCircle, label: "WhatsApp" },
-  { icon: Instagram, label: "Instagram" },
-  { icon: Send, label: "Telegram" },
-  { icon: Plug, label: "API" },
+  { icon: Globe, label: "Web", descripcion: "Chat en tu sitio web" },
+  { icon: MessageCircle, label: "WhatsApp", descripcion: "El canal más usado" },
+  { icon: Instagram, label: "Instagram", descripcion: "DMs automatizados" },
+  { icon: Send, label: "Telegram", descripcion: "Bots y notificaciones" },
+  { icon: Plug, label: "API", descripcion: "Integra cualquier sistema" },
 ];
 
 export const faqs = [
   {
-    pregunta: "¿En qué consiste exactamente vuestro servicio de automatización e IA?",
+    pregunta: "¿En qué consiste exactamente el servicio de automatización con IA?",
     respuesta:
-      "No somos solo proveedores de software; somos arquitectos de procesos. Implementamos ecosistemas de Inteligencia Artificial Conversacional y Estructuras de Automatización (SaaS) que se integran en el núcleo de su negocio para captar, nutrir y convertir leads de forma autónoma 24/7.",
+      "Implementamos ecosistemas de Inteligencia Artificial Conversacional que se integran en el núcleo de tu negocio para captar, nutrir y convertir leads de forma autónoma 24/7. No vendemos software genérico; diseñamos arquitecturas a medida para tu operación.",
   },
   {
     pregunta: "¿Cómo es el proceso desde que solicito mi auditoría gratuita?",
     respuesta:
-      "El flujo es de alta precisión técnica: 1) Auditoría de Diagnóstico: un experto en IA analiza sus cuellos de botella operativos. 2) Consultoría Estratégica: definimos el alcance del proyecto. 3) Presupuesto Ad-Hoc: recibe una propuesta basada en la complejidad de los agentes y flujos necesarios. 4) Despliegue y Programación: iniciamos el desarrollo de su arquitectura personalizada.",
+      "El proceso es de alta precisión: 1) Auditoría de Diagnóstico — detectamos fugas de conversión. 2) Estrategia a Medida — diseñamos la arquitectura. 3) Presupuesto Transparente — propuesta sin letra pequeña. 4) Despliegue Llave en Mano — sistema activo en 15-30 días.",
   },
   {
     pregunta: "¿Tengo algún compromiso de permanencia?",
     respuesta:
-      "Absolutamente ninguno. Operamos bajo un modelo de suscripción mensual transparente. Queremos que se quede con nosotros por los resultados que generamos, no por un contrato. Puede dar de baja el servicio en cualquier momento, lo que le otorga total libertad y control sobre su inversión.",
+      "Ninguno. Operamos bajo suscripción mensual sin contratos de permanencia. Queremos que te quedes por los resultados que generamos, no por obligación contractual. Puedes cancelar en cualquier momento.",
   },
   {
-    pregunta: "¿Por qué el presupuesto es a medida y no un precio fijo?",
+    pregunta: "¿Por qué el presupuesto es a medida y no un precio fijo cerrado?",
     respuesta:
-      'Porque la excelencia técnica no admite "tallas únicas". Un negocio puede requerir un agente de IA para tareas sencillas, mientras que otro necesita una integración profunda de APIs y múltiples flujos de trabajo. Usted paga estrictamente por la potencia y complejidad que su infraestructura requiere.',
+      "Porque tu negocio no es igual al de nadie más. Un proyecto puede requerir un único agente de IA, mientras que otro necesita integración profunda con múltiples APIs y flujos complejos. Pagas estrictamente por la solución que tu operación necesita.",
   },
   {
     pregunta: "¿Cuánto tiempo tarda la implementación completa?",
     respuesta:
-      'La ingeniería de calidad requiere rigor. El ciclo de desarrollo —que incluye programación lógica, entrenamiento de los agentes con sus datos y fase de QA (pruebas)— oscila entre 15 y 30 días. Es un despliegue "llave en mano" listo para producir resultados.',
+      "El ciclo de desarrollo — programación, entrenamiento de agentes con tus datos y fase de QA — oscila entre 15 y 30 días. Es un despliegue llave en mano: tu equipo no toca código ni configura nada.",
   },
   {
     pregunta: "¿En qué se diferencian vuestros agentes de un chatbot convencional?",
     respuesta:
-      "La diferencia es generacional. Un chatbot tradicional es rígido; nuestros Agentes de IA Especializados utilizan Procesamiento de Lenguaje Natural (NLP) para entender intenciones, manejar objeciones y ejecutar estrategias de venta complejas en cada rama de su negocio.",
+      "Un chatbot tradicional sigue un árbol de decisiones rígido. Nuestros Agentes de IA utilizan NLP avanzado para entender intenciones, manejar objeciones en tiempo real y ejecutar estrategias de venta complejas adaptadas a cada conversación.",
   },
   {
-    pregunta: '¿Qué son los "Flow-works" y cómo ayudan a mi negocio?',
+    pregunta: "¿Qué son los Flow-works y cómo ayudan a mi negocio?",
     respuesta:
-      "Los Flow-works son flujos de trabajo inteligentes que disparan acciones automáticas. No solo responden al cliente, sino que pueden agendar citas en su calendario, calificar la calidad de un lead o actualizar su CRM en tiempo real sin intervención humana.",
+      "Son flujos de trabajo inteligentes que disparan acciones automáticas. No solo responden al cliente: pueden agendar citas, cualificar leads, actualizar el CRM y enviar secuencias de seguimiento, todo sin intervención humana.",
   },
   {
-    pregunta: "¿Por qué es imprescindible un Embudo de Ventas (Sales Funnel) automatizado?",
+    pregunta: "¿Por qué necesito un embudo de ventas automatizado?",
     respuesta:
-      "En el entorno digital, la velocidad es dinero. Un embudo automatizado garantiza que ningún prospecto se pierda por falta de atención, guiando al cliente desde el primer contacto hasta el cierre, optimizando su Tasa de Conversión (CR) de forma drástica.",
+      "En el entorno digital, la velocidad de respuesta es dinero. Un embudo automatizado garantiza que ningún prospecto se pierda por falta de atención o respuesta tardía, guiando al cliente desde el primer contacto hasta el cierre de forma consistente.",
   },
   {
-    pregunta: "¿Es difícil la configuración técnica para mí como cliente?",
+    pregunta: "¿Es complicada la configuración técnica para mi equipo?",
     respuesta:
-      "Para usted, la configuración es inexistente. Nuestro equipo de ingenieros se encarga de toda la programación, la instalación de scripts y la sincronización de herramientas. Su única tarea es recibir los resultados.",
+      "Para ti, la configuración es inexistente. Nuestro equipo de ingenieros se encarga de toda la programación, instalación e integración. Tu única tarea es revisar los resultados y seguir cerrando ventas.",
   },
   {
-    pregunta: "¿Cómo me ahorra tiempo y costes este sistema?",
+    pregunta: "¿Cómo me ahorra tiempo y dinero este sistema?",
     respuesta:
-      "Al delegar el Front-End (atención) y la cualificación de leads a nuestros Agentes de IA, usted elimina el error humano y libera a su equipo de tareas repetitivas. Esto permite que su personal se enfoque exclusivamente en cerrar ventas de alto valor.",
+      "Al delegar la captación, cualificación y seguimiento de leads a la IA, eliminas el error humano y liberas a tu equipo de tareas repetitivas. Esto permite que tu personal se enfoque exclusivamente en cerrar ventas de alto valor.",
   },
   {
-    pregunta: "¿Qué sucede si mi negocio escala y necesito más capacidad?",
+    pregunta: "¿Qué sucede si mi negocio crece y necesito más capacidad?",
     respuesta:
-      "Nuestra infraestructura SaaS es totalmente escalable. Podemos aumentar la capacidad de procesamiento, el número de agentes especializados o la complejidad de los flujos de trabajo de manera inmediata conforme su negocio crezca.",
+      "Nuestra infraestructura es 100% escalable. Podemos aumentar la capacidad de procesamiento, añadir nuevos agentes especializados o ampliar los flujos de trabajo de forma inmediata conforme crece tu negocio.",
   },
   {
     pregunta: "¿Mis datos y los de mis clientes están protegidos?",
     respuesta:
-      "La seguridad es nuestra prioridad. Implementamos protocolos de cifrado de extremo a extremo y cumplimos estrictamente con la normativa RGPD. Su base de conocimientos es privada y está blindada contra accesos no autorizados.",
+      "La seguridad es prioritaria. Implementamos cifrado de extremo a extremo y cumplimos estrictamente la normativa RGPD. Tu base de conocimientos es privada y está blindada contra accesos no autorizados.",
   },
   {
-    pregunta: "¿En qué canales se pueden integrar estos Agentes de IA?",
+    pregunta: "¿En qué canales se pueden integrar los agentes de IA?",
     respuesta:
-      "Somos totalmente omnicanal. Podemos desplegar sus embudos y agentes en su sitio Web, WhatsApp, Instagram, Telegram o incluso integrarlos en sistemas de gestión interna mediante API.",
+      "Somos totalmente omnicanal: Web, WhatsApp, Instagram, Telegram o cualquier sistema interno mediante API. Desplegamos donde están tus clientes, no donde sea más cómodo para nosotros.",
   },
   {
-    pregunta: "¿Qué incluye la Auditoría Gratuita inicial?",
+    pregunta: "¿Qué incluye exactamente la Auditoría Gratuita?",
     respuesta:
-      "No es una simple llamada comercial; es una sesión de consultoría técnica. Evaluamos su volumen de tráfico, detectamos fugas de conversión y le presentamos un mapa estratégico de cómo la IA puede maximizar su facturación actual.",
+      "No es una llamada comercial. Es una sesión técnica en la que evaluamos tu volumen de tráfico, detectamos fugas de conversión y te presentamos un mapa estratégico con estimaciones de impacto en facturación. Sin compromiso.",
   },
   {
     pregunta: "¿Cuál es el siguiente paso para empezar?",
     respuesta:
-      "Solicite su auditoría gratuita hoy mismo. Una vez evaluado su caso, un técnico senior se pondrá en contacto para diseñar su presupuesto a medida y comenzar la fase de programación. Es hora de llevar su negocio al siguiente nivel operativo.",
+      "Solicita tu auditoría gratuita ahora. En menos de 24 horas un técnico senior te contactará para analizar tu caso, diseñar tu propuesta a medida y fijar la fecha de inicio del despliegue.",
   },
 ];
+
+export const testimonios = [
+  {
+    nombre: "David G.",
+    cargo: "Director de Ventas, inmobiliaria",
+    rating: 5,
+    texto: "Metatok.ai nos cambió el ritmo. Los bots califican leads 24/7 y solo le pasan al equipo los que vienen calientes. Subieron las citas y bajó el esfuerzo.",
+  },
+  {
+    nombre: "Dra. Laura P.",
+    cargo: "Dirección de clínica",
+    rating: 5,
+    texto: "Con el chatbot de Metatok.ai los pacientes agendan, preguntan y confirman solos. Los seguimientos automáticos nos ayudaron a recuperar citas perdidas.",
+  },
+  {
+    nombre: "Ana F.",
+    cargo: "Gerente de Operaciones, marketplace digital",
+    rating: 5,
+    texto: "El 80% de las consultas ya las atiende el chatbot: pedidos, devoluciones, estatus. Bajamos carga al equipo sin bajar la calidad. Todo un éxito.",
+  },
+  {
+    nombre: "Luis C.",
+    cargo: "Propietario, “Viajes Sin Fronteras”",
+    rating: 5,
+    texto: "Metatok.ai manda confirmaciones y recordatorios automático, y los asistentes de voz responden lo básico. Nos ahorró horas de gestión cada semana.",
+  },
+  {
+    nombre: "Juan V.",
+    cargo: "Director de Ventas, “TecnoCenter”",
+    rating: 5,
+    texto: "El chatbot en la web atiende 24/7: ficha técnica, precios y disponibilidad. Llegan clientes más informados y el tráfico cualificado subió. Excelente.",
+  },
+  {
+    nombre: "Ricardo Xing",
+    cargo: "Abogado socio, “Garrido & Asociados”",
+    rating: 5,
+    texto: "Metatok.ai filtra los prospectos, agenda la primera consulta y nos deja el contexto. Así solo vemos a quien realmente necesita nuestros servicios.",
+  },
+];
+

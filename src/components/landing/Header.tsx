@@ -7,11 +7,12 @@ import { useTheme } from "@/hooks/useTheme";
 
 // Navegación principal — anclas a las secciones de la landing
 const nav = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#proceso", label: "Proceso" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "/#inicio",    label: "Inicio"    },
+  { href: "/#sectores",  label: "Sectores"  },
+  { href: "/#servicios", label: "Servicios" },
+  { href: "/#planes",    label: "Precios"   },
+  { href: "/#faq",       label: "FAQ"       },
+  { href: "/#contacto",  label: "Contacto"  },
 ];
 
 export function Header() {
@@ -43,7 +44,7 @@ export function Header() {
         ].join(" ")}
       >
         <div className="container-mt flex items-center justify-between h-16 md:h-20">
-          <a href="#inicio" className="flex items-center gap-2" aria-label="Metatok inicio">
+          <a href="/#inicio" className="flex items-center gap-2" aria-label="Metatok inicio">
             <img
               src={logo}
               alt="Logo Metatok"
@@ -88,7 +89,7 @@ export function Header() {
               asChild
               className="bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold"
             >
-              <a href="#auditoria">Auditoría Gratuita</a>
+              <a href="/#auditoria">Auditoría Gratuita</a>
             </Button>
           </div>
 
@@ -169,7 +170,7 @@ export function Header() {
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold cta-glow"
             onClick={() => setOpen(false)}
           >
-            <a href="#auditoria">Auditoría Gratuita</a>
+            <a href="/#auditoria">Auditoría Gratuita</a>
           </Button>
         </div>
       </aside>

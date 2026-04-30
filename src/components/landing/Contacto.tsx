@@ -82,7 +82,7 @@ export function Contacto() {
   return (
     <section
       id="contacto"
-      className="py-20 md:py-28 bg-[var(--color-surface)] border-t border-border"
+      className="py-12 md:py-20 bg-[var(--color-surface)] border-t border-border"
       aria-labelledby="contacto-heading"
     >
       <div className="container-mt grid lg:grid-cols-12 gap-10">

@@ -66,7 +66,7 @@ export const Route = createRootRoute({
           "agentes IA, automatización con inteligencia artificial, cualificación de leads, integración CRM, agendamiento automático, embudo de ventas automatizado, chatbot IA, Metatok, NLP, flow-works, auditoría gratuita IA",
       },
       { name: "author", content: "Metatok" },
-      { name: "theme-color", content: "#0F172A" },
+      { name: "theme-color", content: "#F8F9FC" },
       { name: "robots", content: "index, follow" },
       { name: "language", content: "es" },
 
@@ -132,7 +132,7 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className="dark" suppressHydrationWarning>
+    <html lang="es" className="light" suppressHydrationWarning>
       <head suppressHydrationWarning>
         <HeadContent />
       </head>

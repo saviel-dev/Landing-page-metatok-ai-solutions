@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Star, ArrowRight, Zap } from "lucide-react";
+import { Check, Star, ArrowRight, Zap, Shield } from "lucide-react";
 import { fadeUp, stagger, viewportOnce } from "./motion";
 
 type BillingCycle = "mensual" | "trimestral" | "anual";
@@ -14,13 +14,15 @@ const billingConfig = {
 const planes = [
   {
     name: "Starter",
-    tagline: "Ideal para equipos pequeños que quieren empezar con IA.",
+    tagline: "Ideal para equipos pequeños que quieren empezar con IA sin riesgo.",
     price: { mensual: "79", trimestral: "199", anual: "679" },
     features: [
-      "1 canal integrado",
-      "Asistente IA básico",
-      "Hasta 500 leads/mes",
-      "Panel básico",
+      "1 canal integrado (Web o WhatsApp)",
+      "Asistente IA básico con NLP",
+      "Hasta 500 conversaciones/mes",
+      "Panel de control básico",
+      "Cualificación automática de leads",
+      "Soporte por email",
     ],
     highlighted: false,
     cta: "Iniciar ahora",
@@ -28,31 +30,37 @@ const planes = [
   },
   {
     name: "Business",
-    tagline: "Para empresas que buscan automatización total sin perder un solo lead.",
+    tagline: "Para empresas que quieren automatización total y no perder un solo lead.",
     price: { mensual: "239", trimestral: "629", anual: "2.149" },
     features: [
       "Hasta 3 canales integrados",
-      "Voicebots y chatbots premium",
+      "Chatbots y voicebots premium",
       "Seguimiento y scoring automático",
-      "Integración CRM",
-      "Soporte prioritario",
+      "Integración CRM bidireccional",
+      "Agendamiento automático con recordatorios",
+      "Flow-works inteligentes",
+      "Panel de analítica avanzada",
+      "Soporte prioritario 24/5",
     ],
     highlighted: true,
-    cta: "Quiero escalar ventas",
+    cta: "Escalar mis ventas",
     href: "#contacto",
   },
   {
     name: "Enterprise",
-    tagline: "Solución avanzada, canales ilimitados y acompañamiento personalizado.",
+    tagline: "Solución avanzada con canales ilimitados y acompañamiento personalizado.",
     price: { mensual: "590", trimestral: "1.589", anual: "5.399" },
     features: [
       "Canales ilimitados",
-      "Flujos y bots a medida",
-      "Soporte especializado 1:1",
-      "Integración avanzada",
+      "Flujos y bots completamente a medida",
+      "Integraciones API avanzadas",
+      "Gestor de cuenta dedicado 1:1",
+      "SLA de disponibilidad garantizado",
+      "Onboarding personalizado",
+      "Soporte técnico especializado 24/7",
     ],
     highlighted: false,
-    cta: "Solicitar contacto",
+    cta: "Solicitar propuesta",
     href: "#contacto",
   },
 ];
@@ -84,10 +92,10 @@ export function Planes() {
             className="mt-3 text-3xl md:text-5xl font-bold text-foreground tracking-tight"
           >
             Invierte en resultados,{" "}
-            <span className="text-primary">no en horas</span>
+            <span className="text-primary">no en horas extra</span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-4 text-muted-foreground text-lg">
-            Escala tu infraestructura cuando lo necesites. Sin permanencia, sin sorpresas.
+            Sin permanencia. Sin costes ocultos. Solo escala cuando lo necesites.
           </motion.p>
         </motion.div>
 
@@ -218,9 +226,7 @@ export function Planes() {
                   <li key={f} className="flex items-start gap-3 text-sm">
                     <span className={[
                       "mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
-                      plan.highlighted
-                        ? "bg-white/20"
-                        : "bg-primary/10",
+                      plan.highlighted ? "bg-white/20" : "bg-primary/10",
                     ].join(" ")}>
                       <Check className={[
                         "h-3 w-3",
@@ -252,16 +258,25 @@ export function Planes() {
           ))}
         </motion.div>
 
-        {/* Nota de pie */}
-        <motion.p
+        {/* Notas de pie */}
+        <motion.div
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
           variants={fadeUp}
-          className="mt-10 text-center text-xs text-muted-foreground"
+          className="mt-10 text-center space-y-2"
         >
-          Todos los planes incluyen acceso a la plataforma Metatok. Sin permanencia ni costes ocultos.
-        </motion.p>
+          <p className="text-xs text-muted-foreground">
+            Todos los planes incluyen acceso a la plataforma Metatok. Sin permanencia ni costes ocultos.
+          </p>
+          <p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5">
+            <Shield className="h-3.5 w-3.5 text-accent" aria-hidden />
+            ¿Necesitas algo específico?{" "}
+            <a href="#contacto" className="text-primary hover:underline font-medium">
+              Hablamos de un plan a medida →
+            </a>
+          </p>
+        </motion.div>
       </div>
     </section>
   );

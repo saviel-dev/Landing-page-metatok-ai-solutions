@@ -6,8 +6,8 @@ function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "light";
   const stored = localStorage.getItem("mt-theme") as Theme | null;
   if (stored === "light" || stored === "dark") return stored;
-  // Respeta la preferencia del SO; si no hay preferencia, usa light por defecto
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  // Usa light por defecto si no hay preferencia guardada
+  return "light";
 }
 
 export function useTheme() {

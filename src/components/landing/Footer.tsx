@@ -1,4 +1,5 @@
 import logo from "@/assets/logo.png";
+import { Link } from "@tanstack/react-router";
 
 /* ——— Iconos SVG inline para redes que no están en lucide ——— */
 function IconFacebook() {
@@ -99,7 +100,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
             {servicios.map((s) => (
               <li key={s}>
-                <a href="#servicios" className="hover:text-primary transition-colors duration-200">
+                <a href="/#servicios" className="hover:text-primary transition-colors duration-200">
                   {s}
                 </a>
               </li>
@@ -139,13 +140,13 @@ export function Footer() {
         <div className="container-mt py-5 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-muted-foreground">
           <span>© {year} Metatok. Todos los derechos reservados.</span>
           <div className="flex items-center gap-4">
-            <a href="/terminos-y-condiciones" className="hover:text-primary transition-colors duration-200">
+            <Link to="/terminos" className="hover:text-primary transition-colors duration-200">
               Términos y Condiciones
-            </a>
+            </Link>
             <span className="opacity-30">·</span>
-            <a href="/politica-de-privacidad" className="hover:text-primary transition-colors duration-200">
+            <Link to="/privacidad" className="hover:text-primary transition-colors duration-200">
               Política de Privacidad
-            </a>
+            </Link>
           </div>
         </div>
       </div>
