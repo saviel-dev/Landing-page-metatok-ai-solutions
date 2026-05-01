@@ -161,7 +161,7 @@ export function Sectores() {
   return (
     <section
       id="sectores"
-      className="py-12 md:py-20 border-y border-border bg-[var(--color-surface)]"
+      className="py-8 md:py-12 border-y border-border bg-[var(--color-surface)]"
       aria-labelledby="sectores-heading"
     >
       <div className="container-mt">
@@ -180,12 +180,12 @@ export function Sectores() {
           <motion.h2
             id="sectores-heading"
             variants={fadeUp}
-            className="mt-3 text-3xl md:text-4xl font-bold text-foreground tracking-tight"
+            className="mt-3 text-2xl md:text-3xl font-bold text-foreground tracking-tight"
           >
             Tu sector, tus resultados,{" "}
             <span className="text-primary">tu solución a medida</span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-lg text-muted-foreground leading-relaxed">
+          <motion.p variants={fadeUp} className="mt-2 text-base text-muted-foreground leading-snug">
             No vendemos tecnología genérica. Diseñamos la automatización exacta
             que tu tipo de negocio necesita para convertir más.
           </motion.p>
@@ -224,7 +224,7 @@ export function Sectores() {
           transition={{ duration: 0.22, ease: "easeOut" }}
         >
           {/* Header del sector */}
-          <div className="mb-8 flex items-start gap-4 rounded-2xl border border-primary/30 bg-primary/5 p-6">
+          <div className="mb-5 flex items-start gap-3 rounded-xl border border-primary/30 bg-primary/5 p-4">
             <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/30 bg-primary/15">
               <TabIconActivo className="h-6 w-6 text-primary" aria-hidden />
             </div>
@@ -280,7 +280,7 @@ export function Sectores() {
             </div>
 
             {/* Resultados */}
-            <div className="rounded-2xl border border-border bg-card p-6 flex flex-col">
+            <div className="rounded-xl border border-border bg-card p-4 flex flex-col">
               <div className="flex items-center gap-2 mb-5">
                 <TrendingUp className="h-5 w-5 text-accent" aria-hidden />
                 <span className="text-sm font-semibold text-foreground">Resultados medios</span>
@@ -300,7 +300,7 @@ export function Sectores() {
           </div>
 
           {/* Mejoras avanzadas */}
-          <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="rounded-xl border border-border bg-card p-4">
             <div className="flex items-center gap-2 mb-4">
               <Zap className="h-4 w-4 text-accent shrink-0" aria-hidden />
               <span className="text-sm font-semibold text-foreground">
@@ -327,7 +327,7 @@ export function Sectores() {
           whileInView="show"
           viewport={viewportOnce}
           variants={fadeUp}
-          className="mt-10 text-center"
+          className="mt-6 text-center"
         >
           <a
             href="#auditoria"

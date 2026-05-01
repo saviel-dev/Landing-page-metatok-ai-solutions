@@ -21,7 +21,7 @@ export function Auditoria() {
   return (
     <section
       id="auditoria"
-      className="py-12 md:py-20"
+      className="py-8 md:py-12"
       aria-labelledby="auditoria-heading"
     >
       <div className="container-mt">
@@ -30,7 +30,7 @@ export function Auditoria() {
           whileInView="show"
           viewport={viewportOnce}
           variants={stagger}
-          className="relative overflow-hidden rounded-3xl border border-primary/40 bg-[var(--color-surface)] p-8 md:p-14"
+          className="relative overflow-hidden rounded-2xl border border-primary/40 bg-[var(--color-surface)] p-5 md:p-8"
         >
           {/* Acento de fondo */}
           <div
@@ -42,7 +42,7 @@ export function Auditoria() {
             }}
           />
 
-          <div className="grid lg:grid-cols-12 gap-10 items-start">
+          <div className="grid lg:grid-cols-12 gap-6 md:gap-8 items-start">
             {/* ── Columna izquierda: Copy ── */}
             <div className="lg:col-span-7 flex flex-col">
               <motion.span
@@ -56,7 +56,7 @@ export function Auditoria() {
               <motion.h2
                 id="auditoria-heading"
                 variants={fadeUp}
-                className="mt-5 text-3xl md:text-5xl font-extrabold text-foreground tracking-tight leading-[1.08]"
+                className="mt-3 text-2xl md:text-3xl font-extrabold text-foreground tracking-tight leading-[1.08]"
               >
                 Descubre exactamente cuánto{" "}
                 <span className="text-primary">estás dejando de ganar</span>
@@ -64,14 +64,14 @@ export function Auditoria() {
 
               <motion.p
                 variants={fadeUp}
-                className="mt-5 text-lg text-muted-foreground leading-relaxed max-w-xl"
+                className="mt-3 text-base text-muted-foreground leading-relaxed max-w-xl"
               >
                 No es una llamada comercial. Es una sesión técnica gratuita donde un
                 experto en automatización analiza tu operación real y te muestra —
                 con números — cuánto puedes mejorar.
               </motion.p>
 
-              <motion.ul variants={fadeUp} className="mt-7 space-y-3">
+              <motion.ul variants={fadeUp} className="mt-5 space-y-2">
                 {incluye.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm text-foreground">
                     <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 border border-primary/40">
@@ -82,11 +82,11 @@ export function Auditoria() {
                 ))}
               </motion.ul>
 
-              <motion.div variants={fadeUp} className="mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <motion.div variants={fadeUp} className="mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 <Button
                   asChild
                   size="lg"
-                  className="h-auto py-5 px-8 text-base bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-bold rounded-xl group"
+                  className="h-auto py-3 px-5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-bold rounded-xl group"
                 >
                   <a href="#contacto" className="flex items-center gap-2">
                     Solicitar mi auditoría gratuita
@@ -101,7 +101,7 @@ export function Auditoria() {
 
             {/* ── Columna derecha: Stats ── */}
             <motion.div variants={fadeUp} className="lg:col-span-5" aria-hidden>
-              <div className="rounded-2xl border border-border bg-card p-6">
+              <div className="rounded-xl border border-border bg-card p-4">
                 <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-5">
                   Resultados medios tras 60 días
                 </p>

@@ -1,20 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { Header }        from "@/components/landing/Header";
-import { Hero }          from "@/components/landing/Hero";
-import { Brands }        from "@/components/landing/Brands";
-import { Beneficios }    from "@/components/landing/Beneficios";
-import { Sectores }      from "@/components/landing/Sectores";
-import { Servicios }     from "@/components/landing/Servicios";
+import { Header } from "@/components/landing/Header";
+import { Hero } from "@/components/landing/Hero";
+import { SocialProofStrip } from "@/components/landing/SocialProofStrip";
+import { Brands } from "@/components/landing/Brands";
+import { PainPoints } from "@/components/landing/PainPoints";
+import { Beneficios } from "@/components/landing/Beneficios";
+import { MetaTokEngine } from "@/components/landing/MetaTokEngine";
+import { EliteSolutions } from "@/components/landing/EliteSolutions";
+import { Sectores } from "@/components/landing/Sectores";
+import { Servicios } from "@/components/landing/Servicios";
+import { ComparativaMetaTok } from "@/components/landing/ComparativaMetaTok";
 import { DiagnosticoCTA } from "@/components/landing/DiagnosticoCTA";
-import { Proceso }       from "@/components/landing/Proceso";
-import { Canales }       from "@/components/landing/Canales";
-import { Planes }        from "@/components/landing/Planes";
-import { Testimonios }   from "@/components/landing/Testimonios";
-import { Auditoria }     from "@/components/landing/Auditoria";
-import { Faq }           from "@/components/landing/Faq";
-import { Contacto }      from "@/components/landing/Contacto";
-import { Footer }        from "@/components/landing/Footer";
+import { MetaTokAcademy } from "@/components/landing/MetaTokAcademy";
+import { Proceso } from "@/components/landing/Proceso";
+import { Canales } from "@/components/landing/Canales";
+import { Planes } from "@/components/landing/Planes";
+import { Testimonios } from "@/components/landing/Testimonios";
+import { Auditoria } from "@/components/landing/Auditoria";
+import { Faq } from "@/components/landing/Faq";
+import { Contacto } from "@/components/landing/Contacto";
+import { Footer } from "@/components/landing/Footer";
+import { FloatingActionsMenu } from "@/components/landing/FloatingActionsMenu";
 import { Toaster }       from "@/components/ui/sonner";
 import { faqs, servicios } from "@/components/landing/content";
 
@@ -51,21 +58,21 @@ export const Route = createFileRoute("/")({
     meta: [
       {
         title:
-          "Metatok — Convierte más leads sin ampliar tu equipo | IA y Automatización",
+          "MetaTok — Tu departamento de ventas en piloto automático con IA",
       },
       {
         name: "description",
         content:
-          "Agentes de IA que captan, cualifican y agendan leads 24/7. Más citas, menos trabajo manual, sin ampliar equipo. Solicita tu auditoría gratuita.",
+          "Ecosistema de agentes autónomos: prospectan, cualifican y cierran en WhatsApp, Instagram y Web. API abierta a cualquier CRM, multilingüe y listo para escala.",
       },
       {
         property: "og:title",
-        content: "Metatok — Convierte más leads sin ampliar tu equipo",
+        content: "MetaTok — Agentes de venta con IA, 24/7",
       },
       {
         property: "og:description",
         content:
-          "IA que capta y cualifica leads 24/7. Auditoría gratuita sin compromiso.",
+          "No es un chatbot. Es un motor de conversión omnicanal con cierre autónomo y datos accionables.",
       },
     ],
     scripts: [
@@ -77,66 +84,52 @@ export const Route = createFileRoute("/")({
 });
 
 /**
- * Flujo narrativo de la landing (regla de los 5 segundos → conversión):
- *
- *  1. Hero          — ¿Qué haces? ¿Para quién? ¿Qué obtengo? → CTA principal
- *  2. Brands        — Prueba social (logos) — refuerzo de confianza
- *  3. Beneficios    — Resultados rápidos con métricas concretas
- *  4. Sectores      — Solución por sector: estado actual → mejoras → KPIs → avanzado
- *  5. Servicios     — Cómo lo hacemos (funciones + beneficio por servicio)
- *  6. DiagnosticoCTA— Antes / después + CTA intermedio de conversión
- *  7. Proceso       — 4 pasos llave en mano (elimina fricción de "¿cómo empiezo?")
- *  8. Canales       — Dónde se despliega (web, WhatsApp, Instagram, Telegram, API)
- *  9. Planes        — Inversión y qué incluye cada plan
- * 10. Auditoria     — CTA final de alta conversión
- * 11. FAQ           — Eliminar objeciones residuales
- * 12. Contacto      — Formulario de solicitud
+ * Flujo alineado al storyboard MetaTok: problema → motor → comparativa → confianza → contacto.
  */
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="relative isolate min-h-screen bg-background text-foreground">
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-muted/40 via-background to-background dark:from-primary/[0.07] dark:via-background dark:to-background" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-accent/[0.035] via-transparent to-primary/[0.04]" />
+        <div className="absolute inset-0 mt-page-particles mt-page-particles--full" />
+        <div
+          className="absolute inset-0 backdrop-blur-[10px]"
+          style={{
+            backgroundColor: "color-mix(in oklab, var(--color-background) 48%, transparent)",
+          }}
+        />
+      </div>
+
       <Header />
-      <main>
-        {/* 1 — Propuesta de valor inmediata */}
+      <main className="relative z-10">
         <Hero />
-
-        {/* 2 — Prueba social: logos de empresas que confían en la automatización */}
+        <SocialProofStrip />
         <Brands />
-
-        {/* 3 — Resultados concretos desde el primer mes */}
+        <PainPoints />
         <Beneficios />
-
-        {/* 4 — Solución por sector estratégico */}
+        <MetaTokEngine />
+        <EliteSolutions />
         <Sectores />
-
-        {/* 5 — Qué capacidades instalamos y qué beneficio concreto aporta cada una */}
         <Servicios />
-
-        {/* 6 — Comparativa antes/después + CTA de conversión intermedio */}
+        <ComparativaMetaTok />
         <DiagnosticoCTA />
-
-        {/* 7 — Proceso de implementación llave en mano */}
+        <MetaTokAcademy />
         <Proceso />
-
-        {/* 8 — Canales de despliegue (omnicanal) */}
         <Canales />
-
-        {/* 9 — Planes y precios */}
         <Planes />
-
-        {/* 9.5 — Testimonios (Prueba social) */}
         <Testimonios />
-
-        {/* 10 — CTA de auditoría gratuita */}
         <Auditoria />
-
-        {/* 11 — Preguntas frecuentes / elimina objeciones */}
         <Faq />
-
-        {/* 12 — Formulario de contacto */}
         <Contacto />
       </main>
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
+      <FloatingActionsMenu />
       <Toaster />
     </div>
   );

@@ -18,12 +18,12 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import imgChatbots from "@/assets/chatbots.png";
-import imgVoicebots from "@/assets/voicebots.png";
-import imgAutomatizacion from "@/assets/automatizacion y seguimiento.png";
-import imgCRM from "@/assets/CRM.png";
-import imgWorkflow from "@/assets/workflow inteligente.png";
-import imgCalendarios from "@/assets/calendarios.png";
+import imgIaConversacionalGif from "@/assets/gif/ia conversacional.gif";
+import imgCualificacionLeadsGif from "@/assets/gif/Cualificación de Leads.gif";
+import imgAutomatizacionGif from "@/assets/gif/automatizacion de procesos.gif";
+import imgCRMGif from "@/assets/gif/Integración con CRM.gif";
+import imgWorkflowGif from "@/assets/gif/workflow.gif";
+import imgAgendamientoAutomaticoGif from "@/assets/gif/agendamiento automatico.gif";
 
 export type Servicio = {
   icon: LucideIcon;
@@ -42,7 +42,7 @@ export const servicios: Servicio[] = [
       "Agentes especializados con NLP que entienden intenciones, manejan objeciones y ejecutan estrategias de venta complejas en cada canal de tu negocio.",
     beneficio: "Responde al 100% de tus leads en segundos, no en horas.",
     destacado: true,
-    image: imgChatbots,
+    image: imgIaConversacionalGif,
   },
   {
     icon: Workflow,
@@ -50,7 +50,7 @@ export const servicios: Servicio[] = [
     descripcion:
       "Eliminamos tareas repetitivas y errores humanos, liberando a tu equipo para que se enfoque exclusivamente en cerrar ventas de alto valor.",
     beneficio: "Recupera hasta 20 h/semana de tiempo productivo.",
-    image: imgAutomatizacion,
+    image: imgAutomatizacionGif,
   },
   {
     icon: Filter,
@@ -58,7 +58,7 @@ export const servicios: Servicio[] = [
     descripcion:
       "Filtramos y puntuamos cada prospecto en tiempo real para que solo hables con los que tienen intención real de compra.",
     beneficio: "Aumenta tu tasa de cierre hasta un 3× sin más presupuesto.",
-    image: imgVoicebots,
+    image: imgCualificacionLeadsGif,
   },
   {
     icon: Database,
@@ -66,7 +66,7 @@ export const servicios: Servicio[] = [
     descripcion:
       "Sincronización bidireccional con tu CRM mediante API. Datos limpios, actualizados y accionables 24/7, sin duplicados ni pérdidas.",
     beneficio: "0 horas de carga manual de datos en tu equipo.",
-    image: imgCRM,
+    image: imgCRMGif,
   },
   {
     icon: CalendarClock,
@@ -74,7 +74,7 @@ export const servicios: Servicio[] = [
     descripcion:
       "Citas en tu calendario sin fricción. El agente negocia el horario, confirma la reunión y envía recordatorios personalizados.",
     beneficio: "Hasta +54% más citas agendadas sin intervención humana.",
-    image: imgCalendarios,
+    image: imgAgendamientoAutomaticoGif,
   },
   {
     icon: GitBranch,
@@ -83,7 +83,7 @@ export const servicios: Servicio[] = [
       "Flujos de trabajo que disparan acciones automáticas: cualifican leads, agendan reuniones, actualizan el CRM y nutren prospectos en piloto automático.",
     beneficio: "Tu embudo de ventas funciona solo, 24 horas al día.",
     destacado: true,
-    image: imgWorkflow,
+    image: imgWorkflowGif,
   },
 ];
 
@@ -120,11 +120,11 @@ export const proceso = [
 
 export const beneficios = [
   {
-    titulo: "Más leads cualificados",
+    titulo: "Respuesta que multiplica oportunidades",
     descripcion:
-      "Filtramos prospectos en tiempo real para que solo hables con los que están listos para comprar.",
-    metrica: "+3×",
-    metricaLabel: "Tasa de cierre",
+      "La velocidad y la insistencia correcta convierten conversaciones en ingresos. Menos leads muertos por silencio.",
+    metrica: "+400%",
+    metricaLabel: "Tasa de respuesta vs. manual",
   },
   {
     titulo: "Cero tareas repetitivas",

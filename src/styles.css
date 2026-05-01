@@ -59,29 +59,32 @@
 }
 
 /*
- * Paleta Metatok DARK — Azul/Morado (predeterminada).
- *  primary   #6366F1  → indigo vibrante  oklch(0.585 0.233 272)
- *  accent    #A855F7  → violeta/morado   oklch(0.627 0.265 303)
- *  bg        #0A0E1A  → azul marino profundo
+ * Paleta Metatok DARK — Brief: negro #000000, texto humo #F5F5F5, oro #D4AF37 (detalle),
+ * CTA: cobalto eléctrico + acento violeta cibernético.
  */
 :root,
 :root.dark {
   --radius: 0.75rem;
 
-  --background: oklch(0.14 0.035 267);
-  --foreground: oklch(0.97 0.004 248);
+  /* Brief diseño: negro #000000, humo #F5F5F5, oro #D4AF37 */
+  --luxury-gold: #d4af37;
+  --smoke-text: #f5f5f5;
+  --ink-black: #000000;
 
-  --surface: oklch(0.17 0.032 268);
-  --surface-2: oklch(0.22 0.03 268);
+  --background: oklch(0 0 0);
+  --foreground: oklch(0.965 0.002 90);
 
-  --card: oklch(0.22 0.03 268);
-  --card-foreground: oklch(0.97 0.004 248);
+  --surface: oklch(0.1 0.015 268);
+  --surface-2: oklch(0.14 0.02 268);
 
-  --popover: oklch(0.22 0.03 268);
-  --popover-foreground: oklch(0.97 0.004 248);
+  --card: oklch(0.12 0.018 268);
+  --card-foreground: oklch(0.96 0.004 90);
 
-  /* Azul índigo vibrante como primario */
-  --primary: oklch(0.60 0.233 272);
+  --popover: oklch(0.12 0.018 268);
+  --popover-foreground: oklch(0.96 0.004 90);
+
+  /* Cobalto eléctrico (CTA premium) */
+  --primary: oklch(0.52 0.21 264);
   --primary-foreground: oklch(0.99 0 0);
 
   --secondary: oklch(0.22 0.03 268);
@@ -90,16 +93,16 @@
   --muted: oklch(0.22 0.03 268);
   --muted-foreground: oklch(0.72 0.025 260);
 
-  /* Violeta/morado como acento */
-  --accent: oklch(0.65 0.265 303);
+  /* Violeta cibernético */
+  --accent: oklch(0.58 0.26 302);
   --accent-foreground: oklch(0.99 0 0);
 
   --destructive: oklch(0.62 0.22 27);
   --destructive-foreground: oklch(0.97 0.004 248);
 
-  --border: oklch(0.32 0.04 268);
-  --input: oklch(0.32 0.04 268);
-  --ring: oklch(0.60 0.233 272);
+  --border: oklch(0.28 0.03 268);
+  --input: oklch(0.28 0.03 268);
+  --ring: oklch(0.52 0.21 264);
 
   --chart-1: oklch(0.60 0.233 272);
   --chart-2: oklch(0.65 0.265 303);
@@ -107,14 +110,14 @@
   --chart-4: oklch(0.72 0.15 200);
   --chart-5: oklch(0.75 0.12 280);
 
-  --sidebar: oklch(0.17 0.032 268);
-  --sidebar-foreground: oklch(0.97 0.004 248);
-  --sidebar-primary: oklch(0.60 0.233 272);
+  --sidebar: oklch(0.1 0.015 268);
+  --sidebar-foreground: oklch(0.96 0.004 90);
+  --sidebar-primary: oklch(0.52 0.21 264);
   --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.22 0.03 268);
-  --sidebar-accent-foreground: oklch(0.97 0.004 248);
-  --sidebar-border: oklch(0.32 0.04 268);
-  --sidebar-ring: oklch(0.60 0.233 272);
+  --sidebar-accent: oklch(0.14 0.02 268);
+  --sidebar-accent-foreground: oklch(0.96 0.004 90);
+  --sidebar-border: oklch(0.28 0.03 268);
+  --sidebar-ring: oklch(0.52 0.21 264);
 }
 
 /*
@@ -123,6 +126,10 @@
  */
 :root.light {
   --radius: 0.75rem;
+
+  --luxury-gold: #d4af37;
+  --smoke-text: #f5f5f5;
+  --ink-black: #000000;
 
   --background: oklch(0.975 0.006 265);
   --foreground: oklch(0.15 0.04 268);
@@ -238,6 +245,13 @@
       padding-inline: 2rem;
     }
   }
+
+  .text-luxury-gold {
+    color: var(--luxury-gold);
+  }
+  .border-luxury-gold {
+    border-color: var(--luxury-gold);
+  }
 }
 
 /* ─── Organic Floating Blobs (estilo julianherrera-dev) ───────────────────── */
@@ -286,4 +300,94 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee { animation-play-state: paused; }
+}
+
+/* Red neuronal sutil (hero) — brief “impacto visual” */
+@keyframes neural-pulse {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.22;
+  }
+}
+
+.hero-neural {
+  position: absolute;
+  inset: 0;
+  z-index: -15;
+  pointer-events: none;
+  --hero-neural-line: color-mix(in oklab, var(--foreground) 7%, transparent);
+  background-image:
+    linear-gradient(90deg, var(--hero-neural-line) 1px, transparent 1px),
+    linear-gradient(var(--hero-neural-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 42%, #000 0%, transparent 72%);
+  animation: neural-pulse 14s ease-in-out infinite;
+}
+
+/* Rejilla sobre negro: líneas tipo humo (#F5F5F5 muy suaves) */
+:root.dark .hero-neural {
+  --hero-neural-line: color-mix(in oklab, var(--smoke-text) 6%, transparent);
+}
+
+.hero-neural.hero-neural-layer {
+  z-index: -31;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-neural {
+    animation: none;
+    opacity: 0.14;
+  }
+}
+
+/* Fondo global: partículas muy sutiles (se ven apenas tras el vidrio) */
+.mt-page-particles {
+  pointer-events: none;
+  opacity: 0.14;
+  background-image:
+    radial-gradient(
+      circle at center,
+      color-mix(in oklab, var(--color-foreground) 22%, transparent) 0.55px,
+      transparent 1.6px
+    ),
+    radial-gradient(
+      circle at center,
+      color-mix(in oklab, var(--color-primary) 18%, transparent) 0.45px,
+      transparent 1.4px
+    );
+  background-size: 56px 52px, 84px 78px;
+  background-position: 0 0, 36px 24px;
+  mask-image: radial-gradient(ellipse 120% 85% at 50% 18%, #000 0%, transparent 72%);
+}
+
+:root.dark .mt-page-particles {
+  opacity: 0.11;
+}
+
+/* Pantalla completa: partículas aún más discretas, sin vignette */
+.mt-page-particles--full {
+  mask-image: none;
+  opacity: 0.09;
+}
+
+:root.dark .mt-page-particles--full {
+  opacity: 0.075;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mt-page-particles {
+    opacity: 0.1;
+  }
+
+  .mt-page-particles--full {
+    opacity: 0.08;
+  }
+}
+
+/* Acordeón móvil del header: flecha al abrir <details> */
+details.mt-nav-acc[open] summary .mt-nav-chevron {
+  transform: rotate(180deg);
 }

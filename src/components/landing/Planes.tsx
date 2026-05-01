@@ -89,12 +89,12 @@ export function Planes() {
           <motion.h2
             id="planes-heading"
             variants={fadeUp}
-            className="mt-3 text-3xl md:text-5xl font-bold text-foreground tracking-tight"
+            className="mt-2 text-2xl md:text-3xl font-bold text-foreground tracking-tight"
           >
             Invierte en resultados,{" "}
             <span className="text-primary">no en horas extra</span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-muted-foreground text-lg">
+          <motion.p variants={fadeUp} className="mt-2 text-muted-foreground text-base">
             Sin permanencia. Sin costes ocultos. Solo escala cuando lo necesites.
           </motion.p>
         </motion.div>
@@ -105,7 +105,7 @@ export function Planes() {
           whileInView="show"
           viewport={viewportOnce}
           variants={fadeUp}
-          className="mt-10 flex justify-center"
+          className="mt-6 flex justify-center"
         >
           <div className="relative inline-flex items-center rounded-full border border-border bg-card p-1 gap-0.5">
             {(Object.keys(billingConfig) as BillingCycle[]).map((key) => (
@@ -150,16 +150,16 @@ export function Planes() {
           whileInView="show"
           viewport={viewportOnce}
           variants={stagger}
-          className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-center"
+          className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-5 items-center"
         >
           {planes.map((plan) => (
             <motion.div
               key={plan.name}
               variants={fadeUp}
               className={[
-                "relative flex flex-col rounded-3xl p-8 transition-all duration-300 group",
+                "relative flex flex-col rounded-2xl p-5 transition-all duration-300 group",
                 plan.highlighted
-                  ? "bg-primary text-primary-foreground shadow-[0_0_60px_-20px_rgba(99,102,241,0.6)] scale-[1.02] md:scale-105 z-10"
+                  ? "bg-primary text-primary-foreground shadow-[0_0_48px_-18px_rgba(99,102,241,0.55)] scale-[1.01] md:scale-[1.03] z-10"
                   : "bg-card border border-border hover:border-primary/40 hover:-translate-y-1",
               ].join(" ")}
             >
@@ -191,8 +191,8 @@ export function Planes() {
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
                     className={[
-                      "text-5xl md:text-6xl font-extrabold tracking-tight",
-                      plan.highlighted ? "text-white" : "text-primary",
+                      "text-4xl md:text-5xl font-extrabold tracking-tight",
+                      plan.highlighted ? "text-primary-foreground" : "text-primary",
                     ].join(" ")}
                   >
                     {plan.price[billing]}
@@ -216,21 +216,21 @@ export function Planes() {
 
               {/* Separador */}
               <div className={[
-                "my-6 h-px",
-                plan.highlighted ? "bg-white/20" : "bg-border",
+                "my-4 h-px",
+                plan.highlighted ? "bg-primary-foreground/20" : "bg-border",
               ].join(" ")} />
 
               {/* Features */}
-              <ul className="flex flex-col gap-3 flex-1">
+              <ul className="flex flex-col gap-2 flex-1">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm">
                     <span className={[
                       "mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
-                      plan.highlighted ? "bg-white/20" : "bg-primary/10",
+                      plan.highlighted ? "bg-primary-foreground/20" : "bg-primary/10",
                     ].join(" ")}>
                       <Check className={[
                         "h-3 w-3",
-                        plan.highlighted ? "text-white" : "text-primary",
+                        plan.highlighted ? "text-primary-foreground" : "text-primary",
                       ].join(" ")} />
                     </span>
                     <span className={plan.highlighted ? "text-primary-foreground/90" : "text-foreground"}>
@@ -244,7 +244,7 @@ export function Planes() {
               <a
                 href={plan.href}
                 className={[
-                  "mt-8 flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-semibold transition-all duration-200",
+                  "mt-5 flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200",
                   plan.highlighted
                     ? "bg-white text-primary hover:bg-white/90 shadow-lg"
                     : "bg-primary text-primary-foreground hover:bg-primary/90 cta-glow",
@@ -264,7 +264,7 @@ export function Planes() {
           whileInView="show"
           viewport={viewportOnce}
           variants={fadeUp}
-          className="mt-10 text-center space-y-2"
+          className="mt-6 text-center space-y-1.5"
         >
           <p className="text-xs text-muted-foreground">
             Todos los planes incluyen acceso a la plataforma Metatok. Sin permanencia ni costes ocultos.

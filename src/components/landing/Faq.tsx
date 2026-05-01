@@ -14,12 +14,12 @@ export function Faq() {
   const col2Ref = useSlideInRight(200);
 
   return (
-    <section id="faq" className="py-12 md:py-20" aria-labelledby="faq-heading">
+    <section id="faq" className="py-8 md:py-12" aria-labelledby="faq-heading">
       <div className="container-mt">
         {/* Encabezado centrado con fade-up */}
         <div
           ref={asRef<HTMLDivElement>(headerRef)}
-          className="max-w-3xl mx-auto text-center mb-10"
+          className="max-w-3xl mx-auto text-center mb-6"
         >
           <span className="text-xs uppercase tracking-widest text-primary font-semibold">
             FAQ
@@ -27,7 +27,7 @@ export function Faq() {
           <h2
             id="faq-heading"
             ref={asRef<HTMLHeadingElement>(titleRef)}
-            className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight"
+            className="mt-3 text-3xl md:text-4xl lg:text-4xl font-bold text-foreground tracking-tight"
           >
             Preguntas frecuentes
           </h2>
@@ -37,7 +37,7 @@ export function Faq() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4">
           {/* Columna izquierda — slide desde la izquierda */}
           <div ref={asRef<HTMLDivElement>(col1Ref)}>
             <Accordion

@@ -10,26 +10,26 @@ export function Beneficios() {
   return (
     <section
       id="beneficios"
-      className="py-12 md:py-20 border-y border-border bg-[var(--color-surface)]"
+      className="py-8 md:py-12 border-y border-border bg-[var(--color-surface)]"
       aria-labelledby="beneficios-heading"
     >
       <div className="container-mt">
         {/* Encabezado */}
-        <div ref={asRef<HTMLDivElement>(headerRef)} className="max-w-2xl mb-10">
+        <div ref={asRef<HTMLDivElement>(headerRef)} className="max-w-2xl mb-6">
           <span className="text-xs uppercase tracking-widest text-primary font-semibold">
             Resultados tangibles
           </span>
           <h2
             id="beneficios-heading"
             ref={asRef<HTMLHeadingElement>(titleRef)}
-            className="mt-3 text-3xl md:text-4xl font-bold text-foreground tracking-tight"
+            className="mt-3 text-2xl md:text-3xl font-bold text-foreground tracking-tight"
           >
-            Lo que cambia en tu negocio{" "}
-            <span className="text-primary">desde el primer mes</span>
+            De software a{" "}
+            <span className="text-primary">ecosistema que factura</span>
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-            No vendemos tecnología. Vendemos horas recuperadas, leads que se
-            convierten y ventas que antes se perdían.
+          <p className="mt-4 text-muted-foreground text-base leading-snug">
+            No compras un chat: instalas un departamento de ventas que no duerme. Horas
+            recuperadas, leads que avanzan en el embudo y cierres que antes se quedaban a medias.
           </p>
         </div>
 
@@ -41,7 +41,7 @@ export function Beneficios() {
           {beneficios.map((b) => (
             <div
               key={b.titulo}
-              className="card-hover relative rounded-2xl border border-border bg-card p-6 flex flex-col"
+              className="card-hover relative rounded-xl border border-border bg-card p-4 flex flex-col"
             >
               {/* Métrica destacada */}
               <div className="flex items-center gap-2 mb-4">

@@ -10,22 +10,22 @@ export function Servicios() {
   const gridRef = useStaggerChildren(":scope > article", 100, 90);
 
   return (
-    <section id="servicios" className="py-12 md:py-20" aria-labelledby="servicios-heading">
+    <section id="servicios" className="py-8 md:py-12" aria-labelledby="servicios-heading">
       <div className="container-mt">
         {/* Encabezado */}
-        <div ref={asRef<HTMLDivElement>(headerRef)} className="max-w-2xl mb-10">
+        <div ref={asRef<HTMLDivElement>(headerRef)} className="max-w-2xl mb-6">
           <span className="text-xs uppercase tracking-widest text-primary font-semibold">
             Servicios
           </span>
           <h2
             id="servicios-heading"
             ref={asRef<HTMLHeadingElement>(titleRef)}
-            className="mt-3 text-3xl md:text-4xl font-bold text-foreground tracking-tight"
+            className="mt-3 text-2xl md:text-3xl font-bold text-foreground tracking-tight"
           >
             Todo lo que necesitas para convertir{" "}
             <span className="text-primary">más sin trabajar más</span>
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+          <p className="mt-4 text-muted-foreground text-base leading-snug">
             Cada pieza está diseñada para integrarse en tu negocio y operar de
             forma autónoma desde el primer día.
           </p>
@@ -40,7 +40,7 @@ export function Servicios() {
             <article
               key={s.titulo}
               className={[
-                "card-hover rounded-2xl border border-border bg-card p-6 md:p-7 flex flex-col",
+                "card-hover rounded-xl border border-border bg-card p-4 md:p-7 flex flex-col",
                 s.destacado ? "border-primary/30" : "",
               ].join(" ")}
             >

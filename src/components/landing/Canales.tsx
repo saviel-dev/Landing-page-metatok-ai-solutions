@@ -9,24 +9,24 @@ export function Canales() {
   return (
     <section
       id="canales"
-      className="py-12 md:py-20 border-y border-border"
+      className="py-8 md:py-12 border-y border-border"
       aria-labelledby="canales-heading"
     >
       <div className="container-mt">
         {/* Encabezado */}
-        <div ref={asRef<HTMLDivElement>(headerRef)} className="max-w-2xl text-center mx-auto mb-10">
+        <div ref={asRef<HTMLDivElement>(headerRef)} className="max-w-2xl text-center mx-auto mb-6">
           <span className="text-xs uppercase tracking-widest text-primary font-semibold">
             Integración omnicanal
           </span>
           <h2
             id="canales-heading"
             ref={asRef<HTMLHeadingElement>(titleRef)}
-            className="mt-3 text-3xl md:text-4xl font-bold text-foreground tracking-tight"
+            className="mt-3 text-2xl md:text-3xl font-bold text-foreground tracking-tight"
           >
             Tu IA donde ya están{" "}
             <span className="text-primary">tus clientes</span>
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+          <p className="mt-4 text-muted-foreground text-base leading-snug">
             Desplegamos en los canales que tus prospectos ya usan. Sin
             fricciones, sin cambios de plataforma para ellos.
           </p>
@@ -40,7 +40,7 @@ export function Canales() {
           {canales.map((c) => (
             <li
               key={c.label}
-              className="card-hover flex flex-col items-center gap-3 rounded-2xl border border-border bg-card p-6 text-center"
+              className="card-hover flex flex-col items-center gap-3 rounded-xl border border-border bg-card p-4 text-center"
             >
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-[var(--color-surface)]">
                 <c.icon className="h-6 w-6 text-accent" aria-hidden />

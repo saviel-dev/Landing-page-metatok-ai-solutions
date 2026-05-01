@@ -22,8 +22,8 @@ const marqueeBrands = [...brands, ...brands, ...brands];
 
 export function Brands() {
   return (
-    <section className="py-14 border-b border-border bg-[var(--color-surface)] overflow-hidden">
-      <div className="container-mt mb-8 text-center">
+    <section className="py-7 md:py-8 border-b border-border bg-[var(--color-surface)] overflow-hidden">
+      <div className="container-mt mb-5 text-center">
         <motion.p
           initial="hidden"
           whileInView="show"
@@ -31,7 +31,8 @@ export function Brands() {
           variants={fadeUp}
           className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/70"
         >
-          Confían en la automatización líderes de la industria
+          Sistemas robustos preparados para facturación masiva. Seguridad de grado bancario para tus
+          datos.
         </motion.p>
       </div>
 
@@ -40,7 +41,7 @@ export function Brands() {
         <div className="absolute left-0 top-0 z-10 h-full w-16 md:w-36 bg-gradient-to-r from-[var(--color-surface)] to-transparent pointer-events-none" />
         <div className="absolute right-0 top-0 z-10 h-full w-16 md:w-36 bg-gradient-to-l from-[var(--color-surface)] to-transparent pointer-events-none" />
 
-        <div className="flex w-max animate-marquee items-center gap-12 md:gap-20 px-8">
+        <div className="flex w-max animate-marquee items-center gap-8 md:gap-12 px-6">
           {marqueeBrands.map((brand, i) => (
             <div
               key={`${brand.name}-${i}`}
@@ -49,12 +50,12 @@ export function Brands() {
               <img
                 src={brand.logo}
                 alt={brand.name}
-                className="h-8 md:h-9 w-auto max-w-[48px] object-contain"
+                className="h-7 md:h-8 w-auto max-w-[40px] object-contain"
                 loading="lazy"
                 draggable={false}
                 suppressHydrationWarning
               />
-              <span className="text-base md:text-lg font-semibold text-foreground whitespace-nowrap">
+              <span className="text-sm md:text-base font-semibold text-foreground whitespace-nowrap">
                 {brand.name}
               </span>
             </div>

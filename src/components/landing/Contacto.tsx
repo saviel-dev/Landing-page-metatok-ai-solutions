@@ -82,10 +82,10 @@ export function Contacto() {
   return (
     <section
       id="contacto"
-      className="py-12 md:py-20 bg-[var(--color-surface)] border-t border-border"
+      className="py-8 md:py-12 bg-[var(--color-surface)] border-t border-border"
       aria-labelledby="contacto-heading"
     >
-      <div className="container-mt grid lg:grid-cols-12 gap-10">
+      <div className="container-mt grid lg:grid-cols-12 gap-6 md:gap-8">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -102,7 +102,7 @@ export function Contacto() {
           <motion.h2
             id="contacto-heading"
             variants={fadeUp}
-            className="mt-3 text-3xl md:text-4xl font-bold text-foreground tracking-tight"
+            className="mt-3 text-2xl md:text-3xl font-bold text-foreground tracking-tight"
           >
             Hablemos de tu próxima ventaja competitiva
           </motion.h2>
@@ -146,10 +146,10 @@ export function Contacto() {
           viewport={viewportOnce}
           variants={fadeUp}
           onSubmit={handleSubmit(onSubmit)}
-          className="lg:col-span-7 rounded-2xl border border-border bg-card p-6 md:p-8 space-y-5"
+          className="lg:col-span-7 rounded-xl border border-border bg-card p-4 md:p-5 space-y-4"
           noValidate
         >
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 gap-3">
             <Field label="Nombre" id="nombre" error={errors.nombre?.message}>
               <Input
                 id="nombre"

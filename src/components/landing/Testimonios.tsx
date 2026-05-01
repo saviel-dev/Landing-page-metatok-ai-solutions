@@ -7,7 +7,7 @@ export function Testimonios() {
   return (
     <section
       id="testimonios"
-      className="py-12 md:py-20 bg-[var(--color-surface)] border-t border-border"
+      className="py-8 md:py-12 bg-[var(--color-surface)] border-t border-border"
       aria-labelledby="testimonios-heading"
     >
       <div className="container-mt">
@@ -28,11 +28,11 @@ export function Testimonios() {
           <motion.h2
             id="testimonios-heading"
             variants={fadeUp}
-            className="mt-3 text-3xl md:text-4xl font-bold text-foreground tracking-tight"
+            className="mt-3 text-2xl md:text-3xl font-bold text-foreground tracking-tight"
           >
             Casos reales de negocios que ya <span className="text-primary">escalaron su captación</span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-lg text-muted-foreground leading-relaxed">
+          <motion.p variants={fadeUp} className="mt-2 text-base text-muted-foreground leading-snug">
             Resultados comprobados por líderes en sus respectivos sectores tras
             integrar los agentes IA de Metatok en su operación.
           </motion.p>

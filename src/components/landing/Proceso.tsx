@@ -10,24 +10,24 @@ export function Proceso() {
   return (
     <section
       id="proceso"
-      className="py-12 md:py-20 bg-[var(--color-surface)] border-y border-border"
+      className="py-8 md:py-12 bg-[var(--color-surface)] border-y border-border"
       aria-labelledby="proceso-heading"
     >
       <div className="container-mt">
         {/* Encabezado */}
-        <div ref={asRef<HTMLDivElement>(headerRef)} className="max-w-2xl mb-10">
+        <div ref={asRef<HTMLDivElement>(headerRef)} className="max-w-2xl mb-6">
           <span className="text-xs uppercase tracking-widest text-primary font-semibold">
             Proceso
           </span>
           <h2
             id="proceso-heading"
             ref={asRef<HTMLHeadingElement>(titleRef)}
-            className="mt-3 text-3xl md:text-4xl font-bold text-foreground tracking-tight"
+            className="mt-3 text-2xl md:text-3xl font-bold text-foreground tracking-tight"
           >
             De la auditoría al sistema activo{" "}
             <span className="text-primary">en 4 pasos</span>
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+          <p className="mt-4 text-muted-foreground text-base leading-snug">
             Un flujo diseñado para que no tengas que preocuparte de nada técnico.
             Tu trabajo es recibir los resultados.
           </p>
@@ -41,7 +41,7 @@ export function Proceso() {
           {proceso.map((p, i) => (
             <li
               key={p.numero}
-              className="card-hover relative rounded-2xl border border-border bg-card p-6 flex flex-col"
+              className="card-hover relative rounded-xl border border-border bg-card p-4 flex flex-col"
             >
               {/* Número grande (marca de agua en el fondo) */}
               <div className="absolute top-2 right-4 text-7xl font-black text-primary/5 tracking-tighter leading-none select-none pointer-events-none">
