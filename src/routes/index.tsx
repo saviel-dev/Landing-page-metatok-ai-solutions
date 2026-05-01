@@ -22,6 +22,7 @@ import { Faq } from "@/components/landing/Faq";
 import { Contacto } from "@/components/landing/Contacto";
 import { Footer } from "@/components/landing/Footer";
 import { FloatingActionsMenu } from "@/components/landing/FloatingActionsMenu";
+import { LiveDemoWidget } from "@/components/landing/LiveDemoWidget";
 import { Toaster }       from "@/components/ui/sonner";
 import { faqs, servicios } from "@/components/landing/content";
 
@@ -129,6 +130,7 @@ function Index() {
       <div className="relative z-10">
         <Footer />
       </div>
+      <LiveDemoWidget />
       <FloatingActionsMenu />
       <Toaster />
     </div>

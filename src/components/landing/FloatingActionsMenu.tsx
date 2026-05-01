@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ComponentType } from "react";
-import { ClipboardCheck, Mail, Plus, X } from "lucide-react";
+import { ClipboardCheck, Mail, MessageSquare, Plus, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { getWhatsappAgentHref } from "@/lib/whatsapp";
 
@@ -20,16 +20,28 @@ type ActionItem = {
   label: string;
   href: string;
   external?: boolean;
+  onSelect?: () => void;
   icon: ComponentType<{ className?: string }>;
   iconClass: string;
   bgClass: string;
 };
 
-/** De arriba a abajo al desplegar: auditoría → WhatsApp → contacto (encima del botón +). */
+/** De arriba a abajo al desplegar: live demo → auditoría → WhatsApp → contacto. */
 function buildActions(): ActionItem[] {
   const wa = getWhatsappAgentHref();
   const waExternal = !wa.startsWith("/") && !wa.startsWith("#");
   return [
+    {
+      id: "live-demo",
+      label: "Live Demo",
+      href: "#",
+      onSelect: () => {
+        window.dispatchEvent(new CustomEvent("metatok:open-live-demo"));
+      },
+      icon: MessageSquare,
+      iconClass: "text-primary-foreground",
+      bgClass: "bg-primary hover:bg-primary/90",
+    },
     {
       id: "auditoria",
       label: "Auditoría gratis",
@@ -130,7 +142,13 @@ export function FloatingActionsMenu() {
                   role="menuitem"
                   href={a.href}
                   {...(a.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  onClick={close}
+                  onClick={(e) => {
+                    if (a.onSelect) {
+                      e.preventDefault();
+                      a.onSelect();
+                    }
+                    close();
+                  }}
                   className="flex flex-row-reverse items-center gap-2.5 rounded-full py-0.5 pl-0.5"
                 >
                   <span
