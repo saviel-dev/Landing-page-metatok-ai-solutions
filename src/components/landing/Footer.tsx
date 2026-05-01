@@ -59,10 +59,10 @@ const servicios = [
 const sectores = [
   "Inmobiliaria",
   "Salud & Clínicas",
-  "Educación",
   "E-commerce",
   "Consultoría",
-  "Finanzas",
+  "Despachos Profesionales",
+  "Hoteles",
 ];
 
 export function Footer() {
@@ -164,7 +164,7 @@ export function Footer() {
         <div className="container-mt py-5 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-muted-foreground">
           <span>© {year} Metatok. Todos los derechos reservados.</span>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-            <Link to="/terminos" className="hover:text-primary transition-colors duration-200">
+            <Link to="/aviso-legal" className="hover:text-primary transition-colors duration-200">
               Aviso legal
             </Link>
             <span className="opacity-30 hidden sm:inline">·</span>

@@ -190,11 +190,13 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    background-color: var(--background);
+    color: var(--foreground);
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--background);
+    color: var(--foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -391,3 +393,295 @@
 details.mt-nav-acc[open] summary .mt-nav-chevron {
   transform: rotate(180deg);
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   3D HERO — Grid Lines
+════════════════════════════════════════════════════════════════════ */
+@keyframes grid-shift {
+  0%   { background-position: 0 0, 0 0; }
+  100% { background-position: 56px 56px, 56px 56px; }
+}
+
+.hero-grid-3d {
+  background-image:
+    linear-gradient(rgba(82, 112, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(82, 112, 255, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 0%, transparent 75%);
+  animation: grid-shift 8s linear infinite;
+}
+
+:root.light .hero-grid-3d {
+  background-image:
+    linear-gradient(rgba(82, 112, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(82, 112, 255, 0.05) 1px, transparent 1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid-3d { animation: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ENGINE ORBITAL 3D — CSS perspective diagram
+════════════════════════════════════════════════════════════════════ */
+.engine-orbit-scene {
+  perspective: 800px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Rings */
+.engine-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  pointer-events: none;
+}
+
+@keyframes orbit-spin-cw {
+  from { transform: rotateX(70deg) rotateZ(0deg); }
+  to   { transform: rotateX(70deg) rotateZ(360deg); }
+}
+
+@keyframes orbit-spin-ccw {
+  from { transform: rotateX(70deg) rotateZ(0deg); }
+  to   { transform: rotateX(70deg) rotateZ(-360deg); }
+}
+
+.engine-ring-outer {
+  width: 100%;
+  height: 100%;
+  border-color: color-mix(in oklab, var(--color-primary) 25%, transparent);
+  animation: orbit-spin-cw 18s linear infinite;
+  box-shadow: inset 0 0 30px -10px color-mix(in oklab, var(--color-primary) 15%, transparent);
+}
+
+.engine-ring-middle {
+  width: 68%;
+  height: 68%;
+  border-color: color-mix(in oklab, var(--color-accent) 30%, transparent);
+  animation: orbit-spin-ccw 12s linear infinite;
+}
+
+/* Core */
+.engine-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.engine-core-inner {
+  position: relative;
+  z-index: 2;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in oklab, var(--color-primary) 50%, transparent);
+  background: color-mix(in oklab, var(--color-primary) 12%, var(--color-card));
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  box-shadow:
+    0 0 20px -5px var(--color-primary),
+    inset 0 0 20px -10px color-mix(in oklab, var(--color-primary) 30%, transparent);
+}
+
+@keyframes core-pulse {
+  0%, 100% { transform: scale(1);   opacity: 0.15; }
+  50%       { transform: scale(1.6); opacity: 0;    }
+}
+
+.engine-core-pulse {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid var(--color-primary);
+  animation: core-pulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Orbit nodes */
+.engine-orbit-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  /* Place around the outer ring radius */
+  --node-r: calc(50% - 1.5rem);
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--orbit-angle))
+    translateX(var(--node-r));
+  pointer-events: none;
+}
+
+.engine-orbit-dot {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1.5px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  transform: translateX(-50%) translateY(-50%);
+  box-shadow: 0 0 12px -3px currentColor;
+}
+
+/* Particles */
+@keyframes particle-orbit {
+  from { transform: translate(-50%, -50%) rotate(var(--particle-angle)) translateX(var(--node-r)) rotate(calc(-1 * var(--particle-angle))); opacity: 0.8; }
+  50%  { opacity: 0.2; }
+  to   { transform: translate(-50%, -50%) rotate(calc(var(--particle-angle) + 360deg)) translateX(var(--node-r)) rotate(calc(-1 * (var(--particle-angle) + 360deg))); opacity: 0.8; }
+}
+
+.engine-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  --node-r: calc(50% - 1.5rem);
+  animation: particle-orbit 6s linear var(--particle-delay, 0s) infinite;
+  opacity: 0.5;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CHANNEL ORBS — 3D floating spheres per channel
+════════════════════════════════════════════════════════════════════ */
+@keyframes orb-float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes orb-pulse-ring {
+  0%   { transform: scale(1);    opacity: 0.4; }
+  100% { transform: scale(1.8);  opacity: 0;   }
+}
+
+.channel-orb {
+  position: relative;
+  width: 5.5rem;
+  height: 5.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: orb-float 4s ease-in-out var(--orb-delay, 0s) infinite;
+}
+
+.channel-orb-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in oklab, var(--orb-glow, var(--color-primary)) 35%, transparent);
+  animation: orb-pulse-ring 2.5s ease-out var(--orb-delay, 0s) infinite;
+  pointer-events: none;
+}
+
+.channel-orb-sphere {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--orb-from, var(--color-primary)), var(--orb-to, var(--color-accent)));
+  box-shadow:
+    0 8px 32px -8px var(--orb-glow, var(--color-primary)),
+    inset 0 -4px 12px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.group:hover .channel-orb-sphere {
+  transform: scale(1.08);
+  box-shadow:
+    0 12px 40px -8px var(--orb-glow, var(--color-primary)),
+    inset 0 -4px 12px rgba(0,0,0,0.3);
+}
+
+.channel-orb-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* Shine highlight */
+.channel-orb-shine {
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 35%;
+  height: 28%;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  filter: blur(4px);
+  transform: rotate(-30deg);
+  pointer-events: none;
+}
+
+/* Pulse glow beneath orb */
+.channel-orb-pulse {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--orb-glow, var(--color-primary));
+  filter: blur(8px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   UTILITIES EXTRA
+════════════════════════════════════════════════════════════════════ */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Glassmorphism premium card */
+.glass-card {
+  background: color-mix(in oklab, var(--color-card) 60%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in oklab, var(--color-border) 70%, transparent);
+}
+
+/* Hero section min-height fix */
+.hero-3d-section {
+  min-height: 100svh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .channel-orb,
+  .engine-ring-outer,
+  .engine-ring-middle,
+  .engine-core-pulse,
+  .engine-particle,
+  .channel-orb-ring {
+    animation: none;
+  }
+}
+

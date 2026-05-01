@@ -149,12 +149,14 @@ export const beneficios = [
   },
 ];
 
+import { WhatsAppIcon, InstagramIcon, TelegramIcon } from "./BrandIcons";
+
 export const canales = [
-  { icon: Globe, label: "Web", descripcion: "Chat en tu sitio web" },
-  { icon: MessageCircle, label: "WhatsApp", descripcion: "El canal más usado" },
-  { icon: Instagram, label: "Instagram", descripcion: "DMs automatizados" },
-  { icon: Send, label: "Telegram", descripcion: "Bots y notificaciones" },
-  { icon: Plug, label: "API", descripcion: "Integra cualquier sistema" },
+  { label: "Web", icon: Globe, descripcion: "Chat en tu sitio web" },
+  { label: "WhatsApp", icon: WhatsAppIcon, descripcion: "El canal más usado" },
+  { label: "Instagram", icon: InstagramIcon, descripcion: "DMs automatizados" },
+  { label: "Telegram", icon: TelegramIcon, descripcion: "Bots y notificaciones" },
+  { label: "API", icon: Plug, descripcion: "Integra cualquier sistema" },
 ];
 
 export const faqs = [

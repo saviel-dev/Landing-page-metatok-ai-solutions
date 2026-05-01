@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import logo from "@/assets/logo.png";
-import logoMiniExtended from "@/assets/logo mini extended.png";
+import logoMini from "@/assets/logo mini.png";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -30,27 +29,25 @@ const navExplorar = [
 
 const navContacto = { href: "/#contacto", label: "Contacto" } as const;
 
-const linkClass =
-  "relative text-sm text-muted-foreground hover:text-foreground transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100";
 
-const dropdownTriggerClass =
-  "inline-flex items-center gap-1 rounded-md border-0 bg-transparent px-2 py-1 text-sm font-medium text-muted-foreground outline-none transition-colors hover:bg-accent/40 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=open]:text-foreground";
-
-const mobileGroupSummary =
-  "flex w-full cursor-pointer items-center justify-between border-0 bg-transparent px-3 py-3 text-left text-sm font-semibold text-foreground";
-
-const mobileSubLink =
-  "flex items-center px-3 py-2.5 pl-5 text-sm text-muted-foreground hover:text-foreground hover:bg-background/60 rounded-lg transition-colors";
 
 function NavDropdown({
   label,
   items,
+  scrolled,
 }: {
   label: string;
   items: readonly { href: string; label: string }[];
+  scrolled: boolean;
 }) {
+  const dropdownTriggerClass = `inline-flex items-center gap-1 rounded-md border-0 bg-transparent px-2 py-1 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+    scrolled
+      ? "text-muted-foreground hover:bg-accent/40 hover:text-foreground data-[state=open]:text-foreground"
+      : "text-white/80 hover:bg-white/10 hover:text-white data-[state=open]:text-white"
+  }`;
+
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger className={dropdownTriggerClass}>
         {label}
         <ChevronDown className="h-3.5 w-3.5 shrink-0 opacity-70" aria-hidden />
@@ -87,34 +84,35 @@ export function Header() {
     };
   }, [open]);
 
+  const linkClass = `relative text-sm transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100 ${
+    scrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"
+  }`;
+
+  const mobileGroupSummary = "flex w-full cursor-pointer items-center justify-between border-0 bg-transparent px-3 py-3 text-left text-sm font-semibold text-foreground";
+  const mobileSubLink = "flex items-center px-3 py-2.5 pl-5 text-sm text-muted-foreground hover:text-foreground hover:bg-background/60 rounded-lg transition-colors";
+
   return (
     <>
       <header
-        className={[
-          "fixed top-0 inset-x-0 z-50 transition-all duration-300",
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "backdrop-blur-md bg-background/80 border-b border-border"
-            : "bg-transparent",
-        ].join(" ")}
+            ? "border-b border-border backdrop-blur-md bg-background/90 shadow-sm shadow-foreground/5"
+            : "border-b border-transparent bg-transparent py-1"
+        }`}
       >
         <div className="container-mt flex items-center justify-between h-14 md:h-16">
-          <a href="/#inicio" className="flex items-center gap-2" aria-label="Metatok inicio">
+          <a href="/#inicio" className="flex items-center gap-2 group" aria-label="Metatok inicio">
             <img
-              src={logo}
+              src={logoMini}
               alt="Logo Metatok"
-              className="hidden md:block h-8 w-auto"
-              width={160}
-              height={40}
+              className="h-8 w-8"
+              width={32}
+              height={32}
               loading="eager"
             />
-            <img
-              src={logoMiniExtended}
-              alt="Logo Metatok"
-              className="block md:hidden h-7 w-auto"
-              width={120}
-              height={28}
-              loading="eager"
-            />
+            <span className={`text-lg md:text-xl font-extrabold tracking-tight transition-colors ${scrolled ? "text-foreground" : "text-white"}`}>
+              <span className="text-primary group-hover:text-primary/80 transition-colors">M</span>etatok
+            </span>
           </a>
 
           <nav className="hidden md:flex items-center gap-5 lg:gap-6" aria-label="Navegación principal">
@@ -123,8 +121,8 @@ export function Header() {
                 {item.label}
               </a>
             ))}
-            <NavDropdown label="Solución" items={navSolucion} />
-            <NavDropdown label="Explorar" items={navExplorar} />
+            <NavDropdown label="Solución" items={navSolucion} scrolled={scrolled} />
+            <NavDropdown label="Explorar" items={navExplorar} scrolled={scrolled} />
             <a href={navContacto.href} className={linkClass}>
               {navContacto.label}
             </a>
@@ -135,7 +133,11 @@ export function Header() {
               type="button"
               onClick={toggle}
               aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-              className="inline-flex items-center justify-center h-9 w-9 rounded-md border border-border text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
+              className={`inline-flex items-center justify-center h-9 w-9 rounded-md border transition-colors ${
+                scrolled
+                  ? "border-border text-muted-foreground hover:bg-card hover:text-foreground"
+                  : "border-white/20 text-white/80 hover:bg-white/10 hover:text-white"
+              }`}
             >
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
@@ -152,13 +154,21 @@ export function Header() {
               type="button"
               onClick={toggle}
               aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-              className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-border text-foreground transition-colors hover:bg-card"
+              className={`inline-flex items-center justify-center h-10 w-10 rounded-md border transition-colors ${
+                scrolled
+                  ? "border-border text-foreground hover:bg-card"
+                  : "border-white/20 text-white hover:bg-white/10"
+              }`}
             >
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
             <button
               type="button"
-              className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-border text-foreground transition-colors hover:bg-card"
+              className={`inline-flex items-center justify-center h-10 w-10 rounded-md border transition-colors ${
+                scrolled
+                  ? "border-border text-foreground hover:bg-card"
+                  : "border-white/20 text-white hover:bg-white/10"
+              }`}
               onClick={() => setOpen((o) => !o)}
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={open}
@@ -212,7 +222,12 @@ export function Header() {
         ].join(" ")}
       >
         <div className="flex items-center justify-between px-5 h-14 border-b border-border shrink-0">
-          <img src={logoMiniExtended} alt="Metatok" className="h-7 w-auto" width={120} height={28} />
+          <a href="/#inicio" onClick={() => setOpen(false)} className="flex items-center gap-2" aria-label="Metatok inicio">
+            <img src={logoMini} alt="Logo Metatok" className="h-7 w-7" width={28} height={28} />
+            <span className="text-lg font-extrabold tracking-tight text-foreground">
+              <span className="text-primary">M</span>etatok
+            </span>
+          </a>
           <button
             type="button"
             onClick={() => setOpen(false)}

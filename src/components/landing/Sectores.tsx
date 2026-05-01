@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Building2, HeartPulse, ShoppingBag, Users2,
+  Building2, HeartPulse, ShoppingBag, Users2, BriefcaseBusiness, Hotel,
   XCircle, CheckCircle2, ArrowRight, Zap, TrendingUp,
   type LucideIcon,
 } from "lucide-react";
@@ -144,6 +144,66 @@ const SECTORES: Sector[] = [
       "Agente de nutrición para leads fríos a largo plazo",
       "Integración con CRM propio o HubSpot/Salesforce",
       "Reporte semanal automático al equipo comercial",
+    ],
+  },
+  {
+    id: "despachos",
+    icono: BriefcaseBusiness,
+    sector: "Despachos Profesionales",
+    tagline: "Convierte consultas en clientes sin perder tiempo en pre-filtros.",
+    descripcion:
+      "Despachos legales, fiscales y laborales pierden oportunidades por respuestas tardias o por dedicar horas a consultas no cualificadas. MetaTok filtra, prioriza y agenda solo los casos con alto encaje.",
+    actual: [
+      "Consultas iniciales por email o WhatsApp sin seguimiento rapido",
+      "Tiempo del equipo senior invertido en leads sin potencial",
+      "Informacion inicial incompleta antes de la primera reunion",
+      "Falta de trazabilidad comercial por area o tipo de caso",
+    ],
+    mejoras: [
+      "Respuesta automatica en minutos con captacion estructurada",
+      "Pre-cualificacion por urgencia, especialidad y presupuesto",
+      "Agenda automatica con envio de documentacion previa",
+      "CRM y pipeline actualizados por tipo de servicio",
+    ],
+    resultados: [
+      { kpi: "+52%", desc: "consultas cualificadas" },
+      { kpi: "−58%", desc: "tiempo en pre-filtro" },
+      { kpi: "2.6×", desc: "reuniones con alto fit" },
+    ],
+    avanzado: [
+      "Rutas de atencion por area: mercantil, laboral, fiscal, civil",
+      "Recordatorios automaticos de hitos y documentacion",
+      "Panel de conversion por fuente y especialidad",
+    ],
+  },
+  {
+    id: "hoteles",
+    icono: Hotel,
+    sector: "Hoteles y Hospedaje",
+    tagline: "Más reservas directas, menos fricción y mejor experiencia 24/7.",
+    descripcion:
+      "Hoteles y apartahoteles compiten por velocidad de respuesta y personalizacion. MetaTok atiende consultas de disponibilidad, tarifas y servicios en tiempo real para aumentar reservas directas y reducir carga operativa.",
+    actual: [
+      "Consultas de disponibilidad sin respuesta inmediata",
+      "Dependencia excesiva de OTAs para cerrar reservas",
+      "Recepcion saturada con preguntas repetitivas",
+      "Poca automatizacion en upsell y pre-estadia",
+    ],
+    mejoras: [
+      "Asistente IA multicanal para web, WhatsApp e Instagram",
+      "Cotizacion automatica por fechas, tipo de habitacion y ocupacion",
+      "Secuencias de pre-check-in y upsell de servicios",
+      "Integracion con PMS/CRM para seguimiento unificado",
+    ],
+    resultados: [
+      { kpi: "+34%", desc: "reservas directas" },
+      { kpi: "−46%", desc: "carga en recepcion" },
+      { kpi: "+21%", desc: "ticket medio por upsell" },
+    ],
+    avanzado: [
+      "Bot de concierge para dudas durante la estancia",
+      "Campanas automaticas para repeticion y temporada baja",
+      "Panel de rendimiento por canal y tipo de reserva",
     ],
   },
 ];

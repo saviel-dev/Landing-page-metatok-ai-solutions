@@ -1,76 +1,76 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header } from "@/components/landing/Header";
-import { Footer } from "@/components/landing/Footer";
+import { LegalPageLayout } from "@/components/legal/LegalPageLayout";
 
 export const Route = createFileRoute("/privacidad")({
   component: Privacidad,
 });
 
 function Privacidad() {
+  const lastUpdated = new Date().toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <Header />
-      <main className="flex-1 container-mt py-24 md:py-32">
-        <div className="max-w-3xl mx-auto bg-card border border-border rounded-2xl p-8 md:p-12 shadow-sm">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Política de Privacidad
-          </h1>
-          <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none text-muted-foreground space-y-6">
-            <p>
-              Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </p>
-            
-            <section>
-              <h2 className="text-xl font-bold text-foreground mt-8 mb-4">1. Recopilación de Información</h2>
-              <p>
-                En Metatok, recopilamos información personal que tú nos proporcionas directamente al solicitar una auditoría, contactarnos o contratar nuestros servicios. Esto puede incluir tu nombre, correo electrónico, número de teléfono, detalles de la empresa e información de facturación.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-foreground mt-8 mb-4">2. Uso de la Información</h2>
-              <p>
-                Utilizamos la información recopilada para:
-              </p>
-              <ul className="list-disc pl-5 mt-2 space-y-1">
-                <li>Proporcionar y gestionar los servicios de automatización solicitados.</li>
-                <li>Comunicarnos contigo para ofrecer soporte técnico y atención al cliente.</li>
-                <li>Enviar actualizaciones, propuestas comerciales y novedades sobre nuestros servicios.</li>
-                <li>Mejorar nuestros sistemas y personalizar la experiencia del usuario.</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-foreground mt-8 mb-4">3. Protección y Seguridad de Datos</h2>
-              <p>
-                Implementamos medidas de seguridad técnicas y organizativas para proteger tu información personal contra accesos no autorizados, alteración, divulgación o destrucción. Nuestro sistema cumple con las directrices generales de protección de datos y utilizamos cifrado en las comunicaciones de las APIs.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-foreground mt-8 mb-4">4. Procesamiento de Datos de Terceros (Tus Leads)</h2>
-              <p>
-                Como proveedores de infraestructura de IA, Metatok procesa los datos de los usuarios finales (leads) en nombre de nuestros clientes. Nuestros clientes son los controladores de esos datos y son responsables de obtener el consentimiento necesario de sus usuarios. Metatok solo procesa estos datos para ejecutar las automatizaciones contratadas y no los utiliza para fines propios ni los vende a terceros.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-foreground mt-8 mb-4">5. Compartición de Datos</h2>
-              <p>
-                No vendemos, alquilamos ni compartimos tu información personal con terceros, excepto cuando sea estrictamente necesario para proporcionar el servicio (ej. proveedores de hosting, pasarelas de pago o plataformas integradas mediante API bajo tu consentimiento) o para cumplir con obligaciones legales.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-foreground mt-8 mb-4">6. Tus Derechos</h2>
-              <p>
-                Tienes derecho a acceder, corregir, actualizar o solicitar la eliminación de tu información personal. Para ejercer estos derechos o si tienes alguna pregunta sobre nuestra Política de Privacidad, puedes contactarnos en contacto@metatok.ai.
-              </p>
-            </section>
-          </div>
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <LegalPageLayout
+      badge="RGPD / Privacidad"
+      title="Politica de Privacidad y Proteccion de Datos"
+      subtitle="Explicamos como recopilamos, utilizamos y protegemos la informacion personal en cumplimiento de la normativa aplicable, incluido el RGPD."
+      lastUpdated={lastUpdated}
+      sections={[
+        {
+          id: "recopilacion",
+          title: "Recopilacion de informacion",
+          paragraphs: [
+            "Recopilamos datos personales que nos facilitas al contactar, solicitar una auditoria o contratar servicios.",
+            "Estos datos pueden incluir nombre, email, telefono, empresa, informacion tecnica y datos de facturacion necesarios para la prestacion del servicio.",
+          ],
+        },
+        {
+          id: "uso",
+          title: "Uso de la informacion",
+          paragraphs: [
+            "Tratamos la informacion para operar el servicio, atender solicitudes y mejorar la experiencia de cliente.",
+          ],
+          bullets: [
+            "Gestionar servicios de automatizacion y soporte tecnico.",
+            "Comunicaciones operativas y comerciales relacionadas con Metatok.",
+            "Mejora de producto, analitica interna y seguridad de la plataforma.",
+          ],
+        },
+        {
+          id: "seguridad",
+          title: "Seguridad y conservacion de datos",
+          paragraphs: [
+            "Aplicamos medidas tecnicas y organizativas para prevenir acceso no autorizado, alteracion o perdida de datos.",
+            "Conservamos los datos durante el tiempo necesario para la finalidad del tratamiento y segun obligaciones legales aplicables.",
+          ],
+        },
+        {
+          id: "encargado",
+          title: "Tratamiento de datos de terceros (leads)",
+          paragraphs: [
+            "Metatok actua como encargado del tratamiento respecto a los datos de leads que procesa en nombre de sus clientes.",
+            "El cliente, como responsable, debe garantizar una base juridica valida para el tratamiento de dichos datos.",
+          ],
+        },
+        {
+          id: "cesiones",
+          title: "Comparticion de datos",
+          paragraphs: [
+            "No vendemos ni alquilamos datos personales. Solo compartimos informacion con proveedores necesarios para operar el servicio o por obligacion legal.",
+          ],
+        },
+        {
+          id: "derechos",
+          title: "Derechos de las personas",
+          paragraphs: [
+            "Puedes ejercer derechos de acceso, rectificacion, supresion, oposicion, limitacion y portabilidad conforme a la normativa vigente.",
+            "Para cualquier solicitud, escribe a contacto@metatok.ai e indica claramente tu peticion.",
+          ],
+        },
+      ]}
+    />
   );
 }
