@@ -10,7 +10,7 @@ const organizationJsonLd = {
   url: "https://metatok.ai",
   logo: "https://metatok.ai/logo.png",
   description:
-    "Metatok diseña ecosistemas de Inteligencia Artificial Conversacional y automatización para captar, cualificar y convertir leads 24/7.",
+    "MetaTok diseña agentes de Inteligencia Artificial Conversacional y automatización para captar, cualificar y cerrar ventas 24/7 en todos tus canales.",
   sameAs: [
     "https://facebook.com/metatok",
     "https://instagram.com/metatok",
@@ -52,17 +52,17 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
-        title: "MetaTok — Departamento de ventas en piloto automático con IA",
+        title: "MetaTok AI | Automatiza tus Ventas y Atención al Cliente 24/7",
       },
       {
         name: "description",
         content:
-          "MetaTok: agentes autónomos de venta 24/7 en WhatsApp, Instagram y Web. API abierta a cualquier CRM, multilingüe, comparativa frente a chatbots tradicionales y despliegue orientado a cierre.",
+          "Descubre MetaTok AI: Agentes de IA conversacional que cualifican leads, cierran ventas y agendan citas en WhatsApp, Web e Instagram automáticamente. API abierta e integración CRM.",
       },
       {
         name: "keywords",
         content:
-          "agentes IA, automatización con inteligencia artificial, cualificación de leads, integración CRM, agendamiento automático, embudo de ventas automatizado, chatbot IA, Metatok, NLP, flow-works, auditoría gratuita IA",
+          "inteligencia artificial, agentes conversacionales, automatización de ventas, chatbot con IA generativa, captación de leads, MetaTok AI, integraciones CRM, atención al cliente automatizada, agendamiento de citas",
       },
       { name: "author", content: "Metatok" },
       { name: "theme-color", content: "#ffffff" },
@@ -75,12 +75,12 @@ export const Route = createRootRoute({
       { property: "og:locale", content: "es_ES" },
       {
         property: "og:title",
-        content: "MetaTok — Agentes de venta con IA, 24/7",
+        content: "MetaTok AI | Automatiza tus Ventas y Atención al Cliente 24/7",
       },
       {
         property: "og:description",
         content:
-          "Ecosistema omnicanal con cierre autónomo, datos accionables y formación MetaTok Academy.",
+          "Agentes de IA que cualifican leads, cierran ventas y agendan citas en WhatsApp, Web e Instagram 24/7. Descubre cómo MetaTok puede escalar tu negocio.",
       },
       { property: "og:image", content: "https://metatok.ai/logo.png" },
       { property: "og:image:width", content: "1200" },
@@ -93,12 +93,12 @@ export const Route = createRootRoute({
       { name: "twitter:site", content: "@metatok" },
       {
         name: "twitter:title",
-        content: "MetaTok — Agentes de venta con IA, 24/7",
+        content: "MetaTok AI | Automatiza tus Ventas y Atención al Cliente 24/7",
       },
       {
         name: "twitter:description",
         content:
-          "Ecosistema omnicanal con cierre autónomo, datos accionables y formación MetaTok Academy.",
+          "Agentes de IA que cualifican leads, cierran ventas y agendan citas en WhatsApp, Web e Instagram 24/7. Descubre cómo MetaTok puede escalar tu negocio.",
       },
       { name: "twitter:image", content: "https://metatok.ai/logo.png" },
       { name: "twitter:image:alt", content: "Metatok — Automatización con IA" },

@@ -48,7 +48,7 @@ const SECTORES: Sector[] = [
     resultados: [
       { kpi: "+47%", desc: "visitas agendadas" },
       { kpi: "−65%", desc: "tiempo de respuesta" },
-      { kpi: "3×",   desc: "más leads cualificados" },
+      { kpi: "3×", desc: "más leads cualificados" },
     ],
     avanzado: [
       "Voicebot para llamadas entrantes fuera de horario",
@@ -78,7 +78,7 @@ const SECTORES: Sector[] = [
     resultados: [
       { kpi: "−40%", desc: "pacientes ausentes" },
       { kpi: "+35%", desc: "nuevas citas/mes" },
-      { kpi: "20h",  desc: "ahorradas en recepción/sem." },
+      { kpi: "20h", desc: "ahorradas en recepción/sem." },
     ],
     avanzado: [
       "Encuestas de satisfacción automatizadas post-visita",
@@ -138,7 +138,7 @@ const SECTORES: Sector[] = [
     resultados: [
       { kpi: "+60%", desc: "conversión de leads a reunión" },
       { kpi: "−70%", desc: "tiempo de cualificación manual" },
-      { kpi: "4×",   desc: "más propuestas enviadas/mes" },
+      { kpi: "4×", desc: "más propuestas enviadas/mes" },
     ],
     avanzado: [
       "Agente de nutrición para leads fríos a largo plazo",
@@ -215,8 +215,8 @@ export function Sectores() {
   const [activo, setActivo] = useState<number>(0);
 
   // Derivamos el sector activo DENTRO del render, sin cachear en variable fuera
-  const sectorActivo   = SECTORES[activo];
-  const TabIconActivo  = sectorActivo.icono;
+  const sectorActivo = SECTORES[activo];
+  const TabIconActivo = sectorActivo.icono;
 
   return (
     <section

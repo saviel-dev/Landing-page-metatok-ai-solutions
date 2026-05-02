@@ -182,7 +182,13 @@ export function Planes() {
               </p>
 
               {/* Precio con animación al cambiar */}
-              <div className="mt-4 flex items-end gap-1">
+              <div className="mt-4 flex items-baseline gap-0.5">
+                <span className={[
+                  "text-xl font-bold",
+                  plan.highlighted ? "text-primary-foreground/80" : "text-primary/80",
+                ].join(" ")}>
+                  €
+                </span>
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={billing + plan.name}
@@ -199,10 +205,10 @@ export function Planes() {
                   </motion.span>
                 </AnimatePresence>
                 <span className={[
-                  "mb-2 text-sm font-medium",
+                  "mb-1 ml-1 text-sm font-medium",
                   plan.highlighted ? "text-primary-foreground/70" : "text-muted-foreground",
                 ].join(" ")}>
-                  €{billingConfig[billing].suffix}
+                  {billingConfig[billing].suffix}
                 </span>
               </div>
 

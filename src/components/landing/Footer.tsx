@@ -144,8 +144,8 @@ export function Footer() {
           <h4 className="text-sm font-semibold text-foreground">Contacto</h4>
           <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
             <li>
-              <a href="mailto:contacto@metatok.ai" className="hover:text-primary transition-colors duration-200">
-                contacto@metatok.ai
+              <a href="mailto:soporte@metatok.ai" className="hover:text-primary transition-colors duration-200">
+                soporte@metatok.ai
               </a>
             </li>
             <li className="text-foreground/90">

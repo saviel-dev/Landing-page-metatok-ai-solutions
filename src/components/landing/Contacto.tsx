@@ -24,6 +24,8 @@ const auditSchema = z.object({
 
 type AuditInput = z.infer<typeof auditSchema>;
 
+const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/info@metatok.ai";
+
 export function Contacto() {
   const [enviando, setEnviando] = useState(false);
 
@@ -48,25 +50,33 @@ export function Contacto() {
     try {
       setEnviando(true);
 
-      // TODO: Reemplazar por tu endpoint real cuando lo tengas.
-      const endpoint = import.meta.env.VITE_AUDIT_ENDPOINT || "https://tu-endpoint.com/auditoria";
-
-      const response = await fetch(endpoint, {
+      const response = await fetch(FORMSUBMIT_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // TODO: Agregar headers de autenticacion si aplica.
-          // Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+          Accept: "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          name: values.nombre,
+          email: values.email,
+          empresa: values.empresa,
+          telefono: values.telefono,
+          web: values.web || "—",
+          message: values.mensaje || "—",
+          _subject: `Nueva solicitud de auditoría — ${values.empresa}`,
+          _template: "table",
+          _captcha: "false",
+        }),
       });
 
-      if (!response.ok) {
-        throw new Error("Error enviando el formulario");
+      const data = await response.json();
+
+      if (!response.ok || data.success === "false") {
+        throw new Error("Error en FormSubmit");
       }
 
-      toast.success("Solicitud enviada", {
-        description: "Tu solicitud fue enviada correctamente.",
+      toast.success("Solicitud enviada ✓", {
+        description: "Te contactaremos en menos de 24 horas.",
       });
       reset();
     } catch (err) {
@@ -78,6 +88,7 @@ export function Contacto() {
       setEnviando(false);
     }
   };
+
 
   return (
     <section
@@ -114,8 +125,8 @@ export function Contacto() {
           <motion.ul variants={fadeUp} className="mt-8 space-y-4">
             <li className="flex items-center gap-3 text-sm text-foreground">
               <Mail className="h-4 w-4 text-accent" aria-hidden />
-              <a href="mailto:contacto@metatok.ai" className="hover:text-primary transition-colors">
-                contacto@metatok.ai
+              <a href="mailto:info@metatok.ai" className="hover:text-primary transition-colors">
+                info@metatok.ai
               </a>
             </li>
             <li className="flex items-center gap-3 text-sm text-foreground">

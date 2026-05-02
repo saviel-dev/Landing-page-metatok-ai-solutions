@@ -124,15 +124,18 @@ export function ComparativaMetaTok() {
                 </div>
 
                 {/* Tradicional Column */}
-                <div className="bg-card border border-border/50 md:rounded-2xl p-5 md:p-6 h-full flex items-center gap-4 text-muted-foreground text-sm transition-colors group-hover:border-border group-hover:bg-muted/30 z-10 mx-4 md:mx-0 rounded-t-2xl md:rounded-t-none">
-                  <div className="shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-destructive/10 text-destructive">
-                    <X className="w-4 h-4" strokeWidth={3} />
+                <div className="bg-card border border-border/50 md:rounded-2xl p-5 md:p-6 h-full flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-4 text-muted-foreground text-sm transition-colors group-hover:border-border group-hover:bg-muted/30 z-10 mx-4 md:mx-0 rounded-t-2xl md:rounded-t-none">
+                  <div className="md:hidden text-xs font-bold uppercase tracking-wider text-muted-foreground">Bot Tradicional</div>
+                  <div className="flex items-center gap-3 w-full">
+                    <div className="shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-destructive/10 text-destructive">
+                      <X className="w-4 h-4" strokeWidth={3} />
+                    </div>
+                    <span>{row.old}</span>
                   </div>
-                  {row.old}
                 </div>
 
                 {/* MetaTok Column (Highlighted) */}
-                <div className="relative p-5 md:p-6 h-full flex items-center gap-4 text-foreground text-sm font-medium z-10 mx-4 md:mx-0 rounded-b-2xl md:rounded-b-none md:rounded-2xl overflow-hidden group/mt">
+                <div className="relative p-5 md:p-6 h-full flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-4 text-foreground text-sm font-medium z-10 mx-4 md:mx-0 rounded-b-2xl md:rounded-b-none md:rounded-2xl overflow-hidden group/mt">
                   <div className="absolute inset-0 bg-primary/10 border border-primary/30 md:border-transparent md:border-y md:border-primary/20 md:group-hover:bg-primary/20 transition-colors" />
                   {/* Left/Right borders for desktop highlight column */}
                   <div className="hidden md:block absolute inset-y-0 left-0 w-px bg-primary/20" />
@@ -146,10 +149,13 @@ export function ComparativaMetaTok() {
                     <div className="hidden md:block absolute bottom-0 left-0 right-0 h-4 border-b border-x border-primary/20 rounded-b-2xl pointer-events-none" />
                   )}
 
-                  <div className="relative shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-accent text-accent-foreground shadow-[0_0_10px_var(--color-accent)] group-hover/mt:scale-110 transition-transform">
-                    <Check className="w-4 h-4" strokeWidth={3} />
+                  <div className="md:hidden text-xs font-black text-primary uppercase tracking-wider relative">MetaTok AI</div>
+                  <div className="flex items-center gap-3 relative w-full">
+                    <div className="relative shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-accent text-accent-foreground shadow-[0_0_10px_var(--color-accent)] group-hover/mt:scale-110 transition-transform">
+                      <Check className="w-4 h-4" strokeWidth={3} />
+                    </div>
+                    <div className="relative font-bold text-foreground">{row.new}</div>
                   </div>
-                  <div className="relative font-bold">{row.new}</div>
                 </div>
               </motion.div>
             ))}

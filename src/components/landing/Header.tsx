@@ -40,11 +40,7 @@ function NavDropdown({
   items: readonly { href: string; label: string }[];
   scrolled: boolean;
 }) {
-  const dropdownTriggerClass = `inline-flex items-center gap-1 rounded-md border-0 bg-transparent px-2 py-1 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-    scrolled
-      ? "text-muted-foreground hover:bg-accent/40 hover:text-foreground data-[state=open]:text-foreground"
-      : "text-white/80 hover:bg-white/10 hover:text-white data-[state=open]:text-white"
-  }`;
+  const dropdownTriggerClass = `inline-flex items-center gap-1 rounded-md border-0 bg-transparent px-2 py-1 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background text-muted-foreground hover:bg-accent/40 hover:text-foreground data-[state=open]:text-foreground`;
 
   return (
     <DropdownMenu modal={false}>
@@ -84,9 +80,7 @@ export function Header() {
     };
   }, [open]);
 
-  const linkClass = `relative text-sm transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100 ${
-    scrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"
-  }`;
+  const linkClass = `relative text-sm transition-colors py-1 text-muted-foreground hover:text-foreground after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100`;
 
   const mobileGroupSummary = "flex w-full cursor-pointer items-center justify-between border-0 bg-transparent px-3 py-3 text-left text-sm font-semibold text-foreground";
   const mobileSubLink = "flex items-center px-3 py-2.5 pl-5 text-sm text-muted-foreground hover:text-foreground hover:bg-background/60 rounded-lg transition-colors";
@@ -110,8 +104,8 @@ export function Header() {
               height={32}
               loading="eager"
             />
-            <span className={`text-lg md:text-xl font-extrabold tracking-tight transition-colors ${scrolled ? "text-foreground" : "text-white"}`}>
-              <span className="text-primary group-hover:text-primary/80 transition-colors">M</span>etatok
+            <span className="text-lg md:text-xl font-extrabold tracking-tight text-foreground">
+              etatok
             </span>
           </a>
 
@@ -133,11 +127,7 @@ export function Header() {
               type="button"
               onClick={toggle}
               aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-              className={`inline-flex items-center justify-center h-9 w-9 rounded-md border transition-colors ${
-                scrolled
-                  ? "border-border text-muted-foreground hover:bg-card hover:text-foreground"
-                  : "border-white/20 text-white/80 hover:bg-white/10 hover:text-white"
-              }`}
+              className="inline-flex items-center justify-center h-9 w-9 rounded-md border border-border text-muted-foreground hover:bg-card hover:text-foreground transition-colors"
             >
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
@@ -154,21 +144,13 @@ export function Header() {
               type="button"
               onClick={toggle}
               aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-              className={`inline-flex items-center justify-center h-10 w-10 rounded-md border transition-colors ${
-                scrolled
-                  ? "border-border text-foreground hover:bg-card"
-                  : "border-white/20 text-white hover:bg-white/10"
-              }`}
+              className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-border text-foreground hover:bg-card transition-colors"
             >
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
             <button
               type="button"
-              className={`inline-flex items-center justify-center h-10 w-10 rounded-md border transition-colors ${
-                scrolled
-                  ? "border-border text-foreground hover:bg-card"
-                  : "border-white/20 text-white hover:bg-white/10"
-              }`}
+              className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-border text-foreground hover:bg-card transition-colors"
               onClick={() => setOpen((o) => !o)}
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={open}
@@ -225,7 +207,7 @@ export function Header() {
           <a href="/#inicio" onClick={() => setOpen(false)} className="flex items-center gap-2" aria-label="Metatok inicio">
             <img src={logoMini} alt="Logo Metatok" className="h-7 w-7" width={28} height={28} />
             <span className="text-lg font-extrabold tracking-tight text-foreground">
-              <span className="text-primary">M</span>etatok
+              etatok
             </span>
           </a>
           <button

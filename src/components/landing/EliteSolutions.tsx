@@ -10,6 +10,101 @@ import {
   Store,
 } from "lucide-react";
 import { fadeUp, stagger, viewportOnce } from "./motion";
+import { useEffect, useState } from "react";
+
+/* ─── Typing Dots ────────────────────────────────────────────────────────── */
+function TypingDotsWL() {
+  return (
+    <div className="flex items-center gap-1 px-2.5 py-1.5">
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          className="w-1 h-1 rounded-full bg-muted-foreground/60"
+          animate={{ y: [0, -3, 0], opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 0.75, repeat: Infinity, delay: i * 0.18, ease: "easeInOut" }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ─── Chat script ────────────────────────────────────────────────────────── */
+const WL_CHAT_STEPS = [
+  { from: "bot",  text: "Hola, soy el asesor de TuMarca. ¿En qué te ayudo? 👋",      typingMs: 1200, showAt: 0     },
+  { from: "user", text: "Quiero una propuesta para esta semana.",                      typingMs: 900,  showAt: 2600  },
+  { from: "bot",  text: "¡Perfecto! ¿Prefieres reunión por videollamada o presencial?", typingMs: 1300, showAt: 4700  },
+  { from: "user", text: "Videollamada, any day ✅",                                     typingMs: 800,  showAt: 7400  },
+  { from: "bot",  text: "Agendado para mañana 10:30. Te mando confirmación 📅",         typingMs: 1400, showAt: 9800  },
+  { from: "user", text: "Genial, muchas gracias 🙌",                                   typingMs: 700,  showAt: 13000 },
+  { from: "bot",  text: "¡Hasta mañana! Cualquier duda, aquí estoy 🚀",               typingMs: 1200, showAt: 15000 },
+] as const;
+
+const WL_CYCLE_MS = 20000;
+
+function LiveChatWL() {
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [typingFor, setTypingFor] = useState<"bot" | "user" | null>(null);
+
+  useEffect(() => {
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    function runCycle() {
+      setVisibleCount(0);
+      setTypingFor(null);
+      WL_CHAT_STEPS.forEach((step, idx) => {
+        timers.push(setTimeout(() => setTypingFor(step.from as "bot" | "user"), step.showAt));
+        timers.push(setTimeout(() => { setVisibleCount(idx + 1); setTypingFor(null); }, step.showAt + step.typingMs));
+      });
+      timers.push(setTimeout(() => { timers.forEach(clearTimeout); runCycle(); }, WL_CYCLE_MS));
+    }
+    const start = setTimeout(runCycle, 600);
+    timers.push(start);
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  return (
+    <div className="flex flex-col gap-1.5 overflow-hidden">
+      {WL_CHAT_STEPS.slice(0, visibleCount).map((step, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 5, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.22, ease: "easeOut" }}
+          className={`flex ${step.from === "user" ? "justify-end" : "justify-start"}`}
+        >
+          <span
+            className={[
+              "text-[9px] rounded-lg px-2 py-1 max-w-[82%] leading-tight",
+              step.from === "bot"
+                ? "text-foreground/85 rounded-tl-sm"
+                : "text-white font-medium rounded-tr-sm",
+            ].join(" ")}
+            style={
+              step.from === "bot"
+                ? { background: "var(--color-background)", border: "1px solid var(--color-border)" }
+                : { background: "var(--color-accent)" }
+            }
+          >
+            {step.text}
+          </span>
+        </motion.div>
+      ))}
+      {typingFor && (
+        <motion.div
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`flex ${typingFor === "user" ? "justify-end" : "justify-start"}`}
+        >
+          <div
+            className="rounded-lg rounded-tl-sm"
+            style={{ background: "var(--color-background)", border: "1px solid var(--color-border)" }}
+          >
+            <TypingDotsWL />
+          </div>
+        </motion.div>
+      )}
+    </div>
+  );
+}
 
 const bullets = [
   "Identidad corporativa integral: marca, tonalidad visual y naming alineados a tu negocio.",
@@ -195,14 +290,7 @@ export function EliteSolutions() {
               viewport={viewportOnce}
               transition={{ duration: 0.62, ease: bulletEase }}
             >
-              <motion.div
-                animate={prefersReducedMotion ? false : { y: [0, -8, 0] }}
-                transition={
-                  prefersReducedMotion
-                    ? undefined
-                    : { duration: 5.3, repeat: Infinity, ease: [0.45, 0, 0.55, 1] }
-                }
-              >
+              <motion.div>
                 <div className="w-[240px] sm:w-[285px] rounded-[2.5rem] border-[7px] border-border bg-muted/50 p-2.5 shadow-xl ring-1 ring-border">
                   <div className="relative aspect-[9/19] overflow-hidden rounded-[2rem] bg-card">
                     <div className="flex h-7 items-center justify-center pt-2">
@@ -217,16 +305,9 @@ export function EliteSolutions() {
                       </div>
                     </div>
 
-                    <div className="space-y-3 px-4 pb-5 pt-4">
-                      <div className="rounded-xl border border-border bg-background/70 p-2.5 text-xs text-foreground/85">
-                        Hola, soy el asesor oficial de tu marca. Quieres propuesta para esta semana?
-                      </div>
-                      <div className="ml-auto w-[82%] rounded-xl border border-accent/30 bg-accent/12 p-2.5 text-xs text-foreground/85">
-                        Si, agenda demo y enviame opciones.
-                      </div>
-                      <div className="rounded-xl border border-border bg-background/70 p-2.5 text-xs text-foreground/85">
-                        Perfecto, agendado para manana 10:30. Te comparto confirmacion por email.
-                      </div>
+                    {/* Live chat area */}
+                    <div className="space-y-2 px-3 pb-4 pt-3" style={{ minHeight: "160px" }}>
+                      <LiveChatWL />
                     </div>
                   </div>
                 </div>

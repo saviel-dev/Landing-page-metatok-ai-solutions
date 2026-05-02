@@ -64,15 +64,15 @@ export function MetaTokEngine() {
           whileInView="show"
           viewport={viewportOnce}
           variants={stagger}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto auto-rows-[300px]"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto md:auto-rows-[300px]"
         >
 
           {/* 1. NÚCLEO CENTRAL (Span 2 cols) */}
-          <motion.div variants={fadeUp} className="md:col-span-2 row-span-1 rounded-3xl bg-card/75 border border-border p-8 relative overflow-hidden flex flex-col md:flex-row items-center gap-8 group backdrop-blur-sm">
+          <motion.div variants={fadeUp} className="md:col-span-2 row-span-1 rounded-3xl bg-card/75 border border-border p-8 relative flex flex-col md:flex-row items-center gap-6 group backdrop-blur-sm">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             
             {/* 3D Chip Visual */}
-            <div className="relative shrink-0 flex items-center justify-center w-48 h-48">
+            <div className="relative shrink-0 flex items-center justify-center w-36 h-36 md:w-48 md:h-48">
               <div className="absolute inset-0 bg-primary/20 blur-[50px] rounded-full group-hover:bg-primary/40 transition-colors duration-700" />
               
               <div className="relative w-36 h-36 bg-background/85 rounded-2xl border border-border shadow-2xl flex flex-col items-center justify-center transform transition-transform duration-700 group-hover:scale-105 group-hover:rotate-3">
@@ -147,12 +147,12 @@ export function MetaTokEngine() {
           <motion.div variants={fadeUp} className="md:col-span-2 row-span-1 rounded-3xl bg-card/75 border border-border p-8 relative overflow-hidden flex flex-col md:flex-row-reverse items-center gap-8 group backdrop-blur-sm">
             <div className="absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             
-            <div className="relative shrink-0 w-full md:w-1/2 h-32 flex items-center justify-center">
+            <div className="relative shrink-0 w-[85%] md:w-1/2 h-32 md:h-full flex items-center justify-center mt-4 md:mt-0">
               {/* Fake Chart */}
-              <svg className="w-full h-full overflow-visible" viewBox="0 0 200 100" preserveAspectRatio="none">
+              <svg className="w-full h-full overflow-visible" viewBox="-5 -25 210 125" preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.5" />
+                    <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.45" />
                     <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0" />
                   </linearGradient>
                 </defs>

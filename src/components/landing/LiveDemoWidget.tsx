@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Bot, MessageSquare, Send, Sparkles, User, X } from "lucide-react";
+import { Bot, MessageSquare, MessageSquarePlus, Send, Sparkles, User, X } from "lucide-react";
 import { getWhatsappAgentHref } from "@/lib/whatsapp";
 
 type ChatRole = "bot" | "user";
@@ -53,6 +53,12 @@ export function LiveDemoWidget() {
   const [isTyping, setIsTyping] = useState(false);
   const whatsappHref = useMemo(() => getWhatsappAgentHref(), []);
 
+  function resetChat() {
+    setMessages(initialMessages);
+    setInput("");
+    setIsTyping(false);
+  }
+
   useEffect(() => {
     const handler = () => setOpen(true);
     window.addEventListener("metatok:open-live-demo", handler as EventListener);
@@ -88,9 +94,8 @@ export function LiveDemoWidget() {
 
   return (
     <div
-      className={`fixed right-5 z-[85] md:right-8 ${
-        open ? "bottom-24 md:bottom-24" : "bottom-1 md:bottom-2"
-      }`}
+      className={`fixed right-5 z-[85] md:right-8 ${open ? "bottom-24 md:bottom-24" : "bottom-1 md:bottom-2"
+        }`}
     >
       <AnimatePresence mode="wait">
         {open ? (
@@ -113,14 +118,25 @@ export function LiveDemoWidget() {
                   <p className="text-[11px] text-muted-foreground">Agente de ventas en tiempo real</p>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
-                aria-label="Cerrar demo"
-              >
-                <X className="h-4 w-4" aria-hidden />
-              </button>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={resetChat}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                  aria-label="Nuevo chat"
+                  title="Nuevo chat"
+                >
+                  <MessageSquarePlus className="h-4 w-4" aria-hidden />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label="Cerrar demo"
+                >
+                  <X className="h-4 w-4" aria-hidden />
+                </button>
+              </div>
             </div>
 
             <div className="flex-1 overflow-y-auto bg-background/55 px-3 py-3 space-y-2">
@@ -138,11 +154,10 @@ export function LiveDemoWidget() {
                     </span>
                   ) : null}
                   <div
-                    className={`max-w-[85%] rounded-xl border px-3 py-2 text-xs leading-relaxed ${
-                      message.role === "user"
-                        ? "border-accent/30 bg-accent/10 text-foreground"
-                        : "border-border/80 bg-card text-foreground/90"
-                    }`}
+                    className={`max-w-[85%] rounded-xl border px-3 py-2 text-xs leading-relaxed ${message.role === "user"
+                      ? "border-accent/30 bg-accent/10 text-foreground"
+                      : "border-border/80 bg-card text-foreground/90"
+                      }`}
                   >
                     {message.text}
                   </div>
