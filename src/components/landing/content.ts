@@ -15,15 +15,17 @@ import {
   Instagram,
   Send,
   Plug,
+  Phone,
+  PhoneCall,
   type LucideIcon,
 } from "lucide-react";
 
 import imgIaConversacionalGif from "@/assets/gif/ia conversacional.gif";
 import imgCualificacionLeadsGif from "@/assets/gif/Cualificación de Leads.gif";
-import imgAutomatizacionGif from "@/assets/gif/automatizacion de procesos.gif";
 import imgCRMGif from "@/assets/gif/Integración con CRM.gif";
 import imgWorkflowGif from "@/assets/gif/workflow.gif";
 import imgAgendamientoAutomaticoGif from "@/assets/gif/agendamiento automatico.gif";
+import imgVoicebots from "@/assets/voicebots.png";
 
 export type Servicio = {
   icon: LucideIcon;
@@ -45,12 +47,12 @@ export const servicios: Servicio[] = [
     image: imgIaConversacionalGif,
   },
   {
-    icon: Workflow,
-    titulo: "Automatización de Procesos",
+    icon: PhoneCall,
+    titulo: "Voicebots (Agentes de Voz)",
     descripcion:
-      "Eliminamos tareas repetitivas y errores humanos, liberando a tu equipo para que se enfoque exclusivamente en cerrar ventas de alto valor.",
-    beneficio: "Recupera hasta 20 h/semana de tiempo productivo.",
-    image: imgAutomatizacionGif,
+      "Asistentes de voz ultrarrealistas que realizan y reciben llamadas telefónicas. Atienden objeciones, califican y agendan como un operador humano.",
+    beneficio: "Atiende llamadas entrantes sin tiempo de espera 24/7.",
+    image: imgVoicebots,
   },
   {
     icon: Filter,
@@ -129,9 +131,9 @@ export const beneficios = [
   {
     titulo: "Cero tareas repetitivas",
     descripcion:
-      "La IA gestiona captación, seguimiento y agenda. Tu equipo solo interviene cuando hay una venta que cerrar.",
-    metrica: "20h",
-    metricaLabel: "Ahorradas por semana",
+      "La IA asume toda la carga operativa. Elimina errores humanos y reduce costes estructurales masivamente.",
+    metrica: "3.000€",
+    metricaLabel: "Ahorro por trabajador",
   },
   {
     titulo: "Operativo las 24 horas",
@@ -141,9 +143,9 @@ export const beneficios = [
     metricaLabel: "Sin interrupciones",
   },
   {
-    titulo: "Integración omnicanal",
+    titulo: "Integración omnicanal total",
     descripcion:
-      "Web, WhatsApp, Instagram, Telegram o tu CRM interno vía API. Un ecosistema conectado y coherente.",
+      "Teléfono, Web, WhatsApp, Instagram, Telegram o tu CRM interno vía API. Un ecosistema de texto y voz conectado y coherente.",
     metrica: "5+",
     metricaLabel: "Canales integrados",
   },
@@ -152,10 +154,10 @@ export const beneficios = [
 import { WhatsAppIcon, InstagramIcon, TelegramIcon } from "./BrandIcons";
 
 export const canales = [
+  { label: "Teléfono", icon: Phone, descripcion: "Llamadas de voz IA" },
   { label: "Web", icon: Globe, descripcion: "Chat en tu sitio web" },
   { label: "WhatsApp", icon: WhatsAppIcon, descripcion: "El canal más usado" },
   { label: "Instagram", icon: InstagramIcon, descripcion: "DMs automatizados" },
-  { label: "Telegram", icon: TelegramIcon, descripcion: "Bots y notificaciones" },
   { label: "API", icon: Plug, descripcion: "Integra cualquier sistema" },
 ];
 

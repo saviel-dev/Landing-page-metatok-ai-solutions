@@ -72,10 +72,20 @@ function buildActions(): ActionItem[] {
 
 export function FloatingActionsMenu() {
   const [open, setOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const actions = buildActions();
 
   const close = useCallback(() => setOpen(false), []);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const customEvent = e as CustomEvent<boolean>;
+      setMobileMenuOpen(customEvent.detail);
+    };
+    window.addEventListener("metatok:mobile-menu", handler);
+    return () => window.removeEventListener("metatok:mobile-menu", handler);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -98,7 +108,12 @@ export function FloatingActionsMenu() {
   }, [open, close]);
 
   return (
-    <div ref={rootRef} className="fixed bottom-5 right-5 z-[90] flex flex-col items-end gap-2.5 md:bottom-8 md:right-8">
+    <div
+      ref={rootRef}
+      className={`fixed bottom-5 right-5 z-[90] flex-col items-end gap-2.5 md:bottom-8 md:right-8 ${
+        mobileMenuOpen ? "hidden md:flex" : "flex"
+      }`}
+    >
       <AnimatePresence>
         {open && (
           <motion.ul

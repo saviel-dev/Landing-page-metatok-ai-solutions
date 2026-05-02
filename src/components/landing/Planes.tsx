@@ -15,7 +15,7 @@ const planes = [
   {
     name: "Starter",
     tagline: "Ideal para equipos pequeños que quieren empezar con IA sin riesgo.",
-    price: { mensual: "79", trimestral: "199", anual: "679" },
+    price: { mensual: "99", trimestral: "199", anual: "679" },
     features: [
       "1 canal integrado (Web o WhatsApp)",
       "Asistente IA básico con NLP",
@@ -183,12 +183,6 @@ export function Planes() {
 
               {/* Precio con animación al cambiar */}
               <div className="mt-4 flex items-baseline gap-0.5">
-                <span className={[
-                  "text-xl font-bold",
-                  plan.highlighted ? "text-primary-foreground/80" : "text-primary/80",
-                ].join(" ")}>
-                  €
-                </span>
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={billing + plan.name}
@@ -204,6 +198,12 @@ export function Planes() {
                     {plan.price[billing]}
                   </motion.span>
                 </AnimatePresence>
+                <span className={[
+                  "text-xl font-bold",
+                  plan.highlighted ? "text-primary-foreground/80" : "text-primary/80",
+                ].join(" ")}>
+                  €
+                </span>
                 <span className={[
                   "mb-1 ml-1 text-sm font-medium",
                   plan.highlighted ? "text-primary-foreground/70" : "text-muted-foreground",

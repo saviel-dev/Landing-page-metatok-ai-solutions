@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import logoMiniExtended from "@/assets/logo mini extended.png";
+import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -74,9 +74,11 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    window.dispatchEvent(new CustomEvent("metatok:mobile-menu", { detail: open }));
     if (!open) setOpenGroup(null);
     return () => {
       document.body.style.overflow = "";
+      window.dispatchEvent(new CustomEvent("metatok:mobile-menu", { detail: false }));
     };
   }, [open]);
 
@@ -97,7 +99,7 @@ export function Header() {
         <div className="container-mt flex items-center justify-between h-14 md:h-16">
           <a href="/#inicio" className="flex items-center group" aria-label="Metatok inicio">
             <img
-              src={logoMiniExtended}
+              src={logo}
               alt="MetaTok"
               className="h-5 md:h-8 w-auto"
               loading="eager"
@@ -118,6 +120,12 @@ export function Header() {
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
+            <a
+              href="https://app.metatok.ai/"
+              className={linkClass}
+            >
+              Iniciar sesión
+            </a>
             <button
               type="button"
               onClick={toggle}
@@ -200,7 +208,7 @@ export function Header() {
       >
         <div className="flex items-center justify-between px-5 h-14 border-b border-border shrink-0">
           <a href="/#inicio" onClick={() => setOpen(false)} className="flex items-center" aria-label="Metatok inicio">
-            <img src={logoMiniExtended} alt="MetaTok" className="h-5 w-auto" />
+            <img src={logo} alt="MetaTok" className="h-8 w-auto" />
           </a>
           <button
             type="button"
@@ -312,7 +320,14 @@ export function Header() {
           </a>
         </nav>
 
-        <div className="px-4 py-6 shrink-0 border-t border-border">
+        <div className="px-4 py-6 shrink-0 border-t border-border flex flex-col gap-3">
+          <Button
+            asChild
+            variant="outline"
+            className="w-full font-semibold"
+          >
+            <a href="https://app.metatok.ai/">Iniciar sesión</a>
+          </Button>
           <Button
             asChild
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold cta-glow"

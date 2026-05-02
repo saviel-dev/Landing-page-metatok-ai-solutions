@@ -1,14 +1,14 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowRight, ShieldCheck, Clock, Cpu, Zap, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeUp, stagger } from "./motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { AIBrainScene } from "./AIBrainScene";
 
 const metricas = [
-  { value: "+400%", label: "Tasa de respuesta" },
-  { value: "24/7", label: "Cierre automático" },
-  { value: "5 min", label: "Primer agente activo" },
+  { value: "100%", label: "Automatización total" },
+  { value: "3.000€", label: "Ahorro por trabajador" },
+  { value: "24/7", label: "Operación continua" },
 ];
 
 const trust = [
@@ -20,152 +20,135 @@ const trust = [
 
 const testimonial = {
   quote:
-    "Pasamos de 'contestar cuando podemos' a un departamento de ventas que no duerme. El cambio en citas fue inmediato.",
-  name: "Director Comercial",
-  company: "Grupo inmobiliario — Madrid",
+    "Automatizamos el soporte, ventas y cobros en menos de 30 días. El ahorro estructural fue inmediato.",
+  name: "Director de Operaciones",
+  company: "Grupo Empresarial — Madrid",
 };
 
 const liveEvents = [
-  { label: "Lead cualificado", value: "María R. · Score 94", dot: "bg-primary" },
-  { label: "Cita agendada", value: "Hoy · 16:30 ✓", dot: "bg-accent" },
-  { label: "CRM actualizado", value: "Salesforce · +1", dot: "bg-muted-foreground/50" },
-  { label: "Seguimiento IA", value: "WhatsApp · leído", dot: "bg-primary" },
+  { label: "Ticket resuelto", value: "Soporte · T-892", dot: "bg-accent" },
+  { label: "Factura procesada", value: "Contabilidad · #A-402", dot: "bg-emerald-500" },
+  { label: "Post publicado", value: "Instagram · Contenido", dot: "bg-pink-500" },
+  { label: "Lead cualificado", value: "Ventas · Score 94", dot: "bg-primary" },
 ];
 
-/* ─── 3D Floating Phone Mockup ──────────────────────────────────────────── */
-function PhoneMockup3D() {
+/* ─── 3D Floating Dashboard Mockup ──────────────────────────────────────────── */
+function SystemDashboard3D() {
   return (
     <motion.div
-      initial={{ opacity: 0, rotateY: -20, rotateX: 8 }}
-      animate={{ opacity: 1, rotateY: -8, rotateX: 6 }}
+      initial={{ opacity: 0, rotateY: -15, rotateX: 10 }}
+      animate={{ opacity: 1, rotateY: -5, rotateX: 5 }}
       transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="relative hidden lg:block"
       style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
     >
       <motion.div
-        animate={{ y: [0, -12, 0] }}
+        animate={{ y: [0, -10, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         style={{
           transformStyle: "preserve-3d",
-          transform: "rotateY(-12deg) rotateX(6deg)",
+          transform: "rotateY(-8deg) rotateX(4deg)",
         }}
         className="relative"
       >
-        {/* Phone frame */}
+        {/* Dashboard frame */}
         <div
-          className="relative w-[220px] rounded-[2rem] overflow-hidden"
+          className="relative w-[340px] rounded-2xl overflow-hidden"
           style={{
             background: "linear-gradient(160deg, var(--color-card), color-mix(in oklab, var(--color-card) 80%, var(--color-background)))",
             border: "1.5px solid var(--color-border)",
             boxShadow:
-              "0 0 0 1px var(--color-border), 0 40px 80px -20px color-mix(in oklab, var(--color-primary) 30%, transparent), 0 20px 40px -10px color-mix(in oklab, var(--color-foreground) 15%, transparent), inset 0 1px 0 color-mix(in oklab, white 8%, transparent)",
+              "0 0 0 1px var(--color-border), 0 40px 80px -20px color-mix(in oklab, var(--color-primary) 25%, transparent), 0 20px 40px -10px color-mix(in oklab, var(--color-foreground) 10%, transparent)",
           }}
         >
-          {/* Notch */}
-          <div className="flex justify-center pt-3 pb-2">
-            <div
-              className="w-20 h-5 rounded-full"
-              style={{ background: "var(--color-background)", border: "1px solid var(--color-border)" }}
-            />
+          {/* Top Bar */}
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/30">
+            <div className="flex gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+            </div>
+            <div className="ml-4 text-[10px] font-mono text-muted-foreground font-semibold tracking-wider">
+              METATOK // CORE_ENGINE
+            </div>
           </div>
 
           {/* Screen content */}
-          <div className="px-3 pb-4 space-y-2">
-            {/* Status bar */}
-            <div className="flex items-center justify-between px-1 mb-3">
-              <span className="text-[8px] font-bold text-primary">MetaTok</span>
-              <span className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                <span className="text-[8px] text-muted-foreground">En vivo</span>
-              </span>
-            </div>
-
-            {/* AI Agent card */}
-            <div
-              className="rounded-xl p-3"
-              style={{ background: "var(--color-muted)", border: "1px solid var(--color-border)" }}
-            >
-              <div className="flex items-center gap-2 mb-2">
+          <div className="p-4 space-y-4">
+            {/* Status row */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
                 <div
-                  className="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold text-white"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-primary/20"
                   style={{ background: "linear-gradient(135deg, var(--color-primary), var(--color-accent))" }}
                 >
-                  AI
+                  <Cpu className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="text-[9px] font-bold text-foreground">Agente MetaTok</p>
-                  <p className="text-[7px] text-muted-foreground">Procesando lead…</p>
+                  <p className="text-[11px] font-bold text-foreground">Red Neuronal Activa</p>
+                  <p className="text-[9px] text-muted-foreground">Procesando +10.000 operaciones/s</p>
                 </div>
               </div>
-
-              {/* Chat bubbles */}
-              <div className="space-y-1.5">
-                <div
-                  className="text-[8px] text-foreground rounded-lg rounded-tl-sm px-2.5 py-1.5 max-w-[80%]"
-                  style={{ background: "var(--color-background)", border: "1px solid var(--color-border)" }}
-                >
-                  ¡Hola! ¿Estás interesado en nuestra solución de CRM?
-                </div>
-                <div
-                  className="text-[8px] text-white font-medium rounded-lg rounded-tr-sm px-2.5 py-1.5 max-w-[75%] ml-auto"
-                  style={{ background: "var(--color-primary)" }}
-                >
-                  Sí, dime más 👋
-                </div>
-                <div
-                  className="text-[8px] text-foreground rounded-lg rounded-tl-sm px-2.5 py-1.5 max-w-[80%]"
-                  style={{ background: "var(--color-background)", border: "1px solid var(--color-border)" }}
-                >
-                  Perfecto. ¿Cuándo podemos agendar tu demo?
-                </div>
+              <div className="px-2.5 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 text-[9px] font-bold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                ONLINE
               </div>
             </div>
 
-            {/* Stats row */}
-            <div className="grid grid-cols-3 gap-1.5">
-              {[
-                { l: "Leads", v: "23" },
-                { l: "Calific.", v: "17" },
-                { l: "Citas", v: "8" },
-              ].map((s) => (
-                <div
-                  key={s.l}
-                  className="rounded-lg p-2 text-center"
-                  style={{ background: "var(--color-muted)", border: "1px solid var(--color-border)" }}
-                >
-                  <div className="text-[8px] text-muted-foreground">{s.l}</div>
-                  <div className="text-sm font-black text-foreground">{s.v}</div>
-                </div>
-              ))}
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-2 gap-2">
+              <div
+                className="rounded-xl p-3"
+                style={{ background: "var(--color-muted)", border: "1px solid var(--color-border)" }}
+              >
+                <div className="text-[9px] text-muted-foreground font-medium mb-1">Ahorro Generado</div>
+                <div className="text-lg font-black text-foreground">€14.500</div>
+                <div className="text-[8px] text-emerald-500 mt-0.5">+3.000€ este mes</div>
+              </div>
+              <div
+                className="rounded-xl p-3"
+                style={{ background: "var(--color-muted)", border: "1px solid var(--color-border)" }}
+              >
+                <div className="text-[9px] text-muted-foreground font-medium mb-1">Automatización</div>
+                <div className="text-lg font-black text-foreground">100%</div>
+                <div className="text-[8px] text-primary mt-0.5">Sin intervención humana</div>
+              </div>
             </div>
 
-            {/* Score badge */}
+            {/* Server Logs / Activity */}
             <div
-              className="rounded-xl p-2.5 flex items-center justify-between"
-              style={{
-                background: "color-mix(in oklab, var(--color-primary) 10%, var(--color-card))",
-                border: "1px solid color-mix(in oklab, var(--color-primary) 30%, transparent)",
-              }}
+              className="rounded-xl p-3 space-y-2 font-mono text-[9px]"
+              style={{ background: "var(--color-background)", border: "1px solid var(--color-border)" }}
             >
-              <span className="text-[9px] font-semibold text-foreground/80">Score del lead</span>
-              <span className="text-sm font-black text-primary">94%</span>
+              <div className="text-muted-foreground/80 flex justify-between">
+                <span>[SYS] Sincronizando CRM...</span>
+                <span className="text-emerald-500">OK</span>
+              </div>
+              <div className="text-muted-foreground/80 flex justify-between">
+                <span>[VOZ] Llamada saliente #4092</span>
+                <span className="text-emerald-500">CONECTADO</span>
+              </div>
+              <div className="text-foreground flex justify-between">
+                <span>[SALES] Lead cualificado Score 98</span>
+                <span className="text-primary font-bold">CERRADO</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Phone shadow */}
+        {/* Dashboard shadow */}
         <div
           aria-hidden
-          className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-32 h-8 rounded-full blur-xl opacity-40 pointer-events-none"
+          className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-8 rounded-full blur-xl opacity-30 pointer-events-none"
           style={{ background: "var(--color-primary)" }}
         />
       </motion.div>
 
       {/* Floating badge — notifications */}
       <motion.div
-        animate={{ y: [0, -8, 0], rotate: [-2, 2, -2] }}
+        animate={{ y: [0, -8, 0], rotate: [-1, 1, -1] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute -right-12 top-12 rounded-xl px-3 py-2 text-xs font-semibold shadow-lg z-20"
+        className="absolute -right-6 top-8 rounded-xl px-3 py-2 text-xs font-semibold shadow-lg z-20"
         style={{
           background: "var(--color-card)",
           border: "1px solid color-mix(in oklab, var(--color-primary) 40%, transparent)",
@@ -174,29 +157,60 @@ function PhoneMockup3D() {
         }}
       >
         <div className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-          <span>Lead · Score 94</span>
+          <Zap className="h-3 w-3 text-primary" />
+          <span>Máximo Rendimiento</span>
         </div>
       </motion.div>
 
       {/* Floating badge — cita */}
       <motion.div
-        animate={{ y: [0, 8, 0], rotate: [2, -2, 2] }}
+        animate={{ y: [0, 8, 0], rotate: [1, -1, 1] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        className="absolute -left-10 bottom-20 rounded-xl px-3 py-2 text-xs font-semibold shadow-lg z-20"
+        className="absolute -left-8 bottom-12 rounded-xl px-3 py-2 text-xs font-semibold shadow-lg z-20"
         style={{
           background: "var(--color-card)",
-          border: "1px solid color-mix(in oklab, var(--color-accent) 40%, transparent)",
-          boxShadow: "0 0 20px -5px color-mix(in oklab, var(--color-accent) 30%, transparent)",
+          border: "1px solid color-mix(in oklab, var(--color-emerald) 40%, transparent)",
+          boxShadow: "0 0 20px -5px color-mix(in oklab, var(--color-emerald) 30%, transparent)",
           color: "var(--color-foreground)",
         }}
       >
         <div className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-          <span>Cita agendada ✓</span>
+          <ShieldCheck className="h-3 w-3 text-emerald-500" />
+          <span>Infraestructura Segura</span>
         </div>
       </motion.div>
     </motion.div>
+  );
+}
+
+function RotatingDepartments() {
+  const deps = ["Ventas", "Soporte", "Contabilidad", "Contenido", "PR"];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % deps.length);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <span className="relative inline-flex flex-col justify-end h-[1.1em] min-w-[150px] sm:min-w-[190px] md:min-w-[240px] lg:min-w-[280px] overflow-hidden align-bottom">
+      <AnimatePresence mode="popLayout">
+        <motion.span
+          key={index}
+          initial={{ y: 40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -40, opacity: 0 }}
+          transition={{ duration: 0.5, ease: "anticipate" }}
+          className="absolute left-0 bottom-0 bg-gradient-to-r from-primary via-[oklch(0.62_0.24_280)] to-accent bg-clip-text text-transparent pb-1"
+        >
+          {deps[index]}
+        </motion.span>
+      </AnimatePresence>
+      {/* Invisible spacer to maintain layout */}
+      <span className="invisible pb-1">Contabilidad</span>
+    </span>
   );
 }
 
@@ -273,8 +287,10 @@ export function Hero() {
             variants={fadeUp}
             className="mt-4 text-4xl md:text-5xl lg:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.05]"
           >
-            Tu Departamento de Ventas,{" "}
-            <span className="relative inline-block">
+            Tu equipo de{" "}
+            <RotatingDepartments />
+            <br className="hidden sm:block" />
+            <span className="relative inline-block mt-2 sm:mt-0">
               <span className="bg-gradient-to-r from-primary via-[oklch(0.62_0.24_280)] to-accent bg-clip-text text-transparent">
                 en Piloto Automático
               </span>
@@ -292,9 +308,13 @@ export function Hero() {
             className="mt-4 text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed"
           >
             No es un chatbot. Es un ecosistema de{" "}
-            <span className="text-foreground font-semibold">Agentes Autónomos</span> que prospectan,
-            califican y cierran ventas por ti{" "}
-            <span className="text-primary font-semibold">24/7</span> en WhatsApp, Instagram y Web.
+            <span className="text-foreground font-semibold">Agentes Autónomos</span> que gestionan{" "}
+            <span className="font-medium text-foreground">ventas, soporte, contabilidad, contenido y PR</span>{" "}
+            por ti <span className="text-primary font-semibold">24/7</span> en{" "}
+            <span className="font-semibold text-emerald-500">WhatsApp</span>,{" "}
+            <span className="font-semibold text-blue-500">Llamadas de Voz</span>,{" "}
+            <span className="font-semibold text-pink-500">Instagram</span> y{" "}
+            <span className="font-semibold text-amber-500">Web</span>.
           </motion.p>
 
           {/* Quote lateral */}
@@ -303,7 +323,7 @@ export function Hero() {
             className="mt-3 text-sm text-muted-foreground/70 max-w-lg leading-relaxed pl-4 italic"
             style={{ borderLeft: "2px solid color-mix(in oklab, var(--color-primary) 60%, transparent)" }}
           >
-            MetaTok: la única IA que no solo genera leads, sino que empuja el cierre.
+            MetaTok: Automatiza tu negocio de extremo a extremo y ahorra más de 3.000€ por cada trabajador.
           </motion.p>
 
           {/* CTAs */}
@@ -378,8 +398,8 @@ export function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          {/* Phone 3D */}
-          <PhoneMockup3D />
+          {/* Dashboard 3D */}
+          <SystemDashboard3D />
 
           {/* Panel actividad — desktop secundario, mobile principal */}
           <div className="flex flex-col gap-4 flex-1 max-w-sm">
@@ -419,9 +439,9 @@ export function Hero() {
 
               <div className="mt-3 grid grid-cols-3 gap-2">
                 {[
-                  { l: "Leads hoy", v: "23" },
-                  { l: "Cualificados", v: "17" },
-                  { l: "Citas", v: "8" },
+                  { l: "Tareas/hora", v: "142" },
+                  { l: "Dptos. Activos", v: "5" },
+                  { l: "Ahorro/mes", v: "€3k+" },
                 ].map((s) => (
                   <div
                     key={s.l}

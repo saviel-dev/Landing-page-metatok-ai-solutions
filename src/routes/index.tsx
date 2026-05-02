@@ -42,7 +42,7 @@ const faqJsonLd = {
 const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  serviceType: "Automatización con IA y cualificación de leads",
+  serviceType: "Automatización Empresarial con Inteligencia Artificial Total",
   provider: { "@type": "Organization", name: "Metatok" },
   areaServed: "Worldwide",
   hasOfferCatalog: {
@@ -57,26 +57,6 @@ const serviceJsonLd = {
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      {
-        title:
-          "MetaTok — Tu departamento de ventas en piloto automático con IA",
-      },
-      {
-        name: "description",
-        content:
-          "Ecosistema de agentes autónomos: prospectan, cualifican y cierran en WhatsApp, Instagram y Web. API abierta a cualquier CRM, multilingüe y listo para escala.",
-      },
-      {
-        property: "og:title",
-        content: "MetaTok — Agentes de venta con IA, 24/7",
-      },
-      {
-        property: "og:description",
-        content:
-          "No es un chatbot. Es un motor de conversión omnicanal con cierre autónomo y datos accionables.",
-      },
-    ],
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(faqJsonLd) },
       { type: "application/ld+json", children: JSON.stringify(serviceJsonLd) },

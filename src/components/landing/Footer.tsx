@@ -79,12 +79,20 @@ export function Footer() {
               Transforma tu tráfico en ingresos hoy mismo.
             </p>
           </div>
-          <a
-            href="/#contacto"
-            className="inline-flex shrink-0 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:bg-primary/90 cta-glow transition-colors"
-          >
-            Hablar con el equipo
-          </a>
+          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+            <a
+              href="https://app.metatok.ai/"
+              className="inline-flex items-center justify-center rounded-lg border border-input bg-background px-5 py-2.5 text-sm font-bold text-foreground hover:bg-accent hover:text-accent-foreground transition-colors w-full sm:w-auto"
+            >
+              Iniciar sesión
+            </a>
+            <a
+              href="/#contacto"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:bg-primary/90 cta-glow transition-colors w-full sm:w-auto"
+            >
+              Hablar con el equipo
+            </a>
+          </div>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import logoMiniExtended from "@/assets/logo mini extended.png";
+import logo from "@/assets/logo.png";
 
 /**
  * PageReveal — Animación de entrada tipo "split curtain".
@@ -84,9 +84,9 @@ export function PageReveal() {
               className="flex flex-col items-center gap-3"
             >
               <img
-                src={logoMiniExtended}
+                src={logo}
                 alt="MetaTok"
-                className="h-9 w-auto"
+                className="h-14 md:h-16 w-auto"
                 draggable={false}
               />
               {/* Barra de progreso elegante */}
