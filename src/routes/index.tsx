@@ -23,6 +23,7 @@ import { Contacto } from "@/components/landing/Contacto";
 import { Footer } from "@/components/landing/Footer";
 import { FloatingActionsMenu } from "@/components/landing/FloatingActionsMenu";
 import { LiveDemoWidget } from "@/components/landing/LiveDemoWidget";
+import { PageReveal } from "@/components/landing/PageReveal";
 import { Toaster }       from "@/components/ui/sonner";
 import { faqs, servicios } from "@/components/landing/content";
 
@@ -90,6 +91,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="relative isolate min-h-screen bg-background text-foreground">
+      <PageReveal />
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden"

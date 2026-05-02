@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import logoMini from "@/assets/logo mini.png";
+import logoMiniExtended from "@/assets/logo mini extended.png";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -95,18 +95,13 @@ export function Header() {
         }`}
       >
         <div className="container-mt flex items-center justify-between h-14 md:h-16">
-          <a href="/#inicio" className="flex items-center gap-2 group" aria-label="Metatok inicio">
+          <a href="/#inicio" className="flex items-center group" aria-label="Metatok inicio">
             <img
-              src={logoMini}
-              alt="Logo Metatok"
-              className="h-8 w-8"
-              width={32}
-              height={32}
+              src={logoMiniExtended}
+              alt="MetaTok"
+              className="h-5 md:h-8 w-auto"
               loading="eager"
             />
-            <span className="text-lg md:text-xl font-extrabold tracking-tight text-foreground">
-              etatok
-            </span>
           </a>
 
           <nav className="hidden md:flex items-center gap-5 lg:gap-6" aria-label="Navegación principal">
@@ -204,11 +199,8 @@ export function Header() {
         ].join(" ")}
       >
         <div className="flex items-center justify-between px-5 h-14 border-b border-border shrink-0">
-          <a href="/#inicio" onClick={() => setOpen(false)} className="flex items-center gap-2" aria-label="Metatok inicio">
-            <img src={logoMini} alt="Logo Metatok" className="h-7 w-7" width={28} height={28} />
-            <span className="text-lg font-extrabold tracking-tight text-foreground">
-              etatok
-            </span>
+          <a href="/#inicio" onClick={() => setOpen(false)} className="flex items-center" aria-label="Metatok inicio">
+            <img src={logoMiniExtended} alt="MetaTok" className="h-5 w-auto" />
           </a>
           <button
             type="button"
