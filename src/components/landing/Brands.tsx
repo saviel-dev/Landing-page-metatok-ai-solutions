@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { fadeUp, viewportOnce } from "./motion";
+import { useLang } from "@/i18n/LangContext";
 
 import imgHeineken from "@/assets/brands/Heineken.png";
 import imgLatam from "@/assets/brands/LATAM Airlines.png";
@@ -21,6 +22,7 @@ const brands = [
 const marqueeBrands = [...brands, ...brands, ...brands];
 
 export function Brands() {
+  const { t } = useLang();
   return (
     <section className="py-7 md:py-8 border-b border-border bg-[var(--color-surface)] overflow-hidden">
       <div className="container-mt mb-5 text-center">
@@ -31,8 +33,7 @@ export function Brands() {
           variants={fadeUp}
           className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/70"
         >
-          Sistemas robustos preparados para facturación masiva. Seguridad de grado bancario para tus
-          datos.
+          {t.brands.line}
         </motion.p>
       </div>
 

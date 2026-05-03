@@ -10,7 +10,8 @@ import {
   Store,
 } from "lucide-react";
 import { fadeUp, stagger, viewportOnce } from "./motion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useLang } from "@/i18n/LangContext";
 
 /* ─── Typing Dots ────────────────────────────────────────────────────────── */
 function TypingDotsWL() {
@@ -28,20 +29,22 @@ function TypingDotsWL() {
   );
 }
 
-/* ─── Chat script ────────────────────────────────────────────────────────── */
-const WL_CHAT_STEPS = [
-  { from: "bot",  text: "Hola, soy el asesor de TuMarca. ¿En qué te ayudo? 👋",      typingMs: 1200, showAt: 0     },
-  { from: "user", text: "Quiero una propuesta para esta semana.",                      typingMs: 900,  showAt: 2600  },
-  { from: "bot",  text: "¡Perfecto! ¿Prefieres reunión por videollamada o presencial?", typingMs: 1300, showAt: 4700  },
-  { from: "user", text: "Videollamada, any day ✅",                                     typingMs: 800,  showAt: 7400  },
-  { from: "bot",  text: "Agendado para mañana 10:30. Te mando confirmación 📅",         typingMs: 1400, showAt: 9800  },
-  { from: "user", text: "Genial, muchas gracias 🙌",                                   typingMs: 700,  showAt: 13000 },
-  { from: "bot",  text: "¡Hasta mañana! Cualquier duda, aquí estoy 🚀",               typingMs: 1200, showAt: 15000 },
+/* ─── Chat script (textos vía i18n; tiempos fijos) ─────────────────────────── */
+const WL_TIMINGS = [
+  { typingMs: 1200, showAt: 0 },
+  { typingMs: 900, showAt: 2600 },
+  { typingMs: 1300, showAt: 4700 },
+  { typingMs: 800, showAt: 7400 },
+  { typingMs: 1400, showAt: 9800 },
+  { typingMs: 700, showAt: 13000 },
+  { typingMs: 1200, showAt: 15000 },
 ] as const;
 
 const WL_CYCLE_MS = 20000;
 
-function LiveChatWL() {
+type ChatStep = { from: "bot" | "user"; text: string; typingMs: number; showAt: number };
+
+function LiveChatWL({ steps }: { steps: readonly ChatStep[] }) {
   const [visibleCount, setVisibleCount] = useState(0);
   const [typingFor, setTypingFor] = useState<"bot" | "user" | null>(null);
 
@@ -50,7 +53,7 @@ function LiveChatWL() {
     function runCycle() {
       setVisibleCount(0);
       setTypingFor(null);
-      WL_CHAT_STEPS.forEach((step, idx) => {
+      steps.forEach((step, idx) => {
         timers.push(setTimeout(() => setTypingFor(step.from as "bot" | "user"), step.showAt));
         timers.push(setTimeout(() => { setVisibleCount(idx + 1); setTypingFor(null); }, step.showAt + step.typingMs));
       });
@@ -59,11 +62,11 @@ function LiveChatWL() {
     const start = setTimeout(runCycle, 600);
     timers.push(start);
     return () => timers.forEach(clearTimeout);
-  }, []);
+  }, [steps]);
 
   return (
     <div className="flex flex-col gap-1.5 overflow-hidden">
-      {WL_CHAT_STEPS.slice(0, visibleCount).map((step, idx) => (
+      {steps.slice(0, visibleCount).map((step, idx) => (
         <motion.div
           key={idx}
           initial={{ opacity: 0, y: 5, scale: 0.97 }}
@@ -106,37 +109,7 @@ function LiveChatWL() {
   );
 }
 
-const bullets = [
-  "Identidad corporativa integral: marca, tonalidad visual y naming alineados a tu negocio.",
-  "Distribucion profesional en App Store y Google Play, o canal privado corporativo cuando lo necesites.",
-  "Misma capa cognitiva MetaTok dentro de tu app: agentes que venden, cualifican y agendan 24/7.",
-  "Paneles analiticos y reporting bajo tu white label para medir funnel y equipo comercial.",
-  "Roadmaps y actualizaciones coordinadas sin que tu marca pierda el control narrativo ante el cliente.",
-  "Opciones Enterprise: SLAs, privacidad (RGPD) y gobernanza de datos coherentes con tu compliance.",
-];
-
-const highlights = [
-  {
-    icon: Palette,
-    title: "Branding completo",
-    text: "UI, tono, iconografia y experiencia coherente con tu marca.",
-  },
-  {
-    icon: Store,
-    title: "Publicacion oficial",
-    text: "Despliegue en App Store y Google Play o distribucion privada enterprise.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Cumplimiento enterprise",
-    text: "RGPD, controles de acceso y trazabilidad para operacion segura.",
-  },
-  {
-    icon: Globe,
-    title: "Escala multinicho",
-    text: "Una base tecnica para multiples verticales sin rehacer producto.",
-  },
-];
+const highlightIcons = [Palette, Store, ShieldCheck, Globe] as const;
 
 const bulletEase = [0.22, 1, 0.36, 1] as const;
 const bulletTransition = (index: number): Transition => ({
@@ -147,6 +120,19 @@ const bulletTransition = (index: number): Transition => ({
 
 export function EliteSolutions() {
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useLang();
+  const e = t.eliteSolutions;
+  const highlights = e.highlights.map((h, i) => ({ ...h, icon: highlightIcons[i]! }));
+  const chatSteps: ChatStep[] = useMemo(
+    () =>
+      e.chatSteps.map((s, i) => ({
+        from: s.from,
+        text: s.text,
+        typingMs: WL_TIMINGS[i]!.typingMs,
+        showAt: WL_TIMINGS[i]!.showAt,
+      })),
+    [e.chatSteps],
+  );
 
   return (
     <section
@@ -190,25 +176,24 @@ export function EliteSolutions() {
           whileInView="show"
           viewport={viewportOnce}
           variants={stagger}
-          className="mx-auto mb-12 max-w-3xl text-center md:mb-14"
+          className="mx-auto mb-6 max-w-3xl text-center md:mb-8"
         >
           <motion.span
             variants={fadeUp}
             className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary"
           >
             <Smartphone className="h-3.5 w-3.5" aria-hidden />
-            Producto
+            {e.kicker}
           </motion.span>
           <motion.h2
             id="producto-heading"
             variants={fadeUp}
             className="mt-4 text-3xl font-black tracking-tight text-foreground md:text-5xl"
           >
-            Tu app, tu marca, nuestra tecnologia
+            {e.heading}
           </motion.h2>
-          <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Convertimos MetaTok en un producto white label listo para venta: experiencia nativa,
-            arquitectura de conversion y operacion comercial bajo tu identidad.
+          <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            {e.sub}
           </motion.p>
         </motion.div>
 
@@ -217,11 +202,11 @@ export function EliteSolutions() {
           whileInView="show"
           viewport={viewportOnce}
           variants={stagger}
-          className="grid gap-6 md:grid-cols-2 xl:grid-cols-4"
+          className="grid gap-4 md:gap-6 md:grid-cols-2 xl:grid-cols-4"
         >
-          {highlights.map((item) => (
+          {highlights.map((item, hi) => (
             <motion.article
-              key={item.title}
+              key={`elite-highlight-${hi}`}
               variants={fadeUp}
               className="group rounded-2xl border border-border/80 bg-card/60 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/45"
             >
@@ -239,7 +224,7 @@ export function EliteSolutions() {
           whileInView="show"
           viewport={viewportOnce}
           variants={stagger}
-          className="mt-10 grid items-stretch gap-7 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10"
+          className="mt-6 grid items-stretch gap-6 md:mt-8 md:gap-7 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10"
         >
           <motion.div
             variants={fadeUp}
@@ -251,17 +236,16 @@ export function EliteSolutions() {
                 <Smartphone className="h-6 w-6" aria-hidden />
               </div>
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--luxury-gold)]">
-                Tu marca, nuestra potencia
+                {e.panelKicker}
               </p>
               <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                Creamos tu aplicacion nativa con el motor de MetaTok integrado. Tu controlas marca,
-                narrativa comercial y pricing; nosotros aceleramos la capa tecnica y la conversion.
+                {e.panelText}
               </p>
 
               <ul className="mt-7 space-y-3.5" aria-label="Incluye en white label y apps">
-                {bullets.map((text, i) => (
+                {e.bullets.map((text, i) => (
                   <motion.li
-                    key={text}
+                    key={`elite-wl-bullet-${i}`}
                     className="flex gap-3 text-sm leading-relaxed text-foreground/90"
                     initial={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -299,25 +283,25 @@ export function EliteSolutions() {
 
                     <div className="px-4 pt-2">
                       <div className="rounded-2xl border border-primary/25 bg-primary/10 p-3">
-                        <p className="text-[10px] uppercase tracking-[0.18em] text-primary">White Label</p>
-                        <p className="mt-1 text-sm font-bold text-foreground">TuMarca Assistant</p>
-                        <p className="mt-1 text-[11px] text-muted-foreground">Lead cualificado en 43s</p>
+                        <p className="text-[10px] uppercase tracking-[0.18em] text-primary">{e.phoneBadge}</p>
+                        <p className="mt-1 text-sm font-bold text-foreground">{e.phoneTitle}</p>
+                        <p className="mt-1 text-[11px] text-muted-foreground">{e.phoneSub}</p>
                       </div>
                     </div>
 
                     {/* Live chat area */}
                     <div className="space-y-2 px-3 pb-4 pt-3" style={{ minHeight: "160px" }}>
-                      <LiveChatWL />
+                      <LiveChatWL steps={chatSteps} />
                     </div>
                   </div>
                 </div>
               </motion.div>
 
               <div className="pointer-events-none absolute -right-5 top-10 rounded-xl border border-border bg-card/90 px-3 py-2 text-xs text-foreground shadow-lg backdrop-blur">
-                <p className="font-semibold">+31% demo bookings</p>
+                <p className="font-semibold">{e.float1}</p>
               </div>
               <div className="pointer-events-none absolute -left-4 bottom-10 rounded-xl border border-border bg-card/90 px-3 py-2 text-xs text-foreground shadow-lg backdrop-blur">
-                <p className="font-semibold">Marca 100% personalizada</p>
+                <p className="font-semibold">{e.float2}</p>
               </div>
             </motion.div>
           </motion.div>
@@ -334,14 +318,14 @@ export function EliteSolutions() {
             href="#contacto"
             className="cta-glow inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground"
           >
-            Quiero mi app white label
+            {e.cta}
             <ArrowUpRight className="h-4 w-4" aria-hidden />
           </a>
           <a
             href="#planes"
             className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/45 hover:text-primary"
           >
-            Ver opciones enterprise
+            {e.secondaryCta}
             <ShieldCheck className="h-4 w-4" aria-hidden />
           </a>
         </motion.div>

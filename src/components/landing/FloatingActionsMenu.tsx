@@ -3,6 +3,7 @@ import type { ComponentType } from "react";
 import { ClipboardCheck, Mail, MessageSquare, Plus, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { getWhatsappAgentHref } from "@/lib/whatsapp";
+import { useLang } from "@/i18n/LangContext";
 
 function IconWhatsApp({ className }: { className?: string }) {
   return (
@@ -26,55 +27,54 @@ type ActionItem = {
   bgClass: string;
 };
 
-/** De arriba a abajo al desplegar: live demo → auditoría → WhatsApp → contacto. */
-function buildActions(): ActionItem[] {
-  const wa = getWhatsappAgentHref();
-  const waExternal = !wa.startsWith("/") && !wa.startsWith("#");
-  return [
-    {
-      id: "live-demo",
-      label: "Live Demo",
-      href: "#",
-      onSelect: () => {
-        window.dispatchEvent(new CustomEvent("metatok:open-live-demo"));
-      },
-      icon: MessageSquare,
-      iconClass: "text-primary-foreground",
-      bgClass: "bg-primary hover:bg-primary/90",
-    },
-    {
-      id: "auditoria",
-      label: "Auditoría gratis",
-      href: "/#auditoria",
-      icon: ClipboardCheck,
-      iconClass: "text-foreground",
-      bgClass: "bg-card border border-border hover:bg-muted",
-    },
-    {
-      id: "whatsapp",
-      label: "WhatsApp",
-      href: wa,
-      external: waExternal,
-      icon: IconWhatsApp,
-      iconClass: "text-white",
-      bgClass: "bg-[#25D366] hover:bg-[#20bd5a]",
-    },
-    {
-      id: "contacto",
-      label: "Contacto",
-      href: "/#contacto",
-      icon: Mail,
-      iconClass: "text-primary-foreground",
-      bgClass: "bg-primary hover:bg-primary/90",
-    },
-  ];
-}
-
 export function FloatingActionsMenu() {
+  const { t } = useLang();
+  const fl = t.floating;
   const [open, setOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
-  const actions = buildActions();
+  const actions: ActionItem[] = (() => {
+    const wa = getWhatsappAgentHref();
+    const waExternal = !wa.startsWith("/") && !wa.startsWith("#");
+    return [
+      {
+        id: "live-demo",
+        label: fl.liveDemo,
+        href: "#",
+        onSelect: () => {
+          window.dispatchEvent(new CustomEvent("metatok:open-live-demo"));
+        },
+        icon: MessageSquare,
+        iconClass: "text-primary-foreground",
+        bgClass: "bg-primary hover:bg-primary/90",
+      },
+      {
+        id: "auditoria",
+        label: fl.auditoria,
+        href: "/#auditoria",
+        icon: ClipboardCheck,
+        iconClass: "text-foreground",
+        bgClass: "bg-card border border-border hover:bg-muted",
+      },
+      {
+        id: "whatsapp",
+        label: fl.whatsapp,
+        href: wa,
+        external: waExternal,
+        icon: IconWhatsApp,
+        iconClass: "text-white",
+        bgClass: "bg-[#25D366] hover:bg-[#20bd5a]",
+      },
+      {
+        id: "contacto",
+        label: fl.contacto,
+        href: "/#contacto",
+        icon: Mail,
+        iconClass: "text-primary-foreground",
+        bgClass: "bg-primary hover:bg-primary/90",
+      },
+    ];
+  })();
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -119,7 +119,7 @@ export function FloatingActionsMenu() {
           <motion.ul
             className="m-0 flex list-none flex-col items-end gap-2.5 p-0"
             role="menu"
-            aria-label="Acciones de contacto"
+            aria-label={fl.menuAria}
             initial={{ opacity: 0, y: 14, scale: 0.96 }}
             animate={{
               opacity: 1,
@@ -187,7 +187,7 @@ export function FloatingActionsMenu() {
         className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--luxury-gold)] dark:shadow-black/50 cta-glow"
         aria-expanded={open}
         aria-haspopup="menu"
-        aria-label={open ? "Cerrar menú de contacto" : "Abrir menú de contacto"}
+        aria-label={open ? fl.closeMenu : fl.openMenu}
       >
         {open ? <X className="h-7 w-7" aria-hidden /> : <Plus className="h-7 w-7" aria-hidden />}
       </button>

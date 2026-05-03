@@ -1,9 +1,12 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { fadeUp, stagger, viewportOnce } from "./motion";
-import { testimonios } from "./content";
+import { useLang } from "@/i18n/LangContext";
 
 export function Testimonios() {
+  const { t } = useLang();
+  const ts = t.testimoniosSection;
+  const testimonios = ts.items;
   return (
     <section
       id="testimonios"
@@ -23,18 +26,18 @@ export function Testimonios() {
             variants={fadeUp}
             className="text-xs uppercase tracking-widest text-primary font-semibold"
           >
-            Historias de Éxito
+            {ts.kicker}
           </motion.span>
           <motion.h2
             id="testimonios-heading"
             variants={fadeUp}
             className="mt-3 text-2xl md:text-3xl font-bold text-foreground tracking-tight"
           >
-            Casos reales de negocios que ya <span className="text-primary">escalaron su captación</span>
+            {ts.title}
+            <span className="text-primary">{ts.titleAccent}</span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-2 text-base text-muted-foreground leading-snug">
-            Resultados comprobados por líderes en sus respectivos sectores tras
-            integrar los agentes IA de Metatok en su operación.
+            {ts.subtitle}
           </motion.p>
         </motion.div>
 
@@ -46,22 +49,22 @@ export function Testimonios() {
           variants={stagger}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
         >
-          {testimonios.map((t, index) => (
+          {testimonios.map((item, index) => (
             <motion.div
               key={index}
               variants={fadeUp}
               className="rounded-xl border border-border bg-card p-5 shadow-sm flex flex-col justify-between card-hover cursor-default"
             >
               <div>
-                <h4 className="text-base font-bold text-primary">{t.nombre}</h4>
-                <p className="text-xs font-medium text-muted-foreground mb-2.5">{t.cargo}</p>
+                <h4 className="text-base font-bold text-primary">{item.nombre}</h4>
+                <p className="text-xs font-medium text-muted-foreground mb-2.5">{item.cargo}</p>
                 <div className="flex gap-1 mb-3">
-                  {[...Array(t.rating)].map((_, i) => (
+                  {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
                 <p className="text-xs text-foreground/90 leading-relaxed font-medium">
-                  {t.texto}
+                  {item.texto}
                 </p>
               </div>
             </motion.div>

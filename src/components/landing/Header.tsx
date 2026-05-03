@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
+import { Check, ChevronDown, Menu, Moon, Sun, X, Globe } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
@@ -10,25 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "@/hooks/useTheme";
-
-const navTop = [{ href: "/#inicio", label: "Inicio" }] as const;
-
-const navSolucion = [
-  { href: "/#problema", label: "El problema" },
-  { href: "/#motor-metatok", label: "Motor MetaTok" },
-  { href: "/#servicios", label: "Servicios" },
-  { href: "/#comparativa", label: "Vs. chatbots" },
-  { href: "/#producto-white-label", label: "App & white label" },
-] as const;
-
-const navExplorar = [
-  { href: "/#sectores", label: "Sectores" },
-  { href: "/#planes", label: "Precios" },
-  { href: "/#faq", label: "FAQ" },
-] as const;
-
-const navContacto = { href: "/#contacto", label: "Contacto" } as const;
-
+import { useLang } from "@/i18n/LangContext";
 
 
 function NavDropdown({
@@ -63,7 +45,23 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<"solucion" | "explorar" | null>(null);
-  const { theme, toggle } = useTheme();
+  const { theme, toggle: toggleTheme } = useTheme();
+  const { lang, t, setLang } = useLang();
+
+  const navTop = [{ href: "/#inicio", label: t.nav.inicio }];
+  const navSolucion = [
+    { href: "/#problema", label: t.nav.items.problema },
+    { href: "/#motor-metatok", label: t.nav.items.motor },
+    { href: "/#servicios", label: t.nav.items.servicios },
+    { href: "/#comparativa", label: t.nav.items.comparativa },
+    { href: "/#producto-white-label", label: t.nav.items.whitelabel },
+  ];
+  const navExplorar = [
+    { href: "/#sectores", label: t.nav.items.sectores },
+    { href: "/#planes", label: t.nav.items.precios },
+    { href: "/#faq", label: t.nav.items.faq },
+  ];
+  const navContacto = { href: "/#contacto", label: t.nav.contacto };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -112,8 +110,8 @@ export function Header() {
                 {item.label}
               </a>
             ))}
-            <NavDropdown label="Solución" items={navSolucion} scrolled={scrolled} />
-            <NavDropdown label="Explorar" items={navExplorar} scrolled={scrolled} />
+            <NavDropdown label={t.nav.solucion} items={navSolucion} scrolled={scrolled} />
+            <NavDropdown label={t.nav.explorar} items={navExplorar} scrolled={scrolled} />
             <a href={navContacto.href} className={linkClass}>
               {navContacto.label}
             </a>
@@ -124,11 +122,41 @@ export function Header() {
               href="https://app.metatok.ai/"
               className={linkClass}
             >
-              Iniciar sesión
+              {t.nav.login}
             </a>
+            <DropdownMenu modal={false}>
+              <DropdownMenuTrigger
+                type="button"
+                aria-label={t.ui.switchLang}
+                className="inline-flex items-center justify-center gap-1.5 h-9 px-2.5 rounded-md border border-border text-muted-foreground hover:bg-card hover:text-foreground transition-colors text-xs font-bold uppercase outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                <Globe className="h-4 w-4 shrink-0" aria-hidden />
+                {lang}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="min-w-[10.5rem]">
+                <DropdownMenuItem
+                  className="cursor-pointer gap-2"
+                  onSelect={() => setLang("es")}
+                >
+                  <span className="flex w-4 justify-center">
+                    {lang === "es" ? <Check className="h-4 w-4" aria-hidden /> : null}
+                  </span>
+                  {t.ui.langSpanish}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="cursor-pointer gap-2"
+                  onSelect={() => setLang("en")}
+                >
+                  <span className="flex w-4 justify-center">
+                    {lang === "en" ? <Check className="h-4 w-4" aria-hidden /> : null}
+                  </span>
+                  {t.ui.langEnglish}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <button
               type="button"
-              onClick={toggle}
+              onClick={toggleTheme}
               aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
               className="inline-flex items-center justify-center h-9 w-9 rounded-md border border-border text-muted-foreground hover:bg-card hover:text-foreground transition-colors"
             >
@@ -138,14 +166,46 @@ export function Header() {
               asChild
               className="bg-primary text-primary-foreground hover:bg-primary/90 cta-glow font-semibold"
             >
-              <a href="/#contacto">Desplegar agente</a>
+              <a href="/#contacto">{t.nav.cta}</a>
             </Button>
           </div>
 
           <div className="md:hidden flex items-center gap-2">
+            <div
+              role="group"
+              aria-label={t.ui.switchLang}
+              className="flex h-10 shrink-0 overflow-hidden rounded-md border border-border"
+            >
+              <button
+                type="button"
+                onClick={() => setLang("es")}
+                aria-pressed={lang === "es"}
+                className={[
+                  "min-w-[2.25rem] px-2 text-[11px] font-bold uppercase transition-colors",
+                  lang === "es"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-background text-muted-foreground hover:bg-muted hover:text-foreground",
+                ].join(" ")}
+              >
+                ES
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang("en")}
+                aria-pressed={lang === "en"}
+                className={[
+                  "min-w-[2.25rem] px-2 text-[11px] font-bold uppercase transition-colors border-l border-border",
+                  lang === "en"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-background text-muted-foreground hover:bg-muted hover:text-foreground",
+                ].join(" ")}
+              >
+                EN
+              </button>
+            </div>
             <button
               type="button"
-              onClick={toggle}
+              onClick={toggleTheme}
               aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
               className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-border text-foreground hover:bg-card transition-colors"
             >
@@ -226,7 +286,7 @@ export function Header() {
             onClick={() => setOpen(false)}
             className="px-3 py-3.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-background/60 rounded-lg transition-colors border-b border-border/50"
           >
-            Inicio
+            {t.nav.inicio}
           </a>
 
           <div className="border-b border-border/50">
@@ -236,7 +296,7 @@ export function Header() {
               aria-expanded={openGroup === "solucion"}
               className={mobileGroupSummary}
             >
-              Solución
+              {t.nav.solucion}
               <ChevronDown
                 className={[
                   "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
@@ -277,7 +337,7 @@ export function Header() {
               aria-expanded={openGroup === "explorar"}
               className={mobileGroupSummary}
             >
-              Explorar
+              {t.nav.explorar}
               <ChevronDown
                 className={[
                   "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
@@ -326,14 +386,14 @@ export function Header() {
             variant="outline"
             className="w-full font-semibold"
           >
-            <a href="https://app.metatok.ai/">Iniciar sesión</a>
+            <a href="https://app.metatok.ai/">{t.nav.login}</a>
           </Button>
           <Button
             asChild
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold cta-glow"
             onClick={() => setOpen(false)}
           >
-            <a href="/#contacto">Desplegar agente</a>
+            <a href="/#contacto">{t.nav.cta}</a>
           </Button>
         </div>
       </aside>

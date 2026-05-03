@@ -1,36 +1,12 @@
 import { motion } from "framer-motion";
 import { Check, X, Sparkles } from "lucide-react";
 import { fadeUp, stagger, viewportOnce } from "./motion";
-
-const features = [
-  {
-    name: "Calidad de Respuesta",
-    old: "Estática y basada en botones (Árbol de decisiones)",
-    new: "Fluida, humana y persuasiva (IA Generativa)",
-  },
-  {
-    name: "Integración",
-    old: "Limitada o requiere Zapier complejo",
-    new: "Nativa con CRMs, Apps y Sector Público",
-  },
-  {
-    name: "Objetivo Principal",
-    old: "Dar información y derivar a un humano",
-    new: "Superar objeciones y cerrar la venta o cita",
-  },
-  {
-    name: "Configuración",
-    old: "Meses mapeando flujos interminables",
-    new: "En minutos, entrenado con tus propios documentos",
-  },
-  {
-    name: "Soporte",
-    old: "Sistema de tickets básico",
-    new: "Equipo de éxito dedicado y optimización continua",
-  },
-];
+import { useLang } from "@/i18n/LangContext";
 
 export function ComparativaMetaTok() {
+  const { t } = useLang();
+  const c = t.comparativa;
+  const features = c.features;
   return (
     <section
       id="comparativa"
@@ -63,18 +39,18 @@ export function ComparativaMetaTok() {
         >
           <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-widest mb-6 shadow-[0_0_20px_-5px_var(--color-primary)]">
             <Sparkles className="h-3.5 w-3.5" />
-            La Decisión
+            {c.pill}
           </motion.div>
           <motion.h2
             id="comparativa-heading"
             variants={fadeUp}
             className="text-4xl md:text-5xl font-black text-foreground tracking-tight leading-tight"
           >
-            MetaTok vs.{" "}
-            <span className="text-muted-foreground/60">chatbots tradicionales</span>
+            {c.title}
+            <span className="text-muted-foreground/60">{c.titleMuted}</span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Un árbol de decisiones aburrido frente a una IA generativa orientada a conversión. La diferencia entre perder un lead y cerrar una venta.
+            {c.subtitle}
           </motion.p>
         </motion.div>
 
@@ -89,17 +65,17 @@ export function ComparativaMetaTok() {
           {/* Header Row */}
           <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1.5fr] gap-4 mb-4 items-end hidden md:grid px-6">
             <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider pb-4">
-              Característica
+              {c.colFeature}
             </div>
             <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider pb-4 text-center">
-              Bot Tradicional
+              {c.colOld}
             </div>
             <div className="relative">
               {/* Highlight Background Header */}
               <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-primary/5 border-t border-x border-primary/20 rounded-t-2xl" />
               <div className="relative flex justify-center py-4">
                 <span className="inline-flex items-center justify-center rounded-full border border-primary/40 bg-primary/20 px-4 py-1.5 text-sm font-black uppercase tracking-widest text-primary shadow-[0_0_15px_var(--color-primary)]">
-                  MetaTok AI
+                  {c.colNew}
                 </span>
               </div>
             </div>
@@ -110,7 +86,7 @@ export function ComparativaMetaTok() {
             {features.map((row, index) => (
               <motion.div
                 variants={fadeUp}
-                key={row.name}
+                key={`comparativa-row-${index}`}
                 className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1.5fr] gap-0 md:gap-4 items-center group relative"
               >
                 {/* Mobile Header (Hidden on Desktop) */}
@@ -125,7 +101,7 @@ export function ComparativaMetaTok() {
 
                 {/* Tradicional Column */}
                 <div className="bg-card border border-border/50 md:rounded-2xl p-5 md:p-6 h-full flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-4 text-muted-foreground text-sm transition-colors group-hover:border-border group-hover:bg-muted/30 z-10 mx-4 md:mx-0 rounded-t-2xl md:rounded-t-none">
-                  <div className="md:hidden text-xs font-bold uppercase tracking-wider text-muted-foreground">Bot Tradicional</div>
+                  <div className="md:hidden text-xs font-bold uppercase tracking-wider text-muted-foreground">{c.colOld}</div>
                   <div className="flex items-center gap-3 w-full">
                     <div className="shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-destructive/10 text-destructive">
                       <X className="w-4 h-4" strokeWidth={3} />
@@ -149,7 +125,7 @@ export function ComparativaMetaTok() {
                     <div className="hidden md:block absolute bottom-0 left-0 right-0 h-4 border-b border-x border-primary/20 rounded-b-2xl pointer-events-none" />
                   )}
 
-                  <div className="md:hidden text-xs font-black text-primary uppercase tracking-wider relative">MetaTok AI</div>
+                  <div className="md:hidden text-xs font-black text-primary uppercase tracking-wider relative">{c.colNew}</div>
                   <div className="flex items-center gap-3 relative w-full">
                     <div className="relative shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-accent text-accent-foreground shadow-[0_0_10px_var(--color-accent)] group-hover/mt:scale-110 transition-transform">
                       <Check className="w-4 h-4" strokeWidth={3} />

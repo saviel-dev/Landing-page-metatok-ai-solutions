@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useLang } from "@/i18n/LangContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bot, MessageSquare, MessageSquarePlus, Send, Sparkles, User, X } from "lucide-react";
 import { getWhatsappAgentHref } from "@/lib/whatsapp";
@@ -6,49 +7,48 @@ import { getWhatsappAgentHref } from "@/lib/whatsapp";
 type ChatRole = "bot" | "user";
 type ChatMessage = { id: string; role: ChatRole; text: string };
 
-const initialMessages: ChatMessage[] = [
-  {
-    id: "m1",
-    role: "bot",
-    text: "Hola, soy el agente de demo de MetaTok. Te muestro como podrias convertir mas leads en tu negocio.",
+function getBotReply(
+  input: string,
+  replies: {
+    inmobiliaria: string;
+    clinica: string;
+    hotel: string;
+    crm: string;
+    precio: string;
+    default: string;
   },
-  {
-    id: "m2",
-    role: "bot",
-    text: "Cuentame tu sector y tu reto principal (ej: respuestas tardias, agenda vacia, leads frios).",
-  },
-];
-
-const quickActions = [
-  "Soy de inmobiliaria",
-  "Tengo una clinica",
-  "Quiero mas reservas en hotel",
-  "Necesito integrar con CRM",
-];
-
-function getBotReply(input: string): string {
+): string {
   const text = input.toLowerCase();
-  if (text.includes("inmobili")) {
-    return "Perfecto. En inmobiliaria solemos reducir el tiempo de respuesta y subir visitas agendadas con cualificacion automatica por zona y presupuesto.";
+  if (text.includes("inmobili") || text.includes("real estate") || text.includes("estate")) {
+    return replies.inmobiliaria;
   }
-  if (text.includes("clin") || text.includes("salud")) {
-    return "En clinicas activamos agenda 24/7 con recordatorios inteligentes. El objetivo es bajar ausencias y aumentar citas efectivas.";
+  if (text.includes("clin") || text.includes("salud") || text.includes("health")) {
+    return replies.clinica;
   }
-  if (text.includes("hotel") || text.includes("reserva")) {
-    return "Para hoteles, MetaTok atiende disponibilidad en tiempo real, impulsa reserva directa y automatiza upsell pre-estadia.";
+  if (text.includes("hotel") || text.includes("reserva") || text.includes("booking")) {
+    return replies.hotel;
   }
   if (text.includes("crm") || text.includes("hubspot") || text.includes("salesforce")) {
-    return "Nos integramos por API con CRM para sincronizar conversaciones, estados y proximas acciones del equipo comercial.";
+    return replies.crm;
   }
-  if (text.includes("precio") || text.includes("coste")) {
-    return "El coste depende de canales, integraciones y volumen. Si quieres, te preparo una estimacion rapida en una auditoria sin compromiso.";
+  if (text.includes("precio") || text.includes("coste") || text.includes("cost") || text.includes("price")) {
+    return replies.precio;
   }
-  return "Entendido. Con MetaTok podemos automatizar respuesta, cualificacion y seguimiento para llevar al lead hasta cita o venta en menos tiempo.";
+  return replies.default;
 }
 
 export function LiveDemoWidget() {
+  const { t } = useLang();
+  const ld = t.liveDemo;
+  const initialMessages = useMemo<ChatMessage[]>(
+    () => [
+      { id: "m1", role: "bot", text: ld.initial1 },
+      { id: "m2", role: "bot", text: ld.initial2 },
+    ],
+    [ld.initial1, ld.initial2],
+  );
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const whatsappHref = useMemo(() => getWhatsappAgentHref(), []);
@@ -58,6 +58,12 @@ export function LiveDemoWidget() {
     setInput("");
     setIsTyping(false);
   }
+
+  useEffect(() => {
+    setMessages(initialMessages);
+    setInput("");
+    setIsTyping(false);
+  }, [initialMessages]);
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -85,7 +91,7 @@ export function LiveDemoWidget() {
       const botMsg: ChatMessage = {
         id: `b-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
         role: "bot",
-        text: getBotReply(value),
+        text: getBotReply(value, ld.replies),
       };
       setMessages((prev) => [...prev, botMsg]);
       setIsTyping(false);
@@ -106,7 +112,7 @@ export function LiveDemoWidget() {
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.2 }}
             className="w-[min(92vw,370px)] flex flex-col max-h-[calc(100vh-140px)] overflow-hidden rounded-2xl border border-border/80 bg-card/95 shadow-[0_24px_70px_-30px_var(--color-primary)] backdrop-blur-md"
-            aria-label="Live demo de MetaTok"
+            aria-label={ld.aria}
           >
             <div className="shrink-0 flex items-center justify-between border-b border-border/70 bg-background/70 px-4 py-3">
               <div className="flex items-center gap-2">
@@ -114,8 +120,8 @@ export function LiveDemoWidget() {
                   <Sparkles className="h-4 w-4" aria-hidden />
                 </span>
                 <div>
-                  <p className="text-sm font-bold text-foreground">Live Demo MetaTok</p>
-                  <p className="text-[11px] text-muted-foreground">Agente de ventas en tiempo real</p>
+                  <p className="text-sm font-bold text-foreground">{ld.title}</p>
+                  <p className="text-[11px] text-muted-foreground">{ld.subtitle}</p>
                 </div>
               </div>
               <div className="flex items-center gap-1.5">
@@ -123,8 +129,8 @@ export function LiveDemoWidget() {
                   type="button"
                   onClick={resetChat}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
-                  aria-label="Nuevo chat"
-                  title="Nuevo chat"
+                  aria-label={ld.newChat}
+                  title={ld.newChat}
                 >
                   <MessageSquarePlus className="h-4 w-4" aria-hidden />
                 </button>
@@ -132,7 +138,7 @@ export function LiveDemoWidget() {
                   type="button"
                   onClick={() => setOpen(false)}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
-                  aria-label="Cerrar demo"
+                  aria-label={ld.close}
                 >
                   <X className="h-4 w-4" aria-hidden />
                 </button>
@@ -193,9 +199,9 @@ export function LiveDemoWidget() {
 
             <div className="shrink-0 border-t border-border/70 bg-card/80 p-3">
               <div className="mb-2 flex gap-2 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                {quickActions.map((action) => (
+                {ld.quick.map((action, ai) => (
                   <button
-                    key={action}
+                    key={`demo-quick-${ai}`}
                     type="button"
                     onClick={() => sendMessage(action)}
                     className="shrink-0 whitespace-nowrap rounded-full border border-border bg-background/70 px-3 py-1.5 text-[11px] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
@@ -212,14 +218,14 @@ export function LiveDemoWidget() {
                   onKeyDown={(e) => {
                     if (e.key === "Enter") sendMessage(input);
                   }}
-                  placeholder="Escribe tu consulta..."
+                  placeholder={ld.placeholder}
                   className="h-10 flex-1 rounded-lg border border-border bg-background/75 px-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary/45"
                 />
                 <button
                   type="button"
                   onClick={() => sendMessage(input)}
                   className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-all hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
-                  aria-label="Enviar mensaje"
+                  aria-label={ld.send}
                   disabled={isTyping}
                 >
                   <Send className={`h-4 w-4 ${isTyping ? "animate-pulse" : ""}`} aria-hidden />
@@ -231,7 +237,7 @@ export function LiveDemoWidget() {
                 className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-primary transition-colors hover:text-accent"
               >
                 <MessageSquare className="h-3.5 w-3.5" aria-hidden />
-                Hablar con agente real por WhatsApp
+                {ld.wa}
               </a>
             </div>
           </motion.aside>

@@ -1,24 +1,13 @@
 import { motion } from "framer-motion";
 import { ArrowRight, XCircle, CheckCircle2, Zap } from "lucide-react";
 import { fadeUp, stagger, viewportOnce } from "./motion";
-
-const situacionActual = [
-  "Leads que no reciben respuesta en menos de 5 minutos",
-  "Tu equipo pierde horas en prospectos que nunca comprarán",
-  "Citas que se pierden por falta de seguimiento",
-  "CRM desactualizado con datos duplicados o incompletos",
-  "Sin presencia activa fuera del horario comercial",
-];
-
-const conMetatok = [
-  "Respuesta inmediata a cada lead, 24/7, en todos tus canales",
-  "Solo hablas con prospectos listos para comprar",
-  "Agendamiento automático con confirmación y recordatorios",
-  "CRM actualizado en tiempo real, sin intervención humana",
-  "Tu negocio capta y cualifica incluso mientras duermes",
-];
+import { useLang } from "@/i18n/LangContext";
 
 export function DiagnosticoCTA() {
+  const { t } = useLang();
+  const d = t.diagnosticoCTA;
+  const situacionActual = d.situacionActual;
+  const conMetatok = d.conMetatok;
   return (
     <section
       id="diagnostico"
@@ -46,22 +35,22 @@ export function DiagnosticoCTA() {
           className="max-w-3xl mx-auto text-center mb-12"
         >
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-primary font-semibold">
-            Antes y después
+            {d.kicker}
           </motion.span>
           <motion.h2
             id="diagnostico-heading"
             variants={fadeUp}
             className="mt-3 text-3xl md:text-4xl font-black text-foreground tracking-tight"
           >
-            ¿Reconoces la situación{" "}
+            {d.title}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              de tu negocio hoy?
+              {d.titleAccent}
             </span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-4 text-muted-foreground text-base leading-relaxed">
-            La mayoría de negocios pierde entre un{" "}
-            <span className="text-foreground font-semibold">40% y un 60%</span> de sus leads por
-            falta de respuesta rápida y seguimiento sistemático.
+            {d.subtitleLead}
+            <span className="text-foreground font-semibold">{d.subtitleBold}</span>
+            {d.subtitleEnd}
           </motion.p>
         </motion.div>
 
@@ -92,15 +81,15 @@ export function DiagnosticoCTA() {
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-destructive/60">
-                  Situación actual
+                  {d.colLeftBadge}
                 </p>
-                <h3 className="text-base font-bold text-foreground">Sin automatización</h3>
+                <h3 className="text-base font-bold text-foreground">{d.colLeftTitle}</h3>
               </div>
             </div>
             <ul className="relative space-y-3">
               {situacionActual.map((item, i) => (
                 <motion.li
-                  key={item}
+                  key={`diag-actual-${i}`}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={viewportOnce}
@@ -134,15 +123,15 @@ export function DiagnosticoCTA() {
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-primary/70">
-                  Con Metatok
+                  {d.colRightBadge}
                 </p>
-                <h3 className="text-base font-bold text-foreground">Automatización activa</h3>
+                <h3 className="text-base font-bold text-foreground">{d.colRightTitle}</h3>
               </div>
             </div>
             <ul className="relative space-y-3">
               {conMetatok.map((item, i) => (
                 <motion.li
-                  key={item}
+                  key={`diag-con-${i}`}
                   initial={{ opacity: 0, x: 10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={viewportOnce}
@@ -171,12 +160,10 @@ export function DiagnosticoCTA() {
           >
             <span className="absolute inset-0 bg-gradient-to-r from-primary via-[oklch(0.55_0.23_280)] to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <Zap className="relative h-5 w-5" aria-hidden />
-            <span className="relative">Deja de perder leads: auditoría gratuita en 24 h</span>
+            <span className="relative">{d.cta}</span>
             <ArrowRight className="relative h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
-          <p className="mt-4 text-xs text-muted-foreground">
-            Sin compromiso · Sin permanencia · Respuesta en menos de 24 h
-          </p>
+          <p className="mt-4 text-xs text-muted-foreground">{d.footnote}</p>
         </motion.div>
       </div>
     </section>

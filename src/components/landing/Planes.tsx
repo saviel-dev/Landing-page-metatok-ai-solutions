@@ -2,70 +2,19 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Star, ArrowRight, Zap, Shield } from "lucide-react";
 import { fadeUp, stagger, viewportOnce } from "./motion";
+import { useLang } from "@/i18n/LangContext";
 
 type BillingCycle = "mensual" | "trimestral" | "anual";
 
-const billingConfig = {
-  mensual:     { label: "Mensual",     suffix: "/mes",        savingLabel: null },
-  trimestral:  { label: "Trimestral",  suffix: "/trimestre",  savingLabel: "Ahorra ~16%" },
-  anual:       { label: "Anual",       suffix: "/año",        savingLabel: "Ahorra ~29%" },
-};
-
-const planes = [
-  {
-    name: "Starter",
-    tagline: "Ideal para equipos pequeños que quieren empezar con IA sin riesgo.",
-    price: { mensual: "99", trimestral: "199", anual: "679" },
-    features: [
-      "1 canal integrado (Web o WhatsApp)",
-      "Asistente IA básico con NLP",
-      "Hasta 500 conversaciones/mes",
-      "Panel de control básico",
-      "Cualificación automática de leads",
-      "Soporte por email",
-    ],
-    highlighted: false,
-    cta: "Iniciar ahora",
-    href: "#contacto",
-  },
-  {
-    name: "Business",
-    tagline: "Para empresas que quieren automatización total y no perder un solo lead.",
-    price: { mensual: "239", trimestral: "629", anual: "2.149" },
-    features: [
-      "Hasta 3 canales integrados",
-      "Chatbots y voicebots premium",
-      "Seguimiento y scoring automático",
-      "Integración CRM bidireccional",
-      "Agendamiento automático con recordatorios",
-      "Flow-works inteligentes",
-      "Panel de analítica avanzada",
-      "Soporte prioritario 24/5",
-    ],
-    highlighted: true,
-    cta: "Escalar mis ventas",
-    href: "#contacto",
-  },
-  {
-    name: "Enterprise",
-    tagline: "Solución avanzada con canales ilimitados y acompañamiento personalizado.",
-    price: { mensual: "590", trimestral: "1.589", anual: "5.399" },
-    features: [
-      "Canales ilimitados",
-      "Flujos y bots completamente a medida",
-      "Integraciones API avanzadas",
-      "Gestor de cuenta dedicado 1:1",
-      "SLA de disponibilidad garantizado",
-      "Onboarding personalizado",
-      "Soporte técnico especializado 24/7",
-    ],
-    highlighted: false,
-    cta: "Solicitar propuesta",
-    href: "#contacto",
-  },
-];
-
 export function Planes() {
+  const { t } = useLang();
+  const p = t.planesSection;
+  const billingConfig = p.billing;
+  const planes = p.planes.map((plan, i) => ({
+    ...plan,
+    highlighted: i === 1,
+    href: "#contacto" as const,
+  }));
   const [billing, setBilling] = useState<BillingCycle>("mensual");
 
   return (
@@ -84,18 +33,18 @@ export function Planes() {
           className="mx-auto max-w-2xl text-center"
         >
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-primary font-semibold">
-            Planes y Precios
+            {p.kicker}
           </motion.span>
           <motion.h2
             id="planes-heading"
             variants={fadeUp}
             className="mt-2 text-2xl md:text-3xl font-bold text-foreground tracking-tight"
           >
-            Invierte en resultados,{" "}
-            <span className="text-primary">no en horas extra</span>
+            {p.title}
+            <span className="text-primary">{p.titleAccent}</span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-2 text-muted-foreground text-base">
-            Sin permanencia. Sin costes ocultos. Solo escala cuando lo necesites.
+            {p.subtitle}
           </motion.p>
         </motion.div>
 
@@ -128,14 +77,14 @@ export function Planes() {
                 )}
                 <span className="relative z-10 flex items-center gap-1.5">
                   {billingConfig[key].label}
-                  {billingConfig[key].savingLabel && (
+                  {billingConfig[key].saving && (
                     <span className={[
                       "hidden sm:inline text-[10px] font-semibold px-1.5 py-0.5 rounded-full",
                       billing === key
                         ? "bg-primary-foreground/20 text-primary-foreground"
                         : "bg-primary/10 text-primary",
                     ].join(" ")}>
-                      {billingConfig[key].savingLabel}
+                      {billingConfig[key].saving}
                     </span>
                   )}
                 </span>
@@ -152,9 +101,9 @@ export function Planes() {
           variants={stagger}
           className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-5 items-center"
         >
-          {planes.map((plan) => (
+          {planes.map((plan, pi) => (
             <motion.div
-              key={plan.name}
+              key={`plan-card-${pi}`}
               variants={fadeUp}
               className={[
                 "relative flex flex-col rounded-2xl p-5 transition-all duration-300 group",
@@ -168,7 +117,7 @@ export function Planes() {
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-primary uppercase tracking-widest shadow-lg">
                     <Star className="h-3 w-3 fill-primary" />
-                    Más Popular
+                    {p.popular}
                   </span>
                 </div>
               )}
@@ -185,7 +134,7 @@ export function Planes() {
               <div className="mt-4 flex items-baseline gap-0.5">
                 <AnimatePresence mode="wait">
                   <motion.span
-                    key={billing + plan.name}
+                    key={`${pi}-${billing}`}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -228,8 +177,8 @@ export function Planes() {
 
               {/* Features */}
               <ul className="flex flex-col gap-2 flex-1">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-sm">
+                {plan.features.map((f, fi) => (
+                  <li key={`plan-${pi}-feat-${fi}`} className="flex items-start gap-3 text-sm">
                     <span className={[
                       "mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
                       plan.highlighted ? "bg-primary-foreground/20" : "bg-primary/10",
@@ -272,14 +221,12 @@ export function Planes() {
           variants={fadeUp}
           className="mt-6 text-center space-y-1.5"
         >
-          <p className="text-xs text-muted-foreground">
-            Todos los planes incluyen acceso a la plataforma Metatok. Sin permanencia ni costes ocultos.
-          </p>
+          <p className="text-xs text-muted-foreground">{p.foot1}</p>
           <p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5">
             <Shield className="h-3.5 w-3.5 text-accent" aria-hidden />
-            ¿Necesitas algo específico?{" "}
+            {p.foot2Lead}{" "}
             <a href="#contacto" className="text-primary hover:underline font-medium">
-              Hablamos de un plan a medida →
+              {p.foot2Link}
             </a>
           </p>
         </motion.div>

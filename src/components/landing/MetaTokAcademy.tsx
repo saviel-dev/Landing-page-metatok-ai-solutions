@@ -10,26 +10,17 @@ import {
   Rocket,
 } from "lucide-react";
 import { fadeUp, stagger, viewportOnce } from "./motion";
+import { useLang } from "@/i18n/LangContext";
 
-const tracks = [
-  {
-    icon: BookOpenCheck,
-    title: "Playbooks comerciales",
-    text: "Guiones, objeciones y secuencias listas para aplicar en campo.",
-  },
-  {
-    icon: Megaphone,
-    title: "Marketing de guerrilla",
-    text: "Campanas, contenido y posicionamiento para acelerar captacion.",
-  },
-  {
-    icon: Rocket,
-    title: "Escalado operativo",
-    text: "Rituales y metricas para crecer sin perder conversion ni calidad.",
-  },
-];
+const trackIcons = [BookOpenCheck, Megaphone, Rocket] as const;
 
 export function MetaTokAcademy() {
+  const { t } = useLang();
+  const m = t.metaTokAcademy;
+  const tracks = m.tracks.map((tr, i) => ({
+    ...tr,
+    icon: trackIcons[i]!,
+  }));
   return (
     <section
       id="academy"
@@ -74,11 +65,10 @@ export function MetaTokAcademy() {
             variants={fadeUp}
             className="mt-4 text-3xl font-black tracking-tight text-foreground md:text-5xl"
           >
-            Formacion para vender mejor y liderar tu categoria
+            {m.heading}
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            No solo entregamos software. Entregamos metodologia comercial, acompanamiento y
-            entrenamiento continuo para convertir tu marca en referencia de mercado.
+            {m.sub}
           </motion.p>
         </motion.div>
 
@@ -89,9 +79,9 @@ export function MetaTokAcademy() {
           variants={stagger}
           className="mb-8 grid gap-5 md:grid-cols-3 md:gap-6"
         >
-          {tracks.map((track) => (
+          {tracks.map((track, ti) => (
             <motion.article
-              key={track.title}
+              key={`academy-track-${ti}`}
               variants={fadeUp}
               className="group rounded-2xl border border-border/80 bg-card/60 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/45"
             >
@@ -114,29 +104,22 @@ export function MetaTokAcademy() {
           >
             <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10" />
             <motion.p variants={fadeUp} className="relative text-sm font-semibold uppercase tracking-[0.15em] text-[var(--luxury-gold)]">
-              Ruta de acompanamiento
+              {m.card1Label}
             </motion.p>
             <motion.h3 variants={fadeUp} className="relative mt-3 text-2xl font-black text-foreground">
-              Del onboarding al cierre repetible
+              {m.card1Title}
             </motion.h3>
             <motion.p variants={fadeUp} className="relative mt-3 text-sm leading-relaxed text-muted-foreground">
-              Sesiones en vivo, talleres tacticos y soporte de expertos para que tu equipo comercial
-              implemente rapido, mida mejor y escale su tasa de cierre de forma sostenible.
+              {m.card1Text}
             </motion.p>
 
             <motion.ul variants={fadeUp} className="relative mt-6 space-y-3.5 text-sm text-foreground/90">
-              <li className="flex gap-3 rounded-xl border border-border/70 bg-background/50 p-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
-                <span>Webinars semanales, certificaciones y guias por vertical para equipos de ventas.</span>
-              </li>
-              <li className="flex gap-3 rounded-xl border border-border/70 bg-background/50 p-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
-                <span>Framework de conversion con IA: prospeccion, cualificacion, objeciones y cierre.</span>
-              </li>
-              <li className="flex gap-3 rounded-xl border border-border/70 bg-background/50 p-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
-                <span>Mentoria en posicionamiento de marca para vender metodo, no solo tecnologia.</span>
-              </li>
+              {m.card1Bullets.map((line, li) => (
+                <li key={`academy-b1-${li}`} className="flex gap-3 rounded-xl border border-border/70 bg-background/50 p-3">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
+                  <span>{line}</span>
+                </li>
+              ))}
             </motion.ul>
           </motion.div>
 
@@ -154,35 +137,26 @@ export function MetaTokAcademy() {
             <div className="relative rounded-2xl border border-border/75 bg-background/80 p-4">
               <div className="mb-4 flex items-center justify-between">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
-                  Academy Dashboard
+                  {m.dashTitle}
                 </p>
                 <span className="rounded-full border border-primary/35 bg-primary/10 px-2 py-1 text-[10px] font-semibold text-primary">
-                  Cohorte activa
+                  {m.cohort}
                 </span>
               </div>
 
               <div className="space-y-3">
-                <div className="rounded-xl border border-border bg-card/60 p-3">
-                  <p className="text-xs text-muted-foreground">Modulo 01</p>
-                  <p className="mt-1 text-sm font-semibold text-foreground">Arquitectura comercial con IA</p>
-                  <div className="mt-2 h-1.5 rounded-full bg-border/70">
-                    <div className="h-1.5 w-[82%] rounded-full bg-gradient-to-r from-primary to-accent" />
+                {m.modules.map((mod, mi) => (
+                  <div key={`academy-mod-${mi}`} className="rounded-xl border border-border bg-card/60 p-3">
+                    <p className="text-xs text-muted-foreground">{mod.n}</p>
+                    <p className="mt-1 text-sm font-semibold text-foreground">{mod.t}</p>
+                    <div className="mt-2 h-1.5 rounded-full bg-border/70">
+                      <div
+                        className="h-1.5 rounded-full bg-gradient-to-r from-primary to-accent"
+                        style={{ width: `${mod.p}%` }}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="rounded-xl border border-border bg-card/60 p-3">
-                  <p className="text-xs text-muted-foreground">Modulo 02</p>
-                  <p className="mt-1 text-sm font-semibold text-foreground">Guiones de cierre por nicho</p>
-                  <div className="mt-2 h-1.5 rounded-full bg-border/70">
-                    <div className="h-1.5 w-[64%] rounded-full bg-gradient-to-r from-primary to-accent" />
-                  </div>
-                </div>
-                <div className="rounded-xl border border-border bg-card/60 p-3">
-                  <p className="text-xs text-muted-foreground">Modulo 03</p>
-                  <p className="mt-1 text-sm font-semibold text-foreground">Escalado y liderazgo de equipo</p>
-                  <div className="mt-2 h-1.5 rounded-full bg-border/70">
-                    <div className="h-1.5 w-[47%] rounded-full bg-gradient-to-r from-primary to-accent" />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -191,8 +165,8 @@ export function MetaTokAcademy() {
                 <Headphones className="h-5 w-5" aria-hidden />
               </span>
               <div>
-                <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">Soporte experto</p>
-                <p className="text-sm font-semibold text-foreground">Mentoria directa + playbooks accionables</p>
+                <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">{m.supportKicker}</p>
+                <p className="text-sm font-semibold text-foreground">{m.supportTitle}</p>
               </div>
             </div>
           </motion.div>
@@ -209,14 +183,14 @@ export function MetaTokAcademy() {
             href="#contacto"
             className="cta-glow inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground"
           >
-            Quiero entrar a MetaTok Academy
+            {m.ctaPrimary}
             <ArrowUpRight className="h-4 w-4" aria-hidden />
           </a>
           <a
             href="#planes"
             className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/45 hover:text-primary"
           >
-            Ver planes de acompanamiento
+            {m.ctaSecondary}
             <GraduationCap className="h-4 w-4" aria-hidden />
           </a>
         </motion.div>

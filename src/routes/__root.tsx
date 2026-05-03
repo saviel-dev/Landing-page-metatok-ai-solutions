@@ -1,5 +1,6 @@
 import { Outlet, Link, createRootRoute, HeadContent } from "@tanstack/react-router";
 
+import { LangProvider } from "@/i18n/LangContext";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -31,9 +32,9 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <>
+    <LangProvider>
       <HeadContent />
       <Outlet />
-    </>
+    </LangProvider>
   );
 }

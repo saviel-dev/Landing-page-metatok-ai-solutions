@@ -26,7 +26,6 @@ import { LiveDemoWidget } from "@/components/landing/LiveDemoWidget";
 import { PageReveal } from "@/components/landing/PageReveal";
 import { Toaster }       from "@/components/ui/sonner";
 import { faqs, servicios } from "@/components/landing/content";
-
 // JSON-LD: FAQPage construido a partir de las preguntas reales
 const faqJsonLd = {
   "@context": "https://schema.org",

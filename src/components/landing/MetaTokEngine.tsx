@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "./motion";
-import { Cpu, ShieldCheck, Zap, Database, Smartphone, Globe, MessageSquare } from "lucide-react";
+import { Cpu, ShieldCheck, Zap, Smartphone, Globe, MessageSquare } from "lucide-react";
+import { useLang } from "@/i18n/LangContext";
 
 export function MetaTokEngine() {
+  const { t } = useLang();
+  const m = t.metaTokEngine;
   return (
     <section
       id="motor-metatok"
@@ -41,20 +44,20 @@ export function MetaTokEngine() {
         >
           <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-widest mb-6">
             <Zap className="h-3.5 w-3.5" />
-            MetaTok Engine V5
+            {m.pill}
           </motion.div>
           <motion.h2
             id="engine-heading"
             variants={fadeUp}
             className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tight leading-tight"
           >
-            La Arquitectura detrás de la{" "}
+            {m.title}
             <span className="bg-gradient-to-r from-primary via-[#9b82ff] to-accent bg-clip-text text-transparent">
-              Conversión Autónoma
+              {m.titleAccent}
             </span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Descubre el motor cognitivo que no solo responde preguntas, sino que califica leads, supera objeciones y cierra ventas sin intervención humana.
+            {m.subtitle}
           </motion.p>
         </motion.div>
 
@@ -92,10 +95,8 @@ export function MetaTokEngine() {
             </div>
 
             <div className="relative z-10 flex-1 text-center md:text-left">
-              <h3 className="text-2xl font-black text-foreground mb-3">Procesamiento Cognitivo en Tiempo Real</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                El núcleo V5 analiza intención, sentimiento y contexto en milisegundos. Adapta el guion de ventas dinámicamente basándose en más de 10,000 interacciones previas.
-              </p>
+              <h3 className="text-2xl font-black text-foreground mb-3">{m.coreTitle}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{m.coreText}</p>
             </div>
           </motion.div>
 
@@ -116,10 +117,8 @@ export function MetaTokEngine() {
             </div>
 
             <div className="relative z-10">
-              <h3 className="text-xl font-bold text-foreground mb-2">Omnicanalidad Total</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                WhatsApp, Instagram y Web conectados a un único cerebro central.
-              </p>
+              <h3 className="text-xl font-bold text-foreground mb-2">{m.omniTitle}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{m.omniText}</p>
             </div>
           </motion.div>
 
@@ -136,10 +135,8 @@ export function MetaTokEngine() {
             </div>
 
             <div className="relative z-10">
-              <h3 className="text-xl font-bold text-foreground mb-2">Sincronización CRM</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Integración nativa bidireccional. Todo queda registrado.
-              </p>
+              <h3 className="text-xl font-bold text-foreground mb-2">{m.crmTitle}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{m.crmText}</p>
             </div>
           </motion.div>
 
@@ -177,10 +174,8 @@ export function MetaTokEngine() {
             </div>
 
             <div className="relative z-10 flex-1 text-center md:text-left">
-              <h3 className="text-2xl font-black text-foreground mb-3">Auto-optimización Constante</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                El sistema nunca deja de aprender. Realiza pruebas A/B automatizadas en sus propios mensajes para encontrar las combinaciones que generan mayor tasa de respuesta.
-              </p>
+              <h3 className="text-2xl font-black text-foreground mb-3">{m.autoTitle}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{m.autoText}</p>
             </div>
           </motion.div>
 
@@ -194,8 +189,8 @@ export function MetaTokEngine() {
           variants={fadeUp}
           className="mt-8 flex justify-center gap-4 md:gap-8 flex-wrap"
         >
-          {[{v: "< 0.5s", l: "Latencia media"}, {v: "99.9%", l: "Uptime garantizado"}, {v: "AES-256", l: "Cifrado de datos"}].map((s) => (
-            <div key={s.l} className="flex items-center gap-3 bg-card/75 border border-border rounded-full px-5 py-2.5 backdrop-blur-sm">
+          {m.footerStats.map((s, si) => (
+            <div key={`engine-stat-${si}`} className="flex items-center gap-3 bg-card/75 border border-border rounded-full px-5 py-2.5 backdrop-blur-sm">
               <ShieldCheck className="h-4 w-4 text-primary" />
               <div>
                 <div className="text-sm font-bold text-foreground">{s.v}</div>

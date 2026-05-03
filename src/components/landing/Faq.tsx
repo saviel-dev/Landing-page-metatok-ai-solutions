@@ -4,10 +4,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { faqs } from "./content";
 import { useFadeUp, useSlideInLeft, useSlideInRight, useTypingEffect, asRef } from "@/hooks/useAnimeJs";
+import { useLang } from "@/i18n/LangContext";
 
 export function Faq() {
+  const { t } = useLang();
+  const faqItems = t.faq.items;
   const headerRef = useFadeUp(0);
   const titleRef = useTypingEffect(300);
   const col1Ref = useSlideInLeft(200);
@@ -29,12 +31,9 @@ export function Faq() {
             ref={asRef<HTMLHeadingElement>(titleRef)}
             className="mt-3 text-3xl md:text-4xl lg:text-4xl font-bold text-foreground tracking-tight"
           >
-            Preguntas frecuentes
+            {t.faq.heading}
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg">
-            Resolvemos las dudas más habituales sobre el servicio, la
-            implementación y la inversión.
-          </p>
+          <p className="mt-4 text-muted-foreground text-lg">{t.faq.subtitle}</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
@@ -45,7 +44,7 @@ export function Faq() {
               collapsible
               className="rounded-2xl border border-border bg-card divide-y divide-border"
             >
-              {faqs.slice(0, Math.ceil(faqs.length / 2)).map((f, i) => (
+              {faqItems.slice(0, Math.ceil(faqItems.length / 2)).map((f, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="border-0 px-5">
                   <AccordionTrigger className="text-left text-base font-medium text-foreground hover:no-underline hover:text-primary transition-colors py-5">
                     {f.pregunta}
@@ -58,14 +57,14 @@ export function Faq() {
             </Accordion>
           </div>
 
-          {/* Columna derecha — slide desde la derecha */}
+          {/* Columna derecha */}
           <div ref={asRef<HTMLDivElement>(col2Ref)}>
             <Accordion
               type="single"
               collapsible
               className="rounded-2xl border border-border bg-card divide-y divide-border"
             >
-              {faqs.slice(Math.ceil(faqs.length / 2)).map((f, i) => (
+              {faqItems.slice(Math.ceil(faqItems.length / 2)).map((f, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="border-0 px-5">
                   <AccordionTrigger className="text-left text-base font-medium text-foreground hover:no-underline hover:text-primary transition-colors py-5">
                     {f.pregunta}

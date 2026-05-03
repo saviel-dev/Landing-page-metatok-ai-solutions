@@ -1,38 +1,35 @@
 import { motion } from "framer-motion";
 import { Timer, Users, Target } from "lucide-react";
 import { fadeUp, stagger, viewportOnce } from "./motion";
+import { useLang } from "@/i18n/LangContext";
 
-const items = [
+const cardStyle = [
   {
     icon: Timer,
-    stat: "70%",
-    title: "Lead frío",
-    text: "El 70% de los leads se pierden por responder después de 5 minutos. La velocidad lo es todo.",
     tone: "from-orange-500 to-amber-400",
     glowColor: "rgba(251, 146, 60, 0.15)",
     borderColor: "border-orange-500/20",
   },
   {
     icon: Users,
-    stat: "1.000",
-    title: "Saturación humana",
-    text: "Tu equipo humano no puede atender 1.000 chats a la vez. Los agentes MetaTok sí lo hacen.",
     tone: "from-amber-400 to-yellow-400",
     glowColor: "rgba(251, 191, 36, 0.12)",
     borderColor: "border-amber-400/20",
   },
   {
     icon: Target,
-    stat: "Cero cierre",
-    title: "Sin cierre autónomo",
-    text: "Los bots comunes solo dan información. Los agentes MetaTok están programados para cerrar.",
     tone: "from-red-500 to-rose-400",
     glowColor: "rgba(239, 68, 68, 0.12)",
     borderColor: "border-red-500/20",
   },
-];
+] as const;
 
 export function PainPoints() {
+  const { t } = useLang();
+  const items = cardStyle.map((style, i) => ({
+    ...style,
+    ...t.painPoints.cards[i]!,
+  }));
   return (
     <section
       id="problema"
@@ -74,18 +71,18 @@ export function PainPoints() {
             variants={fadeUp}
             className="text-xs uppercase tracking-widest text-[var(--luxury-gold)] font-semibold"
           >
-            La fuga de dinero
+            {t.painPoints.kicker}
           </motion.span>
           <motion.h2
             id="pain-heading"
             variants={fadeUp}
             className="mt-3 text-3xl md:text-4xl font-black text-foreground tracking-tight"
           >
-            Tres costes silenciosos{" "}
-            <span className="text-red-400">que ya estás pagando</span>
+            {t.painPoints.title}
+            <span className="text-red-400">{t.painPoints.titleAccent}</span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-4 text-muted-foreground text-base leading-relaxed">
-            Cada minuto sin automatización es dinero que se va. Identifica exactamente cuánto te está costando el statu quo.
+            {t.painPoints.subtitle}
           </motion.p>
         </motion.div>
 
@@ -98,7 +95,7 @@ export function PainPoints() {
         >
           {items.map((it, i) => (
             <motion.div
-              key={it.title}
+              key={`pain-card-${i}`}
               variants={fadeUp}
               className={`group relative rounded-2xl border ${it.borderColor} bg-card/70 backdrop-blur-sm p-6 overflow-hidden
                           hover:-translate-y-1 hover:shadow-xl transition-all duration-300`}

@@ -1,8 +1,8 @@
 import { type ReactNode, useRef, type MouseEvent } from "react";
 import { TrendingUp, Zap, Clock, Network } from "lucide-react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { beneficios } from "./content";
 import { fadeUp, stagger, viewportOnce } from "./motion";
+import { useLang } from "@/i18n/LangContext";
 
 const iconMap = [Zap, TrendingUp, Clock, Network];
 
@@ -62,6 +62,9 @@ function Tilt3DCard({ children, className }: { children: ReactNode; className?: 
 
 /* ── Sección Beneficios ────────────────────────────────────────────── */
 export function Beneficios() {
+  const { t } = useLang();
+  const items = t.beneficios.items;
+
   return (
     <section
       id="beneficios"
@@ -87,23 +90,15 @@ export function Beneficios() {
           variants={stagger}
           className="max-w-2xl mb-12"
         >
-          <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-primary font-semibold">
-            Resultados tangibles
-          </motion.span>
           <motion.h2
             id="beneficios-heading"
             variants={fadeUp}
             className="mt-3 text-3xl md:text-4xl font-black text-foreground tracking-tight"
           >
-            De software a{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              ecosistema que factura
+              {t.beneficios.heading}
             </span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-muted-foreground text-base leading-relaxed">
-            No compras un chat: instalas un departamento de ventas que no duerme. Horas recuperadas,
-            leads que avanzan y cierres que antes se quedaban a medias.
-          </motion.p>
         </motion.div>
 
         {/* Grid 3D cards */}
@@ -115,11 +110,11 @@ export function Beneficios() {
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"
           style={{ perspective: "1200px" }}
         >
-          {beneficios.map((b, i) => {
+          {items.map((b, i) => {
             const Icon = iconMap[i] ?? TrendingUp;
             return (
               <motion.div
-                key={b.titulo}
+                key={`beneficio-card-${i}`}
                 variants={fadeUp}
                 className="relative group"
                 style={{ transformStyle: "preserve-3d" }}

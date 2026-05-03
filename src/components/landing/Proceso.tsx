@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { proceso } from "./content";
 import { fadeUp, stagger, viewportOnce } from "./motion";
+import { useLang } from "@/i18n/LangContext";
 
 const stepColors = [
   { from: "var(--color-primary)", to: "oklch(0.58 0.26 302)" },
@@ -11,6 +11,9 @@ const stepColors = [
 ];
 
 export function Proceso() {
+  const { t } = useLang();
+  const steps = t.proceso.items;
+
   return (
     <section
       id="proceso"
@@ -37,22 +40,17 @@ export function Proceso() {
           className="max-w-2xl mb-16"
         >
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-primary font-semibold">
-            Proceso
+            {t.proceso.heading}
           </motion.span>
           <motion.h2
             id="proceso-heading"
             variants={fadeUp}
             className="mt-3 text-3xl md:text-4xl font-black text-foreground tracking-tight"
           >
-            De la auditoría al sistema activo{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              en 4 pasos
+              {t.proceso.subheading}
             </span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-muted-foreground text-base leading-relaxed">
-            Un flujo diseñado para que no tengas que preocuparte de nada técnico.
-            Tu trabajo es recibir los resultados.
-          </motion.p>
         </motion.div>
 
         {/* Steps grid */}
@@ -73,7 +71,7 @@ export function Proceso() {
             }}
           />
 
-          {proceso.map((p, i) => {
+          {steps.map((p, i) => {
             const col = stepColors[i] ?? stepColors[0];
             return (
               <motion.li
@@ -91,7 +89,7 @@ export function Proceso() {
                 >
                   {p.numero}
                   {/* Arrow between steps — desktop */}
-                  {i < proceso.length - 1 && (
+                  {i < steps.length - 1 && (
                     <ArrowRight
                       className="hidden lg:block absolute -right-8 top-1/2 -translate-y-1/2 h-4 w-4 text-border"
                       aria-hidden
@@ -145,7 +143,7 @@ export function Proceso() {
             href="#auditoria"
             className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-7 py-3.5 text-sm font-bold text-primary hover:bg-primary/20 hover:shadow-[0_0_20px_-5px_var(--color-primary)] transition-all duration-300 backdrop-blur-sm"
           >
-            Quiero empezar con la auditoría gratuita
+            {t.contacto.heading}
             <ArrowRight className="h-4 w-4" />
           </a>
         </motion.div>

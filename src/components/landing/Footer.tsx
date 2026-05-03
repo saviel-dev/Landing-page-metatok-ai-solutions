@@ -1,5 +1,6 @@
 import logo from "@/assets/logo.png";
 import { Link } from "@tanstack/react-router";
+import { useLang } from "@/i18n/LangContext";
 
 /* ——— Iconos SVG inline para redes que no están en lucide ——— */
 function IconFacebook() {
@@ -47,36 +48,23 @@ const socialLinks = [
   },
 ];
 
-const servicios = [
-  "Agentes de IA Conversacional",
-  "Automatización de Procesos",
-  "Cualificación de Leads",
-  "Integración con CRM",
-  "Agendamiento Automático",
-  "Flow-works inteligentes",
-];
-
-const sectores = [
-  "Inmobiliaria",
-  "Salud & Clínicas",
-  "E-commerce",
-  "Consultoría",
-  "Despachos Profesionales",
-  "Hoteles",
-];
-
 export function Footer() {
+  const { t } = useLang();
+  const f = t.footerExtended;
+  const foot = t.footer;
   const year = new Date().getFullYear();
+  const servicios = f.services;
+  const sectores = f.sectors;
   return (
     <footer className="border-t border-border bg-background">
       <div className="border-b border-border bg-[var(--color-surface)]">
         <div className="container-mt py-6 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-luxury-gold">
-              Siguiente paso
+              {f.nextKicker}
             </p>
             <p className="mt-1.5 text-lg md:text-xl font-bold text-foreground max-w-xl leading-snug">
-              Transforma tu tráfico en ingresos hoy mismo.
+              {f.nextTitle}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
@@ -84,13 +72,13 @@ export function Footer() {
               href="https://app.metatok.ai/"
               className="inline-flex items-center justify-center rounded-lg border border-input bg-background px-5 py-2.5 text-sm font-bold text-foreground hover:bg-accent hover:text-accent-foreground transition-colors w-full sm:w-auto"
             >
-              Iniciar sesión
+              {f.login}
             </a>
             <a
               href="/#contacto"
               className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:bg-primary/90 cta-glow transition-colors w-full sm:w-auto"
             >
-              Hablar con el equipo
+              {f.talkTeam}
             </a>
           </div>
         </div>
@@ -101,10 +89,7 @@ export function Footer() {
         {/* Columna 1 — Logo + descripción + redes */}
         <div className="sm:col-span-2 lg:col-span-1">
           <img src={logo} alt="Metatok" className="h-8 w-auto" width={160} height={40} />
-          <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
-            Instalamos departamentos de ventas con IA: prospectan, cualifican y cierran 24/7 —
-            omnicanal, con CRM y listos para escala enterprise.
-          </p>
+          <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">{f.blurb}</p>
           <div className="mt-6 flex items-center gap-3">
             {socialLinks.map(({ label, href, icon: Icon, hoverClass }) => (
               <a
@@ -123,7 +108,7 @@ export function Footer() {
 
         {/* Columna 2 — Servicios */}
         <div>
-          <h4 className="text-sm font-semibold text-foreground">Servicios</h4>
+          <h4 className="text-sm font-semibold text-foreground">{f.colServices}</h4>
           <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
             {servicios.map((s) => (
               <li key={s}>
@@ -137,7 +122,7 @@ export function Footer() {
 
         {/* Columna 3 — Sectores */}
         <div>
-          <h4 className="text-sm font-semibold text-foreground">Sectores</h4>
+          <h4 className="text-sm font-semibold text-foreground">{f.colSectors}</h4>
           <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
             {sectores.map((s) => (
               <li key={s} className="hover:text-primary transition-colors duration-200 cursor-default">
@@ -149,7 +134,7 @@ export function Footer() {
 
         {/* Columna 4 — Contacto */}
         <div>
-          <h4 className="text-sm font-semibold text-foreground">Contacto</h4>
+          <h4 className="text-sm font-semibold text-foreground">{f.colContact}</h4>
           <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
             <li>
               <a href="mailto:soporte@metatok.ai" className="hover:text-primary transition-colors duration-200">
@@ -157,12 +142,10 @@ export function Footer() {
               </a>
             </li>
             <li className="text-foreground/90">
-              Sede: Madrid, España
-              <span className="block text-xs text-muted-foreground mt-1">
-                Dirección fiscal completa bajo solicitud para licitaciones y contratos.
-              </span>
+              {f.hq}
+              <span className="block text-xs text-muted-foreground mt-1">{f.hqNote}</span>
             </li>
-            <li>100 % privacidad de datos (RGPD)</li>
+            <li>{f.privacyLine}</li>
           </ul>
         </div>
       </div>
@@ -170,18 +153,20 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-border">
         <div className="container-mt py-5 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-muted-foreground">
-          <span>© {year} Metatok. Todos los derechos reservados.</span>
+          <span>
+            © {year} Metatok. {f.copyright}
+          </span>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             <Link to="/aviso-legal" className="hover:text-primary transition-colors duration-200">
-              Aviso legal
+              {foot.legal}
             </Link>
             <span className="opacity-30 hidden sm:inline">·</span>
             <Link to="/terminos" className="hover:text-primary transition-colors duration-200">
-              Términos de servicio
+              {f.terms}
             </Link>
             <span className="opacity-30 hidden sm:inline">·</span>
             <Link to="/privacidad" className="hover:text-primary transition-colors duration-200">
-              RGPD / Privacidad
+              {f.rgpd}
             </Link>
           </div>
         </div>
