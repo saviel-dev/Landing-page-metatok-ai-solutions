@@ -244,37 +244,37 @@ export const testimonios = [
     nombre: "David G.",
     cargo: "Director de Ventas, inmobiliaria",
     rating: 5,
-    texto: "Metatok.ai nos cambió el ritmo. Los bots califican leads 24/7 y solo le pasan al equipo los que vienen calientes. Subieron las citas y bajó el esfuerzo.",
+    texto: "Metatok.ai transformó nuestro embudo de ventas: asistentes humanoides atienden 24/7 y, con automatizaciones inteligentes, convierten consultas frías en citas cerradas.",
   },
   {
     nombre: "Dra. Laura P.",
     cargo: "Dirección de clínica",
     rating: 5,
-    texto: "Con el chatbot de Metatok.ai los pacientes agendan, preguntan y confirman solos. Los seguimientos automáticos nos ayudaron a recuperar citas perdidas.",
+    texto: "Nuestro embudo de ventas ahora fluye solo: asistentes humanoides resuelven dudas al instante y las automatizaciones de seguimiento recuperan citas que antes se perdían.",
   },
   {
     nombre: "Ana F.",
     cargo: "Gerente de Operaciones, marketplace digital",
     rating: 5,
-    texto: "El 80% de las consultas ya las atiende el chatbot: pedidos, devoluciones, estatus. Bajamos carga al equipo sin bajar la calidad. Todo un éxito.",
+    texto: "Escalamos el embudo de ventas sin ampliar equipo: asistentes humanoides gestionan pedidos y devoluciones, y las automatizaciones mantienen cada oportunidad activa hasta la compra.",
   },
   {
     nombre: "Luis C.",
     cargo: "Propietario, “Viajes Sin Fronteras”",
     rating: 5,
-    texto: "Metatok.ai manda confirmaciones y recordatorios automático, y los asistentes de voz responden lo básico. Nos ahorró horas de gestión cada semana.",
+    texto: "Pasamos de respuestas tardías a un embudo de ventas siempre activo: asistentes humanoides de voz atienden con tono llamativo y las automatizaciones confirman y reactivan reservas.",
   },
   {
     nombre: "Juan V.",
     cargo: "Director de Ventas, “TecnoCenter”",
     rating: 5,
-    texto: "El chatbot en la web atiende 24/7: ficha técnica, precios y disponibilidad. Llegan clientes más informados y el tráfico cualificado subió. Excelente.",
+    texto: "Nuestro embudo de ventas en web ahora convierte mejor: asistentes humanoides responden de forma persuasiva y las automatizaciones filtran, priorizan y empujan leads con alta intención.",
   },
   {
     nombre: "Ricardo Xing",
     cargo: "Abogado socio, “Garrido & Asociados”",
     rating: 5,
-    texto: "Metatok.ai filtra los prospectos, agenda la primera consulta y nos deja el contexto. Así solo vemos a quien realmente necesita nuestros servicios.",
+    texto: "Metatok.ai ordenó por completo nuestro embudo de ventas: asistentes humanoides cualifican casos y las automatizaciones agendan, documentan y dejan cada consulta lista para cerrar.",
   },
 ];
 

@@ -213,37 +213,37 @@ export const pageSectionsEs = {
         nombre: "David Gómez",
         cargo: "Director de Ventas, inmobiliaria",
         texto:
-          "Metatok.ai nos cambió el ritmo. Los bots califican leads 24/7 y solo le pasan al equipo los que vienen calientes. Subieron las citas y bajó el esfuerzo.",
+          "Metatok.ai transformó nuestro embudo de ventas: asistentes humanoides atienden 24/7 y, con automatizaciones inteligentes, convierten consultas frías en citas cerradas.",
       },
       {
         nombre: "Dra. Laura Peñafiel",
         cargo: "Dirección de clínica",
         texto:
-          "Con el chatbot de Metatok.ai los pacientes agendan, preguntan y confirman solos. Los seguimientos automáticos nos ayudaron a recuperar citas perdidas.",
+          "Nuestro embudo de ventas ahora fluye solo: asistentes humanoides resuelven dudas al instante y las automatizaciones de seguimiento recuperan citas que antes se perdían.",
       },
       {
         nombre: "Ana Fuentes",
         cargo: "Gerente de Operaciones, marketplace digital",
         texto:
-          "El 80% de las consultas ya las atiende el chatbot: pedidos, devoluciones, estatus. Bajamos carga al equipo sin bajar la calidad. Todo un éxito.",
+          "Escalamos el embudo de ventas sin ampliar equipo: asistentes humanoides gestionan pedidos y devoluciones, y las automatizaciones mantienen cada oportunidad activa hasta la compra.",
       },
       {
         nombre: "Luis Carrión",
         cargo: 'Propietario, "Viajes Sin Fronteras"',
         texto:
-          "Metatok.ai manda confirmaciones y recordatorios automático, y los asistentes de voz responden lo básico. Nos ahorró horas de gestión cada semana.",
+          "Pasamos de respuestas tardías a un embudo de ventas siempre activo: asistentes humanoides de voz atienden con tono llamativo y las automatizaciones confirman y reactivan reservas.",
       },
       {
         nombre: "Juan Valdés",
         cargo: 'Director de Ventas, "TecnoCenter"',
         texto:
-          "El chatbot en la web atiende 24/7: ficha técnica, precios y disponibilidad. Llegan clientes más informados y el tráfico cualificado subió. Excelente.",
+          "Nuestro embudo de ventas en web ahora convierte mejor: asistentes humanoides responden de forma persuasiva y las automatizaciones filtran, priorizan y empujan leads con alta intención.",
       },
       {
         nombre: "Ricardo Garrido",
         cargo: 'Abogado socio, "Garrido & Asociados"',
         texto:
-          "Metatok.ai filtra los prospectos, agenda la primera consulta y nos deja el contexto. Así solo vemos a quien realmente necesita nuestros servicios.",
+          "Metatok.ai ordenó por completo nuestro embudo de ventas: asistentes humanoides cualifican casos y las automatizaciones agendan, documentan y dejan cada consulta lista para cerrar.",
       },
     ],
   },
@@ -722,37 +722,37 @@ export const pageSectionsEn = {
         nombre: "David Gómez",
         cargo: "Head of Sales, real estate",
         texto:
-          "MetaTok changed our pace. Bots qualify 24/7 and only hot leads reach the team. More meetings, less grunt work.",
+          "MetaTok changed our pace: humanoid assistants run our funnel 24/7, qualify with persuasive messaging, and only escalate sales-ready leads to the team.",
       },
       {
         nombre: "Dr Laura Peñafiel",
         cargo: "Clinic director",
         texto:
-          "Patients book, ask and confirm on their own. Automated follow-ups helped us recover lost appointments.",
+          "Patients now book, ask and confirm through humanoid assistants. Automated follow-ups recover lost appointments and keep the calendar full.",
       },
       {
         nombre: "Ana Fuentes",
         cargo: "COO, digital marketplace",
         texto:
-          "80% of tickets are handled by the bot: orders, returns, status. Less load on the team with no drop in quality.",
+          "80% of funnel conversations are now handled by humanoid assistants: orders, returns and status updates. Less load on the team with no drop in quality.",
       },
       {
         nombre: "Luis Carrión",
         cargo: 'Owner, “Viajes Sin Fronteras”',
         texto:
-          "Confirmations and reminders on autopilot; voice assistants cover basics. Saves hours every week.",
+          "MetaTok automated confirmations and reminders, while voice assistants handle inquiries with a natural, engaging tone. We save hours every week.",
       },
       {
         nombre: "Juan Valdés",
         cargo: 'Head of Sales, “TecnoCenter”',
         texto:
-          "The site bot answers 24/7: specs, pricing, stock. Buyers arrive better informed and qualified traffic is up.",
+          "Our web humanoid assistant answers 24/7 with clear, persuasive replies on specs, pricing and availability. Buyers arrive better informed and qualified traffic keeps growing.",
       },
       {
         nombre: "Ricardo Garrido",
         cargo: 'Partner, “Garrido & Asociados”',
         texto:
-          "MetaTok filters prospects, books the first consult and gives us context—we only meet those who truly need us.",
+          "MetaTok automates acquisition, filters prospects, books the first consultation and hands us full context. We only meet clients who truly need our services.",
       },
     ],
   },
