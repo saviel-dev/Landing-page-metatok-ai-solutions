@@ -210,37 +210,37 @@ export const pageSectionsEs = {
       "Resultados comprobados por líderes en sus respectivos sectores tras integrar los agentes IA de Metatok en su operación.",
     items: [
       {
-        nombre: "David G.",
+        nombre: "David Gómez",
         cargo: "Director de Ventas, inmobiliaria",
         texto:
           "Metatok.ai nos cambió el ritmo. Los bots califican leads 24/7 y solo le pasan al equipo los que vienen calientes. Subieron las citas y bajó el esfuerzo.",
       },
       {
-        nombre: "Dra. Laura P.",
+        nombre: "Dra. Laura Peñafiel",
         cargo: "Dirección de clínica",
         texto:
           "Con el chatbot de Metatok.ai los pacientes agendan, preguntan y confirman solos. Los seguimientos automáticos nos ayudaron a recuperar citas perdidas.",
       },
       {
-        nombre: "Ana F.",
+        nombre: "Ana Fuentes",
         cargo: "Gerente de Operaciones, marketplace digital",
         texto:
           "El 80% de las consultas ya las atiende el chatbot: pedidos, devoluciones, estatus. Bajamos carga al equipo sin bajar la calidad. Todo un éxito.",
       },
       {
-        nombre: "Luis C.",
+        nombre: "Luis Carrión",
         cargo: 'Propietario, "Viajes Sin Fronteras"',
         texto:
           "Metatok.ai manda confirmaciones y recordatorios automático, y los asistentes de voz responden lo básico. Nos ahorró horas de gestión cada semana.",
       },
       {
-        nombre: "Juan V.",
+        nombre: "Juan Valdés",
         cargo: 'Director de Ventas, "TecnoCenter"',
         texto:
           "El chatbot en la web atiende 24/7: ficha técnica, precios y disponibilidad. Llegan clientes más informados y el tráfico cualificado subió. Excelente.",
       },
       {
-        nombre: "Ricardo Xing",
+        nombre: "Ricardo Garrido",
         cargo: 'Abogado socio, "Garrido & Asociados"',
         texto:
           "Metatok.ai filtra los prospectos, agenda la primera consulta y nos deja el contexto. Así solo vemos a quien realmente necesita nuestros servicios.",
@@ -719,37 +719,37 @@ export const pageSectionsEn = {
       "Results from leaders across industries after integrating MetaTok AI agents into their operations.",
     items: [
       {
-        nombre: "David G.",
+        nombre: "David Gómez",
         cargo: "Head of Sales, real estate",
         texto:
           "MetaTok changed our pace. Bots qualify 24/7 and only hot leads reach the team. More meetings, less grunt work.",
       },
       {
-        nombre: "Dr Laura P.",
+        nombre: "Dr Laura Peñafiel",
         cargo: "Clinic director",
         texto:
           "Patients book, ask and confirm on their own. Automated follow-ups helped us recover lost appointments.",
       },
       {
-        nombre: "Ana F.",
+        nombre: "Ana Fuentes",
         cargo: "COO, digital marketplace",
         texto:
           "80% of tickets are handled by the bot: orders, returns, status. Less load on the team with no drop in quality.",
       },
       {
-        nombre: "Luis C.",
+        nombre: "Luis Carrión",
         cargo: 'Owner, “Viajes Sin Fronteras”',
         texto:
           "Confirmations and reminders on autopilot; voice assistants cover basics. Saves hours every week.",
       },
       {
-        nombre: "Juan V.",
+        nombre: "Juan Valdés",
         cargo: 'Head of Sales, “TecnoCenter”',
         texto:
           "The site bot answers 24/7: specs, pricing, stock. Buyers arrive better informed and qualified traffic is up.",
       },
       {
-        nombre: "Ricardo Xing",
+        nombre: "Ricardo Garrido",
         cargo: 'Partner, “Garrido & Asociados”',
         texto:
           "MetaTok filters prospects, books the first consult and gives us context—we only meet those who truly need us.",
